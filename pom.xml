@@ -9,6 +9,9 @@
 	<url>http://maven.apache.org</url>
 	<properties>
 		<spring.version>3.2.9.RELEASE</spring.version>
+		<apache.tiles.version>2.2.2</apache.tiles.version>
+		<org.slf4j.version>1.5.10</org.slf4j.version>
+		<javax.jstl.version>1.2</javax.jstl.version>
 	</properties>
 	<dependencies>
 		<!-- Test -->
@@ -39,6 +42,47 @@
 			<groupId>cglib</groupId>
 			<artifactId>cglib</artifactId>
 			<version>3.0</version>
+		</dependency>
+		<!-- Tiles -->
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-core</artifactId>
+			<version>${apache.tiles.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-jsp</artifactId>
+			<version>${apache.tiles.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${org.slf4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>${org.slf4j.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>${org.slf4j.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<version>6.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>${javax.jstl.version}</version>
+			<scope>runtime</scope>
 		</dependency>
 	</dependencies>
 	<build>
