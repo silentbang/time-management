@@ -4,7 +4,7 @@
 		<div class="grid simple ">
 			<div class="grid-title no-border">
 				<h4>
-					Alerts & <span class="semi-bold">Notifications</span>
+					Alerts &amp; <span class="semi-bold">Notifications</span>
 					<spring:message code="headTitle.dashboard" />
 				</h4>
 				<div class="tools">

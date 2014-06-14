@@ -30,10 +30,10 @@
 	<li class=""><a href="javascript:;"><i class="icon-custom-ui"></i><span class="title">UI Elements</span><span class="arrow "></span></a>
 	<ul class="sub-menu">
 		<li><a href="typography.html"> Typography </a></li>
-		<li><a href="messages_notifications.html"> Messages & Notifications </a></li>
+		<li><a href="messages_notifications.html"> Messages &amp; Notifications </a></li>
 		<li><a href="icons.html">Icons</a></li>
 		<li><a href="buttons.html">Buttons</a></li>
-		<li><a href="tabs_accordian.html"> Tabs & Accordions </a></li>
+		<li><a href="tabs_accordian.html"> Tabs &amp; Accordions </a></li>
 		<li><a href="sliders.html">Sliders</a></li>
 		<li><a href="group_list.html">Group list </a></li>
 	</ul>
