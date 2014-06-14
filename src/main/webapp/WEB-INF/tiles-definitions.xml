@@ -2,6 +2,23 @@
 <!DOCTYPE tiles-definitions PUBLIC 
     "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" 
     "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+    
 <tiles-definitions>
-	<definition name="template" template="/WEB-INF/templates/template.jsp" />
+	<!-- Layouts -->
+	<definition name="mainLayout" template="/WEB-INF/templates/mainLayout.jsp">
+		<put-attribute name="title" value="global.title" />
+		<put-attribute name="headerResources"
+			value="/WEB-INF/templates/fragments/headerResources.jsp" />
+		<put-attribute name="header" value="/WEB-INF/templates/fragments/header.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/templates/fragments/menu.jsp" />
+		<put-attribute name="headTitle" value="" />
+		<put-attribute name="footer" value="/WEB-INF/templates/fragments/footer.jsp" />
+		<put-attribute name="footerResources"
+			value="/WEB-INF/templates/fragments/footerResources.jsp" />
+	</definition>
+
+	<definition name="dashboard" extends="mainLayout">
+		<put-attribute name="headTitle" value="headTitle.dashboard" />
+		<put-attribute name="body" value="/WEB-INF/pages/dashboard.jsp" />
+	</definition>
 </tiles-definitions>

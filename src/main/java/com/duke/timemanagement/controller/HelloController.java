@@ -12,7 +12,7 @@ public class HelloController {
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView printWelcome() {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("template");
+		mav.setViewName("dashboard");
 		mav.addObject("message", "This is message 2");
 
 		return mav;
