@@ -1,11 +1,14 @@
 <%@ page pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
+
 <!DOCTYPE html>
 <html>
 	<head>
 		<title>
-			<tiles:insertAttribute name="title" ignore="true"/>
+			<c:set var="title"><tiles:getAsString name="title" ignore="true" /></c:set>
+			<spring:message code="${title}"/>
 		</title>
 		<tiles:insertAttribute name="headerResources"/>
 	</head>
@@ -25,7 +28,10 @@
 			<div class="page-content">
 				<div class="content">
 					<div class="page-title">
-						<h3><tiles:insertAttribute name="headTitle" ignore="true"/></h3>
+						<h3>
+							<c:set var="headTitle"><tiles:getAsString name="headTitle" ignore="true"/></c:set>
+							<spring:message code="${headTitle}"/>
+						</h3>
 					</div>
 					<div id="container">
 						<tiles:insertAttribute name="body"/>

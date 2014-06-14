@@ -1,9 +1,11 @@
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <div class="row">
 	<div class="col-md-12">
 		<div class="grid simple ">
 			<div class="grid-title no-border">
 				<h4>
 					Alerts & <span class="semi-bold">Notifications</span>
+					<spring:message code="headTitle.dashboard" />
 				</h4>
 				<div class="tools">
 					<a href="javascript:;" class="collapse"></a> <a href="#grid-config"

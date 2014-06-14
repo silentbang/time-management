@@ -24,4 +24,31 @@
 			</list>
 		</property>
 	</bean>
+
+	<!-- Localization -->
+	<bean
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource"
+		id="messageSource">
+		<property name="basename" value="classpath:messages"></property>
+		<property name="defaultEncoding" value="UTF-8"></property>
+	</bean>
+
+	<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"
+		id="localeChangeInterceptor">
+		<property name="paramName" value="lang"></property>
+	</bean>
+
+	<bean class="org.springframework.web.servlet.i18n.CookieLocaleResolver"
+		id="localeResolver">
+		<property name="defaultLocale" value="en"></property>
+	</bean>
+
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"
+		id="handlerMapping">
+		<property name="interceptors">
+			<ref bean="localeChangeInterceptor"></ref>
+		</property>
+	</bean>
+
 </beans>
