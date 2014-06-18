@@ -3,12 +3,15 @@ package com.duke.timemanagement.dao;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.duke.timemanagement.model.Project;
 
 @Repository("projectDAO")
+@Transactional
 public class ProjectDAOImpl implements ProjectDAO {
 
 	@Autowired
@@ -17,7 +20,7 @@ public class ProjectDAOImpl implements ProjectDAO {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Project> listProjects() {
-		return this.sessionFactory.getCurrentSession().createCriteria(Project.class).list();
+		return this.sessionFactory.getCurrentSession().createCriteria(Project.class).addOrder(Order.desc("projectId")).list();
 	}
 
 	@Override
@@ -37,7 +40,9 @@ public class ProjectDAOImpl implements ProjectDAO {
 
 	@Override
 	public void deleteProject(Project project) {
-		this.sessionFactory.getCurrentSession().delete(project);
+		if (project != null) {
+			this.sessionFactory.getCurrentSession().delete(project);
+		}
 	}
 
 }

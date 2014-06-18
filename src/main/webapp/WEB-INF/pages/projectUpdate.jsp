@@ -12,7 +12,7 @@
 				</div>
 			</div>
 			<div class="grid-body no-border">
-				<form:form method="POST" commandName="project" action="/TimeManagement/projects/save">
+				<form:form method="POST" commandName="project" action="/TimeManagement/projects/update/${project.projectId}">
 					<form:hidden path="projectId" value="${project.projectId}"/>
 					<div class="form-group">
 						<form:label path="name" cssClass="form-label"><spring:message code="label.project.name"/></form:label>
@@ -24,10 +24,13 @@
 					</div>
 					<div class="form-actions">
 						<div class="pull-right">
-							<button type="submit" class="btn btn-success btn-cons">
+							<button type="submit" class="btn btn-small btn-success btn-cons">
 								<i class="icon-ok">
 								</i> <spring:message code="crud.command.save"/>
 							</button>
+							<a href="javascript:deleteEntity('/TimeManagement/projects/delete/${project.projectId}');" class="btn btn-small btn-danger btn-cons">
+								<i class="fa fa-file-text-o"></i> Delete
+							</a>
 						</div>
 					</div>
 				</form:form>

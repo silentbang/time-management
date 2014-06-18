@@ -29,4 +29,8 @@
 		<put-attribute name="headTitle" value="headTitle.projectAdd" />
 		<put-attribute name="body" value="/WEB-INF/pages/projectAdd.jsp" />
 	</definition>
+	<definition name="projectUpdate" extends="mainLayout">
+		<put-attribute name="headTitle" value="headTitle.projectUpdate" />
+		<put-attribute name="body" value="/WEB-INF/pages/projectUpdate.jsp" />
+	</definition>
 </tiles-definitions>

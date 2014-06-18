@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.duke.timemanagement.bean.ProjectBean;
@@ -44,7 +46,32 @@ public class ProjectController {
 	public ModelAndView saveProject(@ModelAttribute("project") ProjectBean projectBean, BindingResult result) {
 		Project project = this.prepareModel(projectBean);
 		this.projectService.insertProject(project);
-		return new ModelAndView("redirect:/projects/add");
+		return new ModelAndView("redirect:/projects");
+	}
+
+	@RequestMapping(value = "/update/{projectId}", method = RequestMethod.GET)
+	public ModelAndView updateProject(@PathVariable Integer projectId) {
+		Project project = this.projectService.findProjectById(projectId);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("project", project);
+		mav.setViewName("projectUpdate");
+
+		return mav;
+	}
+
+	@RequestMapping(value = "/update/{projectId}", method = RequestMethod.POST)
+	public ModelAndView updateProject(@ModelAttribute Project project, @PathVariable Integer projectId) {
+		this.projectService.updateProject(project);
+
+		return new ModelAndView("redirect:/projects");
+	}
+
+	@RequestMapping(value = "/delete/{projectId}", method = RequestMethod.GET)
+	public ModelAndView deleteProject(@PathVariable Integer projectId) {
+		Project project = this.projectService.findProjectById(projectId);
+		this.projectService.deleteProject(project);
+
+		return new ModelAndView("redirect:/projects");
 	}
 
 	private List<ProjectBean> prepareListOfBeans(List<Project> projects) {

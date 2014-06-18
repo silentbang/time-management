@@ -39,4 +39,4 @@
 <script src="<c:url value="/assets/js/demo.js" />" type="text/javascript"></script> 
 <!-- END CORE TEMPLATE JS -->
 
-<!-- <script src="<c:url value="/assets/js/app.js" />"></script> -->
+<script src="<c:url value="/assets/js/app.js" />"></script>
