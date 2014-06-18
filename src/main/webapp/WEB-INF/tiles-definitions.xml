@@ -21,4 +21,12 @@
 		<put-attribute name="headTitle" value="headTitle.dashboard" />
 		<put-attribute name="body" value="/WEB-INF/pages/dashboard.jsp" />
 	</definition>
+	<definition name="projectList" extends="mainLayout">
+		<put-attribute name="headTitle" value="headTitle.projectList" />
+		<put-attribute name="body" value="/WEB-INF/pages/projectList.jsp" />
+	</definition>
+	<definition name="projectAdd" extends="mainLayout">
+		<put-attribute name="headTitle" value="headTitle.projectAdd" />
+		<put-attribute name="body" value="/WEB-INF/pages/projectAdd.jsp" />
+	</definition>
 </tiles-definitions>

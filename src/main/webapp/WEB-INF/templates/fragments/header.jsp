@@ -1,3 +1,5 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!-- BEGIN TOP NAVIGATION BAR -->
 <div class="navbar-inner">
 	<div class="header-seperation">
@@ -8,7 +10,7 @@
 			</a></li>
 		</ul>
 		<!-- BEGIN LOGO -->
-		<a href="index.html"><img src="assets/img/logo.png" class="logo" alt="" data-src="assets/img/logo.png" data-src-retina="assets/img/logo2x.png" width="106" height="21"/></a>
+		<a href="index.html"><img src="<c:url value="/assets/img/logo.png" />" class="logo" alt="" data-src="<c:url value="/assets/img/logo.png" />" data-src-retina="<c:url value="/assets/img/logo2x.png" />" width="106" height="21"/></a>
 		<!-- END LOGO -->
 		<ul class="nav pull-right notifcation-center">
 			<li class="dropdown" id="header_task_bar"><a href="index.html" class="dropdown-toggle active" data-toggle="">
@@ -68,7 +70,7 @@
 					<div style="width:300px">
 						<div class="notification-messages info">
 							<div class="user-profile">
-								<img src="assets/img/profiles/d.jpg" alt="" data-src="assets/img/profiles/d.jpg" data-src-retina="assets/img/profiles/d2x.jpg" width="35" height="35">
+								<img src="<c:url value="/assets/img/profiles/d.jpg" />" alt="" data-src="<c:url value="/assets/img/profiles/d.jpg" />" data-src-retina="<c:url value="/assets/img/profiles/d2x.jpg" />" width="35" height="35">
 							</div>
 							<div class="message-wrapper">
 								<div class="heading">
@@ -104,7 +106,7 @@
 						</div>
 						<div class="notification-messages success">
 							<div class="user-profile">
-								<img src="assets/img/profiles/h.jpg" alt="" data-src="assets/img/profiles/h.jpg" data-src-retina="assets/img/profiles/h2x.jpg" width="35" height="35">
+								<img src="<c:url value="/assets/img/profiles/h.jpg" />" alt="" data-src="<c:url value="/assets/img/profiles/h.jpg" />" data-src-retina="<c:url value="/assets/img/profiles/h2x.jpg" />" width="35" height="35">
 							</div>
 							<div class="message-wrapper">
 								<div class="heading">
@@ -123,7 +125,7 @@
 					</div>
 				</div>
 				<div class="profile-pic">
-					<img src="assets/img/profiles/avatar_small.jpg" alt="" data-src="assets/img/profiles/avatar_small.jpg" data-src-retina="assets/img/profiles/avatar_small2x.jpg" width="35" height="35"/>
+					<img src="<c:url value="/assets/img/profiles/avatar_small.jpg" />" alt="" data-src="<c:url value="/assets/img/profiles/avatar_small.jpg" />" data-src-retina="<c:url value="/assets/img/profiles/avatar_small2x.jpg" />" width="35" height="35"/>
 				</div>
 			</div>
 			<ul class="nav quick-section ">
