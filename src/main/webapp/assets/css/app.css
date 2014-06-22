@@ -2,3 +2,20 @@
 .taskDone {
 	text-decoration: line-through;
 }
+
+.app-hidden {
+	visibility: hidden;
+}
+
+/* Buttons */
+.btn-medium {
+    padding: 7px 14px;
+    font-size: 16px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.btn-medium [class^="icon-"], .btn-large [class*=" icon-"] {
+    margin-top: 4px;
+}

@@ -40,7 +40,7 @@
 <!-- 						</div> -->
 						<div class="widget-body">
 							<div class="pull-left ">
-								<button id="btnAddTask_${taskType.value}" class="btn btn-dark btn-small" type="button"><i class="fa fa-plus"></i></button>
+<%-- 								<button id="btnAddTask_${taskType.value}" class="btn btn-dark btn-small btnAddTask" type="button"><i class="fa fa-plus"></i></button> --%>
 							</div>
 							<c:forEach items="${tasks}" var="task">
 								<c:if test="${task.taskTypeId == taskType.value }">
@@ -53,8 +53,8 @@
 											<div class="heading ${taskHeaderStyle}">${task.name}</div>
 											<div class="description">${task.deadline}</div>
 										</div>
-										<div class="date pull-right">${task.estimatedDuration}h</div>
-										<span class="badge" onClick="deleteEntity('/TimeManagement/tasks/delete/${task.taskId}');">x</span>
+										<div class="date pull-right"><span class="badge" onClick="deleteEntity('/TimeManagement/tasks/delete/${task.taskId}');"><i class="fa fa-trash-o"></i></span></div>
+										<div class="date pull-right">${task.estimatedDuration}h &nbsp;</div>
 									</div>
 								</c:if>
 							</c:forEach>
@@ -64,12 +64,11 @@
 					</div>
 					<div class="tile-footer">
 						<div class="pull-left">
-							<canvas id="wind" width="32" height="32"></canvas>
-							<span class="text-white small-text-description">Total duration:</span>
+							<button id="btnAddTask_${taskType.value}" class="btn btn-dark btn-medium btnAddTask" type="button"><i class="fa fa-plus"></i></button>
 						</div>
 						<div class="pull-right">
-							<canvas id="rain" width="32" height="32"></canvas>
-							<span class="text-white small-text-description">30h</span>
+							<canvas id="wind" width="32" height="32"></canvas>
+							<span class="text-white small-text-description">Total duration: 30h</span>
 						</div>
 						<div class="clearfix">
 						</div>
@@ -84,7 +83,7 @@
 		
 	</div>
 	
-	<div class="col-md-4">
+	<div id="taskForm" class="app-hidden col-md-4">
 		<div class="row">
 			<div class="col-md-12 col-sm-6 spacing-bottom">
 				<div id="formDialog" class="widget">
