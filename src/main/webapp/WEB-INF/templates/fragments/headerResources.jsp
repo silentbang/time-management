@@ -7,6 +7,10 @@
 <meta content="" name="author" />
 
 <!-- BEGIN PLUGIN CSS -->
+<link href="<c:url value="/assets/plugins/jquery-slider/css/jquery.sidr.light.css" />" rel="stylesheet" type="text/css" media="screen"/>
+<link href="<c:url value="/assets/plugins/boostrap-slider/css/slider.css" />" rel="stylesheet" type="text/css"/>
+<link href="<c:url value="/assets/plugins/bootstrap-datepicker/css/datepicker.css" />" rel="stylesheet" type="text/css" />
+<link href="<c:url value="/assets/plugins/bootstrap-timepicker/css/bootstrap-timepicker.css" />" rel="stylesheet" type="text/css" />
 <link href="<c:url value="/assets/plugins/fullcalendar/fullcalendar.css" />" rel="stylesheet" type="text/css" media="screen"/>
 <link href="<c:url value="/assets/plugins/pace/pace-theme-flash.css" />" rel="stylesheet" type="text/css" media="screen"/>
 <link href="<c:url value="/assets/plugins/gritter/css/jquery.gritter.css" />" rel="stylesheet" type="text/css"/>

@@ -89,14 +89,14 @@
 			<div class="col-md-12 col-sm-6 spacing-bottom">
 				<div id="formDialog" class="widget">
 					<div class="widget-title dark">
-						 Task: Create full product demo
+						 <spring:message code="page.taskMatrix.form.title" />
 						<div class="controller">
 							<a href="javascript:;" class="reload"></a>
 							<a href="javascript:;" class="remove"></a>
 						</div>
 					</div>
 					<div class="widget-body">
-						<form:form method="POST" commandName="task" action="/TimeManagement/tasks/save/${project.projectId}">
+						<form:form method="POST" commandName="task" action="/TimeManagement/tasks/save">
 							<form:hidden path="projectId" value="${task.projectId}"/>
 							<form:hidden path="taskId" value="${task.taskId}"/>
 							<form:hidden path="taskTypeId" value="${task.taskTypeId}"/>
@@ -104,16 +104,32 @@
 								<form:input path="name" value="${task.name}" cssClass="form-control" placeholder="${labelTaskName}"/>
 							</div>
 							<br>
-							<div class="col-md-12">
-								<form:input path="estimatedDuration" value="${task.estimatedDuration}" cssClass="form-control" placeholder="${labelTaskEstimatedDuration}" />
+							<div class="slider primary col-md-12">
+								<form:label path="estimatedDuration" cssClass="form-label"><spring:message code="label.task.estimatedDuration"/></form:label>
+								<form:input path="estimatedDuration" value="${task.estimatedDuration}" cssClass="slider-element form-control" 
+									data-slider-min="0" data-slider-max="8" data-slider-step="0.25" data-slider-value="${task.estimatedDuration}" data-slider-orientation="horizontal" data-slider-selection="after" data-slider-tooltip="show"/>
+							</div>
+							<br>
+							<div class="slider primary col-md-12">
+								<form:label path="actualDuration" cssClass="form-label"><spring:message code="label.task.actualDuration"/></form:label>
+								<form:input path="actualDuration" value="${task.actualDuration}" cssClass="slider-element form-control" 
+									data-slider-min="0" data-slider-max="8" data-slider-step="0.25" data-slider-value="${task.actualDuration}" data-slider-orientation="horizontal" data-slider-selection="after" data-slider-tooltip="show"/>
 							</div>
 							<br>
 							<div class="col-md-12">
-								<form:input path="actualDuration" value="${task.actualDuration}" cssClass="form-control" placeholder="${labelTaskActualDuration}" />
+								<form:label path="deadlineDate" cssClass="form-label"><spring:message code="label.task.deadline"/></form:label>
 							</div>
-							<br>
 							<div class="col-md-12">
-								<form:input path="deadline" value="${task.deadline}" cssClass="form-control" placeholder="${labelTaskDeadline}" />
+								<div class="input-append success date">
+									<form:input path="deadlineDate" id="sandbox-advance" value="${task.deadlineDate}" cssClass="form-control" />
+			                      	<span class="add-on"><span class="arrow"></span><i class="fa fa-th"></i></span>
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="input-append bootstrap-timepicker-component">
+									<form:input path="deadlineTime" value="${task.deadlineTime}" cssClass="timepicker-24 span12" />
+									<span class="add-on"><span class="arrow"></span><i class="fa fa-clock-o"></i></span>
+								</div>
 							</div>
 							<br>
 							<div class="col-md-12">
@@ -121,7 +137,11 @@
 							</div>
 							<br>
 							<div class="col-md-12">
-								<form:input path="completedPercentage" value="${task.completedPercentage}" cssClass="form-control" placeholder="${labelTaskCompletedPercentage}" />
+								<form:label path="completedPercentage" cssClass="form-label"><spring:message code="label.task.completedPercentage"/></form:label>
+								<div class="slider primary col-md-8">
+									<form:input path="completedPercentage" value="${task.completedPercentage}" cssClass="slider-element form-control" placeholder="${labelTaskCompletedPercentage}" 
+										data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="${task.completedPercentage}" data-slider-orientation="horizontal" data-slider-selection="after" data-slider-tooltip="show"/>
+								</div>
 							</div>
 							<br>
 							<div class="form-actions">

@@ -31,10 +31,10 @@ public class Task implements Serializable {
 	private String name;
 
 	@Column(name = "\"estimatedDuration\"")
-	private Integer estimatedDuration;
+	private Double estimatedDuration;
 
 	@Column(name = "\"actualDuration\"")
-	private Integer actualDuration;
+	private Double actualDuration;
 
 	@Column(name = "\"deadline\"")
 	@DateTimeFormat(pattern = Constant.FORMAT_DATE_TIME)
@@ -72,19 +72,19 @@ public class Task implements Serializable {
 		this.name = name;
 	}
 
-	public Integer getEstimatedDuration() {
+	public Double getEstimatedDuration() {
 		return this.estimatedDuration;
 	}
 
-	public void setEstimatedDuration(Integer estimatedDuration) {
+	public void setEstimatedDuration(Double estimatedDuration) {
 		this.estimatedDuration = estimatedDuration;
 	}
 
-	public Integer getActualDuration() {
+	public Double getActualDuration() {
 		return this.actualDuration;
 	}
 
-	public void setActualDuration(Integer actualDuration) {
+	public void setActualDuration(Double actualDuration) {
 		this.actualDuration = actualDuration;
 	}
 

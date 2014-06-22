@@ -8,6 +8,22 @@ $(document).ready(function() {
 		// Update form content
 		form	.show(1000);
 	});
+	
+	// Date picker
+	$('#sandbox-advance').datepicker({
+		format: "yyyy-mm-dd",
+		startView: 1,
+		autoclose: true,
+		todayHighlight: true,
+		altField: '#deadlineDate'
+	});
+	
+	//Time pickers
+    $('.timepicker-24').timepicker({
+                minuteStep: 1,
+                showSeconds: true,
+                showMeridian: false
+     });
 });
 
 function go(url){
@@ -20,3 +36,4 @@ function deleteEntity(url){
 		go(url);
 	}
 }
+

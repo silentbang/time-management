@@ -50,8 +50,8 @@ public class TaskController {
 		return mav;
 	}
 
-	@RequestMapping(value = "/save/{projectId}", method = RequestMethod.POST)
-	public ModelAndView saveTask(@ModelAttribute("task") TaskBean taskBean, @PathVariable Integer projectId, BindingResult result) {
+	@RequestMapping(value = "/save", method = RequestMethod.POST)
+	public ModelAndView saveTask(@ModelAttribute("task") TaskBean taskBean, BindingResult result) {
 		Task task = this.prepareModel(taskBean);
 		this.taskService.saveTask(task);
 
@@ -68,6 +68,9 @@ public class TaskController {
 	}
 
 	private Task prepareModel(TaskBean taskBean) {
+		// Transform deadline
+		Date deadline = this.transformDeadline(taskBean);
+
 		Task task = new Task();
 		task.setTaskId(taskBean.getTaskId());
 		task.setProject(this.projectService.findProjectById(taskBean.getProjectId()));
@@ -75,11 +78,26 @@ public class TaskController {
 		task.setName(taskBean.getName());
 		task.setEstimatedDuration(taskBean.getEstimatedDuration());
 		task.setActualDuration(taskBean.getActualDuration());
-		task.setDeadline(taskBean.getDeadline());
+		task.setDeadline(deadline);
 		task.setNote(taskBean.getNote());
 		task.setCompletedPercentage(taskBean.getCompletedPercentage());
 		task.setIsFinished(taskBean.getIsFinished());
 
 		return task;
+	}
+
+	@SuppressWarnings("deprecation")
+	private Date transformDeadline(TaskBean taskBean) {
+		Date deadlineDate = taskBean.getDeadlineDate();
+		Date deadlineTime = taskBean.getDeadlineTime();
+
+		Date deadline = new Date();
+		deadline.setYear(deadlineDate.getYear());
+		deadline.setMonth(deadlineDate.getMonth());
+		deadline.setDate(deadlineDate.getDate());
+		deadline.setHours(deadlineTime.getHours());
+		deadline.setMinutes(deadlineTime.getMinutes());
+		deadline.setSeconds(deadlineTime.getSeconds());
+		return deadline;
 	}
 }

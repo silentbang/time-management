@@ -9,6 +9,8 @@
 <!-- END CORE JS FRAMEWORK --> 
 
 <!-- BEGIN PAGE LEVEL JS --> 
+<script src="<c:url value="/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" />" type="text/javascript"></script>
+<script src="<c:url value="/assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js" />" type="text/javascript"></script>
 <script src="<c:url value="/assets/plugins/pace/pace.min.js" />" type="text/javascript"></script>  
 <script src="<c:url value="/assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js" />" type="text/javascript"></script> 
 <script src="<c:url value="/assets/plugins/jquery-numberAnimate/jquery.animateNumbers.js" />" type="text/javascript"></script> 
@@ -38,5 +40,12 @@
 <script src="<c:url value="/assets/js/chat.js" />" type="text/javascript"></script> 
 <script src="<c:url value="/assets/js/demo.js" />" type="text/javascript"></script> 
 <!-- END CORE TEMPLATE JS -->
+
+<script src="<c:url value="/assets/plugins/boostrap-slider/js/bootstrap-slider.js" />" type="text/javascript"></script>
+<script>
+	$(document).ready(function() {		
+		$('.slider-element').slider();
+	});
+</script>
 
 <script src="<c:url value="/assets/js/app.js" />"></script>

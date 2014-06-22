@@ -11,10 +11,12 @@ public class TaskBean {
 	private Integer projectId;
 	private Integer taskTypeId;
 	private String name;
-	private Integer estimatedDuration;
-	private Integer actualDuration;
-	@DateTimeFormat(pattern = Constant.FORMAT_DATE_TIME)
-	private Date deadline;
+	private Double estimatedDuration;
+	private Double actualDuration;
+	@DateTimeFormat(pattern = Constant.FORMAT_DATE)
+	private Date deadlineDate;
+	@DateTimeFormat(pattern = Constant.FORMAT_TIME)
+	private Date deadlineTime;
 	private String note;
 	private Double completedPercentage;
 	private Boolean isFinished;
@@ -51,28 +53,36 @@ public class TaskBean {
 		this.name = name;
 	}
 
-	public Integer getEstimatedDuration() {
+	public Double getEstimatedDuration() {
 		return this.estimatedDuration;
 	}
 
-	public void setEstimatedDuration(Integer estimatedDuration) {
+	public void setEstimatedDuration(Double estimatedDuration) {
 		this.estimatedDuration = estimatedDuration;
 	}
 
-	public Integer getActualDuration() {
+	public Double getActualDuration() {
 		return this.actualDuration;
 	}
 
-	public void setActualDuration(Integer actualDuration) {
+	public void setActualDuration(Double actualDuration) {
 		this.actualDuration = actualDuration;
 	}
 
-	public Date getDeadline() {
-		return this.deadline;
+	public Date getDeadlineDate() {
+		return this.deadlineDate;
 	}
 
-	public void setDeadline(Date deadline) {
-		this.deadline = deadline;
+	public void setDeadlineDate(Date deadlineDate) {
+		this.deadlineDate = deadlineDate;
+	}
+
+	public Date getDeadlineTime() {
+		return this.deadlineTime;
+	}
+
+	public void setDeadlineTime(Date deadlineTime) {
+		this.deadlineTime = deadlineTime;
 	}
 
 	public String getNote() {
