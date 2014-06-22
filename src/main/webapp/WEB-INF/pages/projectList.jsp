@@ -59,6 +59,7 @@
 										<a href="javascript:deleteEntity('/TimeManagement/projects/delete/${project.projectId}');" class="btn btn-small btn-danger btn-cons">
 											<i class="fa fa-file-text-o"></i> Delete
 										</a>
+										<a href="/TimeManagement/tasks/${project.projectId}" class="btn btn-small btn-warning btn-cons" ><i class="fa fa-paste"></i> Manage tasks</a>
 									</td>
 								</tr>
 							</c:forEach>

@@ -2,19 +2,22 @@ package com.duke.timemanagement.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.PrePersist;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.hibernate.annotations.Generated;
-import org.hibernate.annotations.GenerationTime;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 @Table(name = "project")
@@ -34,7 +37,15 @@ public class Project implements Serializable {
 	@Column(name = "\"createdDate\"", nullable = false, updatable = false)
 	private Date createdDate;
 
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "project", cascade = {
+		CascadeType.REMOVE
+	})
+	// Prevent duplicates when joining
+	@Fetch(FetchMode.SUBSELECT)
+	private Set<Task> tasks;
+
 	public Project() {
+		// Initialize current timestamp
 		this.createdDate = new Date();
 	}
 
@@ -60,6 +71,14 @@ public class Project implements Serializable {
 
 	public void setCreatedDate(Date createdDate) {
 		this.createdDate = createdDate;
+	}
+
+	public Set<Task> getTasks() {
+		return this.tasks;
+	}
+
+	public void setTasks(Set<Task> tasks) {
+		this.tasks = tasks;
 	}
 
 }

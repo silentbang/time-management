@@ -13,5 +13,7 @@ public interface TaskDAO {
 
 	public void updateTask(Task task);
 
+	public void saveTask(Task task);
+
 	public void deleteTask(Task task);
 }

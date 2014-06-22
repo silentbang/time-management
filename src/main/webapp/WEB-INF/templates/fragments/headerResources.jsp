@@ -32,3 +32,5 @@
 <link href="<c:url value="/assets/css/responsive.css" />" rel="stylesheet" type="text/css"/>
 <link href="<c:url value="/assets/css/custom-icon-set.css" />" rel="stylesheet" type="text/css"/>
 <!-- END CSS TEMPLATE -->
+
+<link href="<c:url value="/assets/css/app.css" />" rel="stylesheet" type="text/css"/>

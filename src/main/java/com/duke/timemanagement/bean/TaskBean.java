@@ -2,6 +2,10 @@ package com.duke.timemanagement.bean;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.duke.timemanagement.common.Constant;
+
 public class TaskBean {
 	private Integer taskId;
 	private Integer projectId;
@@ -9,6 +13,7 @@ public class TaskBean {
 	private String name;
 	private Integer estimatedDuration;
 	private Integer actualDuration;
+	@DateTimeFormat(pattern = Constant.FORMAT_DATE_TIME)
 	private Date deadline;
 	private String note;
 	private Double completedPercentage;

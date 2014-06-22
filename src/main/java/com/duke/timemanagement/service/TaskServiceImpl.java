@@ -39,6 +39,12 @@ public class TaskServiceImpl implements TaskService {
 		this.taskDAO.updateTask(task);
 	}
 
+	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
+	@Override
+	public void saveTask(Task task) {
+		this.taskDAO.saveTask(task);
+	}
+
 	@Override
 	public void deleteTask(Task task) {
 		this.taskDAO.deleteTask(task);

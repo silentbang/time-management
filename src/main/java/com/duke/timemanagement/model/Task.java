@@ -8,7 +8,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.duke.timemanagement.common.Constant;
 
 @Entity
 @Table(name = "task")
@@ -31,6 +37,7 @@ public class Task implements Serializable {
 	private Integer actualDuration;
 
 	@Column(name = "\"deadline\"")
+	@DateTimeFormat(pattern = Constant.FORMAT_DATE_TIME)
 	private Date deadline;
 
 	@Column(name = "\"note\"")
@@ -41,6 +48,13 @@ public class Task implements Serializable {
 
 	@Column(name = "\"isFinished\"")
 	private Boolean isFinished;
+
+	@Column(name = "\"taskTypeId\"")
+	private Integer taskTypeId;
+
+	@ManyToOne
+	@JoinColumn(name = "\"projectId\"")
+	private Project project;
 
 	public Integer getTaskId() {
 		return this.taskId;
@@ -104,6 +118,22 @@ public class Task implements Serializable {
 
 	public void setIsFinished(Boolean isFinished) {
 		this.isFinished = isFinished;
+	}
+
+	public Project getProject() {
+		return this.project;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
+	}
+
+	public Integer getTaskTypeId() {
+		return this.taskTypeId;
+	}
+
+	public void setTaskTypeId(Integer taskTypeId) {
+		this.taskTypeId = taskTypeId;
 	}
 
 }
