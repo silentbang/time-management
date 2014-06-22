@@ -135,12 +135,10 @@
 								<form:input path="note" value="${task.note}" cssClass="form-control" placeholder="${labelTaskNote}" />
 							</div>
 							<br>
-							<div class="col-md-12">
+							<div class="slider primary col-md-12">
 								<form:label path="completedPercentage" cssClass="form-label"><spring:message code="label.task.completedPercentage"/></form:label>
-								<div class="slider primary col-md-8">
-									<form:input path="completedPercentage" value="${task.completedPercentage}" cssClass="slider-element form-control" placeholder="${labelTaskCompletedPercentage}" 
-										data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="${task.completedPercentage}" data-slider-orientation="horizontal" data-slider-selection="after" data-slider-tooltip="show"/>
-								</div>
+								<form:input path="completedPercentage" value="${task.completedPercentage}" cssClass="slider-element form-control" placeholder="${labelTaskCompletedPercentage}" 
+									data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="${task.completedPercentage}" data-slider-orientation="horizontal" data-slider-selection="after" data-slider-tooltip="show"/>
 							</div>
 							<br>
 							<div class="form-actions">

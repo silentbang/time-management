@@ -374,7 +374,7 @@
 		max: 10,
 		step: 1,
 		orientation: 'horizontal',
-		value: 5,
+		value: 0,
 		selection: 'before',
 		tooltip: 'show',
 		handle: 'round',
