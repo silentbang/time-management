@@ -90,7 +90,7 @@
 					<div class="widget-title dark">
 						 <spring:message code="page.taskMatrix.form.title" />
 						<div class="controller">
-							<a href="javascript:;" class="reload"></a>
+							<a id="formReload" href="javascript:;" class="reload"></a>
 							<a href="javascript:;" class="remove"></a>
 						</div>
 					</div>

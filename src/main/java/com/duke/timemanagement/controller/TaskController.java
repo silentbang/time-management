@@ -102,7 +102,6 @@ public class TaskController {
 		taskBean.setName(task.getName());
 		taskBean.setEstimatedDuration(task.getEstimatedDuration());
 		taskBean.setActualDuration(task.getActualDuration());
-		// FIXME
 		taskBean.setDeadlineDate(task.getDeadline());
 		taskBean.setDeadlineTime(task.getDeadline());
 		taskBean.setDeadlineDateText(new SimpleDateFormat(Constant.FORMAT_DATE).format(task.getDeadline()));
