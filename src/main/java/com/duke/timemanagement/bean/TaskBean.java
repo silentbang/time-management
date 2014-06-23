@@ -21,6 +21,9 @@ public class TaskBean {
 	private Double completedPercentage;
 	private Boolean isFinished;
 
+	private String deadlineDateText;
+	private String deadlineTimeText;
+
 	public Integer getTaskId() {
 		return this.taskId;
 	}
@@ -108,4 +111,21 @@ public class TaskBean {
 	public void setIsFinished(Boolean isFinished) {
 		this.isFinished = isFinished;
 	}
+
+	public String getDeadlineTimeText() {
+		return this.deadlineTimeText;
+	}
+
+	public void setDeadlineTimeText(String deadlineTimeText) {
+		this.deadlineTimeText = deadlineTimeText;
+	}
+
+	public String getDeadlineDateText() {
+		return this.deadlineDateText;
+	}
+
+	public void setDeadlineDateText(String deadlineDateText) {
+		this.deadlineDateText = deadlineDateText;
+	}
+
 }

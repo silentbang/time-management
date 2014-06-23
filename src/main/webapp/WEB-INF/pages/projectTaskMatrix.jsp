@@ -120,7 +120,7 @@
 							</div>
 							<div class="col-md-12">
 								<div class="input-append success date">
-									<form:input path="deadlineDate" id="sandbox-advance" value="${task.deadlineDate}" cssClass="form-control" />
+									<form:input path="deadlineDate" value="${task.deadlineDate}" cssClass="form-control" />
 			                      	<span class="add-on"><span class="arrow"></span><i class="fa fa-th"></i></span>
 								</div>
 							</div>

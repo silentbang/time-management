@@ -16,7 +16,7 @@
 					<form:hidden path="projectId" value="${project.projectId}"/>
 					<div class="form-group">
 						<form:label path="name" cssClass="form-label"><spring:message code="label.project.name"/></form:label>
-						<span class="help"><spring:message code="common.example"/> "2014/08"</span>
+						<span class="help"><spring:message code="hint.task.name"/></span>
 						<div class="input-with-icon right">
 							<i class=""></i>
 							<form:input path="name" value="${project.name}" cssClass="form-control"/>

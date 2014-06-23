@@ -12,6 +12,7 @@
 		<apache.tiles.version>2.2.2</apache.tiles.version>
 		<org.slf4j.version>1.5.10</org.slf4j.version>
 		<javax.jstl.version>1.2</javax.jstl.version>
+		<jackson.databind-version>2.2.3</jackson.databind-version>
 	</properties>
 	<dependencies>
 		<!-- Test -->
@@ -69,6 +70,12 @@
 			<artifactId>tiles-jsp</artifactId>
 			<version>${apache.tiles.version}</version>
 		</dependency>
+		<!-- Jackson -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.databind-version}</version>
+        </dependency>
 		<!-- Log -->
 		<dependency>
 			<groupId>org.slf4j</groupId>

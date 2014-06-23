@@ -15,7 +15,7 @@
 	border-radius: 4px;
 }
 
-.btn-medium [class^="icon-"],.btn-large [class*=" icon-"] {
+.btn-medium [class^="icon-"],.btn-medium [class*=" icon-"] {
 	margin-top: 4px;
 }
 

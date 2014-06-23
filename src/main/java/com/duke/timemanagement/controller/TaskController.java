@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.duke.timemanagement.bean.TaskBean;
@@ -37,8 +38,6 @@ public class TaskController {
 		Project project = this.projectService.findProjectById(projectId);
 		TaskBean taskBean = new TaskBean();
 		taskBean.setProjectId(project.getProjectId());
-		// FIXME
-		taskBean.setTaskTypeId(1);
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("project", project);
@@ -56,6 +55,15 @@ public class TaskController {
 		this.taskService.saveTask(task);
 
 		return new ModelAndView("redirect:/tasks/" + task.getProject().getProjectId());
+	}
+
+	@RequestMapping(value = "/update/{taskId}", method = RequestMethod.POST)
+	public @ResponseBody
+	TaskBean updateTask(@PathVariable Integer taskId) {
+		Task task = this.taskService.findTaskById(taskId);
+		TaskBean taskBean = this.prepareBean(task);
+
+		return taskBean;
 	}
 
 	// TODO Use JSON
@@ -84,6 +92,27 @@ public class TaskController {
 		task.setIsFinished(taskBean.getIsFinished());
 
 		return task;
+	}
+
+	private TaskBean prepareBean(Task task) {
+		TaskBean taskBean = new TaskBean();
+		taskBean.setTaskId(task.getTaskId());
+		taskBean.setProjectId(task.getProject().getProjectId());
+		taskBean.setTaskTypeId(task.getTaskTypeId());
+		taskBean.setName(task.getName());
+		taskBean.setEstimatedDuration(task.getEstimatedDuration());
+		taskBean.setActualDuration(task.getActualDuration());
+		// FIXME
+		taskBean.setDeadlineDate(task.getDeadline());
+		taskBean.setDeadlineTime(task.getDeadline());
+		taskBean.setDeadlineDateText(new SimpleDateFormat(Constant.FORMAT_DATE).format(task.getDeadline()));
+		taskBean.setDeadlineTimeText(new SimpleDateFormat(Constant.FORMAT_TIME).format(task.getDeadline()));
+
+		taskBean.setNote(task.getNote());
+		taskBean.setCompletedPercentage(task.getCompletedPercentage());
+		taskBean.setIsFinished(taskBean.getIsFinished());
+
+		return taskBean;
 	}
 
 	@SuppressWarnings("deprecation")
