@@ -55,11 +55,11 @@
 										</div>
 									</td>
 									<td>
-										<a href="/TimeManagement/projects/update/${project.projectId}" class="btn btn-small btn-primary btn-cons" ><i class="fa fa-paste"></i> Update</a>
-										<a href="javascript:deleteEntity('/TimeManagement/projects/delete/${project.projectId}');" class="btn btn-small btn-danger btn-cons">
+										<a href="/TimeManagement/projects/update/${project.projectId}" class="btn btn-small btn-primary btn-xs btn-mini" ><i class="fa fa-paste"></i> Update</a>
+										<a href="javascript:deleteEntity('/TimeManagement/projects/delete/${project.projectId}');" class="btn btn-small btn-danger btn-xs btn-mini">
 											<i class="fa fa-file-text-o"></i> Delete
 										</a>
-										<a href="/TimeManagement/tasks/${project.projectId}" class="btn btn-small btn-warning btn-cons" ><i class="fa fa-paste"></i> Manage tasks</a>
+										<a href="/TimeManagement/tasks/${project.projectId}" class="btn btn-small btn-warning btn-xs btn-mini" ><i class="fa fa-paste"></i> Manage tasks</a>
 									</td>
 								</tr>
 							</c:forEach>

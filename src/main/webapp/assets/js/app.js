@@ -119,11 +119,14 @@ function onFetchTaskSuccess(data, statuss) {
 	$("#taskId").val(data["taskId"]);
 	$("#taskTypeId").val(data["taskTypeId"]);
 	$("#name").val(data["name"]);
+	$("#estimatedDuration").val(data["estimatedDuration"]);
+	$("#actualDuration").val(data["actualDuration"]);
 	$("#estimatedDuration").slider("setValue", data["estimatedDuration"]);
 	$("#actualDuration").slider("setValue", data["actualDuration"]);
 	$("#deadlineDate").val(data["deadlineDateText"]);
 	$("#deadlineTime").val(data["deadlineTimeText"]);
 	$("#note").val(data["note"]);
+	$("#completedPercentage").val(data["completedPercentage"]);
 	$("#completedPercentage").slider("setValue", data["completedPercentage"]);
 	// Release block
 	triggerFormReloadRelease($("#formDialog"));
