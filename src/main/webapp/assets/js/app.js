@@ -111,6 +111,8 @@ function resetTaskForm(){
 	$("#note").val(null);
 	$("#completedPercentage").slider("setValue", 0);
 	// Release block
+	
+	focusOnForm();
 }
 
 function onFetchTaskSuccess(data, statuss) {
@@ -130,12 +132,19 @@ function onFetchTaskSuccess(data, statuss) {
 	$("#completedPercentage").slider("setValue", data["completedPercentage"]);
 	// Release block
 	triggerFormReloadRelease($("#formDialog"));
+	
+	focusOnForm();
 }
 
 function onFetchTaskError(request, status, error) {
 	console.log(status + " - " + error);
 	triggerFormReloadRelease($("#formDialog"));
+	
+	focusOnForm();
+}
 
+function focusOnForm(){
+	$("#name").focus();
 }
 
 function triggerFormReloadRelease(el) {
