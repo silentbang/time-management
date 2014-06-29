@@ -1,5 +1,7 @@
+<%@page import="com.duke.timemanagement.common.Constant"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>  
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@page import="com.duke.timemanagement.common.TaskType"%>
 <spring:message code="label.task.name" var="labelTaskName"/>
@@ -51,7 +53,7 @@
 												<c:set var="taskHeaderStyle">taskDone</c:set>
 											</c:if>
 											<div class="heading ${taskHeaderStyle}">${task.name}</div>
-											<div class="description">${task.deadline}</div>
+											<div class="description"><fmt:formatDate value="${task.deadline}" pattern="<%=Constant.FORMAT_DATE_TIME %>" /></div>
 										</div>
 										<div class="date pull-right"><span class="badge" onClick="deleteEntity('/TimeManagement/tasks/delete/${task.taskId}');"><i class="fa fa-trash-o"></i></span></div>
 										<div class="date pull-right">${task.estimatedDuration}h &nbsp;</div>
