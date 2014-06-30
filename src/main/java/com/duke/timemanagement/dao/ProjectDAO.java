@@ -15,4 +15,6 @@ public interface ProjectDAO {
 	public void updateProject(Project project);
 
 	public void deleteProject(Project project);
+
+	public List<Object> calculateProjectDurationByTaskType(Project project);
 }

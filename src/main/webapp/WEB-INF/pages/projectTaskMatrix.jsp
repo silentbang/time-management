@@ -70,7 +70,11 @@
 						</div>
 						<div class="pull-right">
 							<canvas id="wind" width="32" height="32"></canvas>
-							<span class="text-white small-text-description">Total duration: 30h</span>
+							<span class="text-white small-text-description">
+								<c:set var="counterText">${counter.count}</c:set>
+								<spring:message code="page.taskMatrix.label.totalEstimatedDuration" /> 
+								${hoursByType[counterText]}h
+							</span>
 						</div>
 						<div class="clearfix">
 						</div>

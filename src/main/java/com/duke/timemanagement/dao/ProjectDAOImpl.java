@@ -2,6 +2,8 @@ package com.duke.timemanagement.dao;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +45,16 @@ public class ProjectDAOImpl implements ProjectDAO {
 		if (project != null) {
 			this.sessionFactory.getCurrentSession().delete(project);
 		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Object> calculateProjectDurationByTaskType(Project project) {
+		String sql = "SELECT \"taskTypeId\", SUM(\"estimatedDuration\") " + "FROM \"task\" " + "WHERE \"projectId\" = :projectId GROUP BY \"taskTypeId\" ORDER BY \"taskTypeId\" ASC";
+		Query query = this.sessionFactory.getCurrentSession().createSQLQuery(sql).setParameter("projectId", project.getProjectId()).setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+		List<Object> result = query.list();
+
+		return result;
 	}
 
 }
