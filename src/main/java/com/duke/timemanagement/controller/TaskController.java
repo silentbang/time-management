@@ -1,6 +1,8 @@
 package com.duke.timemanagement.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -18,6 +20,7 @@ import com.duke.timemanagement.bean.TaskBean;
 import com.duke.timemanagement.common.Constant;
 import com.duke.timemanagement.common.TaskType;
 import com.duke.timemanagement.common.UIUtils;
+import com.duke.timemanagement.comparator.TaskComparator;
 import com.duke.timemanagement.model.Project;
 import com.duke.timemanagement.model.Task;
 import com.duke.timemanagement.service.ProjectService;
@@ -37,11 +40,13 @@ public class TaskController {
 		Project project = this.projectService.findProjectById(projectId);
 		TaskBean taskBean = new TaskBean();
 		taskBean.setProjectId(project.getProjectId());
+		// Sort list of tasks
+		List<Task> tasks = this.sortTasksByDeadline(project);
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("project", project);
 		mav.addObject("taskTypes", TaskType.values());
-		mav.addObject("tasks", project.getTasks());
+		mav.addObject("tasks", tasks);
 		mav.addObject("task", taskBean);
 		mav.addObject("hoursByType", this.projectService.calculateProjectDurationByTaskType(project));
 		mav.setViewName("projectTaskMatrix");
@@ -142,5 +147,12 @@ public class TaskController {
 		deadline.setMinutes(deadlineTime.getMinutes());
 		deadline.setSeconds(deadlineTime.getSeconds());
 		return deadline;
+	}
+
+	private List<Task> sortTasksByDeadline(Project project) {
+		List<Task> tasks = new ArrayList<Task>();
+		tasks.addAll(project.getTasks());
+		Collections.sort(tasks, new TaskComparator());
+		return tasks;
 	}
 }
