@@ -60,6 +60,7 @@
 											<i class="fa fa-file-text-o"></i> Delete
 										</a>
 										<a href="/TimeManagement/tasks/${project.projectId}" class="btn btn-small btn-warning btn-xs btn-mini" ><i class="fa fa-paste"></i> Manage tasks</a>
+										<a href="/TimeManagement/tasks/plan/${project.projectId}" class="btn btn-small btn-warning btn-xs btn-mini" ><i class="fa fa-paste"></i> Planning</a>
 									</td>
 								</tr>
 							</c:forEach>

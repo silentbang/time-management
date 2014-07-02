@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.duke.timemanagement.bean.PlanningBean;
 import com.duke.timemanagement.bean.TaskBean;
 import com.duke.timemanagement.common.Constant;
+import com.duke.timemanagement.common.Helper;
 import com.duke.timemanagement.common.TaskType;
 import com.duke.timemanagement.common.UIUtils;
 import com.duke.timemanagement.comparator.TaskComparator;
@@ -45,7 +47,6 @@ public class TaskController {
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("project", project);
-		mav.addObject("taskTypes", TaskType.values());
 		mav.addObject("tasks", tasks);
 		mav.addObject("task", taskBean);
 		mav.addObject("hoursByType", this.projectService.calculateProjectDurationByTaskType(project));
@@ -63,8 +64,8 @@ public class TaskController {
 	}
 
 	@RequestMapping(value = "/update/{taskId}", method = RequestMethod.POST)
-	public @ResponseBody
-	TaskBean updateTask(@PathVariable Integer taskId) {
+	@ResponseBody
+	public TaskBean updateTask(@PathVariable Integer taskId) {
 		Task task = this.taskService.findTaskById(taskId);
 		TaskBean taskBean = this.prepareBean(task);
 
@@ -89,6 +90,7 @@ public class TaskController {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("project", project);
 		mav.addObject("tasks", tasks);
+		mav.addObject("plan", new PlanningBean(tasks));
 		mav.addObject("uiUtils", UIUtils.getInstance());
 		mav.setViewName("projectPlan");
 
@@ -124,8 +126,8 @@ public class TaskController {
 		taskBean.setActualDuration(task.getActualDuration());
 		taskBean.setDeadlineDate(task.getDeadline());
 		taskBean.setDeadlineTime(task.getDeadline());
-		taskBean.setDeadlineDateText(new SimpleDateFormat(Constant.FORMAT_DATE).format(task.getDeadline()));
-		taskBean.setDeadlineTimeText(new SimpleDateFormat(Constant.FORMAT_TIME).format(task.getDeadline()));
+		taskBean.setDeadlineDateText(Helper.convertToDateText(task.getDeadline()));
+		taskBean.setDeadlineTimeText(Helper.convertToTimeText(task.getDeadline()));
 
 		taskBean.setNote(task.getNote());
 		taskBean.setCompletedPercentage(task.getCompletedPercentage());

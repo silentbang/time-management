@@ -2,7 +2,10 @@ package com.duke.timemanagement.dao;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Expression;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +23,15 @@ public class TaskDAOImpl implements TaskDAO {
 	@Override
 	public List<Task> listTasks() {
 		return this.sessionFactory.getCurrentSession().createCriteria(Task.class).list();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Task> listTasksByProject(Integer projectId) {
+		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Task.class);
+		criteria.add(Restrictions.eq("project.projectId", projectId.intValue()));
+
+		return criteria.list();
 	}
 
 	@Override

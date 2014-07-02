@@ -7,6 +7,8 @@ import com.duke.timemanagement.model.Task;
 public interface TaskDAO {
 	public List<Task> listTasks();
 
+	public List<Task> listTasksByProject(Integer projectId);
+
 	public void insertTask(Task task);
 
 	public Task findTaskById(Integer taskId);
@@ -16,4 +18,5 @@ public interface TaskDAO {
 	public void saveTask(Task task);
 
 	public void deleteTask(Task task);
+
 }

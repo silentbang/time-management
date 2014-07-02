@@ -37,4 +37,8 @@
 		<put-attribute name="headTitle" value="headTitle.projectTaskMatrix" />
 		<put-attribute name="body" value="/WEB-INF/pages/projectTaskMatrix.jsp" />
 	</definition>
+	<definition name="projectPlan" extends="mainLayout">
+		<put-attribute name="headTitle" value="headTitle.projectPlan" />
+		<put-attribute name="body" value="/WEB-INF/pages/projectPlan.jsp" />
+	</definition>
 </tiles-definitions>
