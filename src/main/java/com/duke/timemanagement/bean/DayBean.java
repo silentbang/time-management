@@ -8,8 +8,8 @@ import com.duke.timemanagement.model.Task;
 public class DayBean {
 
 	private Date date;
-	private Date totalEstimatedDuration;
-	private Date totalActualDuration;
+	private Double totalEstimatedDuration;
+	private Double totalActualDuration;
 	private Double averageProgress;
 	private List<Task> tasks;
 
@@ -21,19 +21,19 @@ public class DayBean {
 		this.date = date;
 	}
 
-	public Date getTotalEstimatedDuration() {
+	public Double getTotalEstimatedDuration() {
 		return this.totalEstimatedDuration;
 	}
 
-	public void setTotalEstimatedDuration(Date totalEstimatedDuration) {
+	public void setTotalEstimatedDuration(Double totalEstimatedDuration) {
 		this.totalEstimatedDuration = totalEstimatedDuration;
 	}
 
-	public Date getTotalActualDuration() {
+	public Double getTotalActualDuration() {
 		return this.totalActualDuration;
 	}
 
-	public void setTotalActualDuration(Date totalActualDuration) {
+	public void setTotalActualDuration(Double totalActualDuration) {
 		this.totalActualDuration = totalActualDuration;
 	}
 

@@ -19,3 +19,12 @@
 	margin-top: 4px;
 }
 
+.tableHead {
+	background-color: #99EC6F;
+	color: white;
+}
+
+.tableHead th {
+	font-weight: 900;
+	font-size: small;
+}

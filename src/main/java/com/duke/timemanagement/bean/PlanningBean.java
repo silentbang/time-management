@@ -1,6 +1,7 @@
 package com.duke.timemanagement.bean;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -39,13 +40,30 @@ public class PlanningBean {
 					tasksByDay.add(task);
 				}
 			}
-			// Add to map
+
+			// Compute
 			dayBean.setTasks(tasksByDay);
+			double totalProgress = 0;
+			double totalEstimatedDuration = 0;
+			double totalActualDuration = 0;
+			for (int i = 0; i < tasksByDay.size(); i++) {
+				Task task = tasksByDay.get(i);
+				totalProgress += (task.getCompletedPercentage() == null) ? 0 : task.getCompletedPercentage();
+				totalEstimatedDuration += task.getEstimatedDuration();
+				totalActualDuration += (task.getActualDuration() == null) ? 0 : task.getActualDuration();
+			}
+			Double averageProgress = totalProgress / tasksByDay.size();
+
+			dayBean.setAverageProgress(averageProgress);
+			dayBean.setTotalEstimatedDuration(totalEstimatedDuration);
+			dayBean.setTotalActualDuration(totalActualDuration);
+			// Add to map
 			unsortedTasksByDays.put(dateText, dayBean);
 		}
 
-		// Sort map by date
-		this.tasksByDays = new TreeMap<String, DayBean>(unsortedTasksByDays);
+		// Sort map by date (descending)
+		this.tasksByDays = new TreeMap<String, DayBean>(Collections.reverseOrder());
+		this.tasksByDays.putAll(unsortedTasksByDays);
 	}
 
 	public Map<String, DayBean> getTasksByDays() {

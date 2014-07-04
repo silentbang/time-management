@@ -47,6 +47,7 @@ public class TaskController {
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("project", project);
+		mav.addObject("taskTypes", TaskType.values());
 		mav.addObject("tasks", tasks);
 		mav.addObject("task", taskBean);
 		mav.addObject("hoursByType", this.projectService.calculateProjectDurationByTaskType(project));
@@ -89,7 +90,7 @@ public class TaskController {
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("project", project);
-		mav.addObject("tasks", tasks);
+		// mav.addObject("tasks", tasks);
 		mav.addObject("plan", new PlanningBean(tasks));
 		mav.addObject("uiUtils", UIUtils.getInstance());
 		mav.setViewName("projectPlan");
