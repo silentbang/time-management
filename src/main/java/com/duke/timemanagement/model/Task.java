@@ -17,7 +17,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.duke.timemanagement.common.Constant;
 
 @Entity
-@Table(name = "task")
+@Table(name = "\"task\"")
 public class Task implements Serializable {
 
 	private static final long serialVersionUID = -4400842752968299857L;

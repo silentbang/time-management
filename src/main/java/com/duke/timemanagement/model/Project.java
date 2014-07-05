@@ -20,7 +20,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 @Entity
-@Table(name = "project")
+@Table(name = "\"project\"")
 public class Project implements Serializable {
 
 	private static final long serialVersionUID = 529761514104085030L;

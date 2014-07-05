@@ -11,15 +11,12 @@
 		http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
 		http://www.springframework.org/schema/mvc
 		http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
-
+			
 	<mvc:annotation-driven/>  
     <context:annotation-config/>  
 	<context:component-scan base-package="com.duke.timemanagement"></context:component-scan>
-	
-	<mvc:resources mapping="/assets/**" location="/assets/" />
 
-	<!-- Hibernate -->
-	<context:property-placeholder location="classpath:/database.properties"></context:property-placeholder>
+	<context:property-placeholder location="classpath:/database-test.properties"></context:property-placeholder>
 	<bean class="org.springframework.jdbc.datasource.DriverManagerDataSource"
 		id="dataSource">
 		<property name="driverClassName" value="${database.driver}"></property>
@@ -50,47 +47,5 @@
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 	<tx:annotation-driven transaction-manager="hibernateTransactionManager"></tx:annotation-driven>
-
-	<!-- Tiles -->
-	<bean id="viewResolver"
-		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
-		<property name="viewClass"
-			value="org.springframework.web.servlet.view.tiles2.TilesView" />
-	</bean>
-
-	<bean class="org.springframework.web.servlet.view.tiles2.TilesConfigurer"
-		id="tilesConfigurer">
-		<property name="definitions">
-			<list>
-				<value>/WEB-INF/tiles-definitions.xml</value>
-			</list>
-		</property>
-	</bean>
-
-	<!-- Localization -->
-	<bean
-		class="org.springframework.context.support.ReloadableResourceBundleMessageSource"
-		id="messageSource">
-		<property name="basename" value="classpath:messages"></property>
-		<property name="defaultEncoding" value="UTF-8"></property>
-	</bean>
-
-	<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"
-		id="localeChangeInterceptor">
-		<property name="paramName" value="lang"></property>
-	</bean>
-
-	<bean class="org.springframework.web.servlet.i18n.CookieLocaleResolver"
-		id="localeResolver">
-		<property name="defaultLocale" value="en"></property>
-	</bean>
-
-	<bean
-		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"
-		id="handlerMapping">
-		<property name="interceptors">
-			<ref bean="localeChangeInterceptor"></ref>
-		</property>
-	</bean>
-
 </beans>
+

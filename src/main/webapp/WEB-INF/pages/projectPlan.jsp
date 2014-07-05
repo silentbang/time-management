@@ -69,7 +69,7 @@
 								</th>
 								<th style="width:10%">${dateText}</th>
 								<th style="width:10%">
-									${entry.value.averageProgress}%
+									<fmt:formatNumber value="${entry.value.averageProgress}" maxFractionDigits="2"/>%
 								</th>
 							</tr>
 						</thead>
