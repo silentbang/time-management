@@ -58,10 +58,16 @@ public class ProjectServiceImpl implements ProjectService {
 		while (iterator.hasNext()) {
 			Map row = (Map) iterator.next();
 			// Extract information
-			Integer taskTypeId = (Integer) row.get(Constant.Tag.TASK_TASKTYPEID);
+			int taskTypeId;
+			try {
+				taskTypeId = (Integer) row.get(Constant.Tag.TASK_TASKTYPEID);
+			}
+			catch (ClassCastException e) {
+				taskTypeId = (Short) row.get(Constant.Tag.TASK_TASKTYPEID);
+			}
 			Double sum = (Double) row.get(Constant.Tag.SUM_ESTIMATEDDURATION);
 
-			durationCountMap.put(taskTypeId.toString(), sum);
+			durationCountMap.put(Integer.toString(taskTypeId), sum);
 		}
 
 		return durationCountMap;
