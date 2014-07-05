@@ -9,12 +9,17 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-import com.duke.timemanagement.common.Helper;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.duke.timemanagement.common.DateUtils;
 import com.duke.timemanagement.model.Task;
 
 public class PlanningBean {
 	private Map<String, DayBean> tasksByDays;
 	private final Set<String> dateTexts;
+
+	@Autowired
+	private DateUtils dateUtils;
 
 	public PlanningBean(List<Task> tasks) {
 		this.dateTexts = new HashSet<String>();
@@ -24,7 +29,7 @@ public class PlanningBean {
 	private void populateTasksByDays(List<Task> tasks) {
 		// Populate lists of unique dates
 		for (Task task : tasks) {
-			String dateText = Helper.convertToDateText(task.getDeadline());
+			String dateText = this.dateUtils.convertToDateText(task.getDeadline());
 			this.dateTexts.add(dateText);
 		}
 
@@ -35,7 +40,7 @@ public class PlanningBean {
 			DayBean dayBean = new DayBean();
 			List<Task> tasksByDay = new ArrayList<Task>();
 			for (Task task : tasks) {
-				String taskDeadline = Helper.convertToDateText(task.getDeadline());
+				String taskDeadline = this.dateUtils.convertToDateText(task.getDeadline());
 				if (dateText.equals(taskDeadline)) {
 					tasksByDay.add(task);
 				}

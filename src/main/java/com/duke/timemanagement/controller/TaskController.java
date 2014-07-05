@@ -1,6 +1,5 @@
 package com.duke.timemanagement.controller;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -18,8 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.duke.timemanagement.bean.PlanningBean;
 import com.duke.timemanagement.bean.TaskBean;
-import com.duke.timemanagement.common.Constant;
-import com.duke.timemanagement.common.Helper;
+import com.duke.timemanagement.common.DateUtils;
 import com.duke.timemanagement.common.TaskType;
 import com.duke.timemanagement.common.UIUtils;
 import com.duke.timemanagement.comparator.TaskComparator;
@@ -36,6 +34,8 @@ public class TaskController {
 	private TaskService taskService;
 	@Autowired
 	private ProjectService projectService;
+	@Autowired
+	private DateUtils dateUtils;
 
 	@RequestMapping(value = "/{projectId}", method = RequestMethod.GET)
 	public ModelAndView updateTaskMatrix(@PathVariable Integer projectId) {
@@ -127,8 +127,8 @@ public class TaskController {
 		taskBean.setActualDuration(task.getActualDuration());
 		taskBean.setDeadlineDate(task.getDeadline());
 		taskBean.setDeadlineTime(task.getDeadline());
-		taskBean.setDeadlineDateText(Helper.convertToDateText(task.getDeadline()));
-		taskBean.setDeadlineTimeText(Helper.convertToTimeText(task.getDeadline()));
+		taskBean.setDeadlineDateText(this.dateUtils.convertToDateText(task.getDeadline()));
+		taskBean.setDeadlineTimeText(this.dateUtils.convertToTimeText(task.getDeadline()));
 
 		taskBean.setNote(task.getNote());
 		taskBean.setCompletedPercentage(task.getCompletedPercentage());

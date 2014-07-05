@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.duke.timemanagement.bean.PlanningBean;
+import com.duke.timemanagement.common.DateUtils;
 import com.duke.timemanagement.dao.TaskDAO;
 import com.duke.timemanagement.model.Task;
 
@@ -19,21 +20,23 @@ public class TaskServiceImpl implements TaskService {
 
 	@Autowired
 	private TaskDAO taskDAO;
+	@Autowired
+	private DateUtils dateUtils;
 
 	@Override
 	public List<Task> listTasks() {
-		// TODO FINISH CHECKING
 		List<Task> tasks = this.taskDAO.listTasks();
-		tasks = this.autoCorrectAndSave(tasks);
+		// Auto correct expiry status & save tasks
+		tasks = this.autoCorrectExpiryStatusAndSaveTasks(tasks);
 
 		return tasks;
 	}
 
 	@Override
 	public List<Task> listTasksByProject(Integer projectId) {
-		// TODO FINISH CHECKING
 		List<Task> tasks = this.taskDAO.listTasksByProject(projectId);
-		tasks = this.autoCorrectAndSave(tasks);
+		// Auto correct expiry status & save tasks
+		tasks = this.autoCorrectExpiryStatusAndSaveTasks(tasks);
 
 		return tasks;
 	}
@@ -41,14 +44,16 @@ public class TaskServiceImpl implements TaskService {
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	@Override
 	public void insertTask(Task task) {
-		task = this.autoCheckAndCorrectExpiry(task);
+		// Auto correct expiry status before inserting
+		task = this.autoCorrectExpiryStatus(task);
 		this.taskDAO.insertTask(task);
 	}
 
 	@Override
 	public Task findTaskById(Integer taskId) {
 		Task task = this.taskDAO.findTaskById(taskId);
-		task = this.autoCorrectAndSave(task);
+		// Auto correct expiry status & save task
+		task = this.autoCorrectExpiryStatusAndSaveTask(task);
 
 		return task;
 	}
@@ -56,14 +61,16 @@ public class TaskServiceImpl implements TaskService {
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	@Override
 	public void updateTask(Task task) {
-		task = this.autoCheckAndCorrectExpiry(task);
+		// Auto correct expiry status before updating
+		task = this.autoCorrectExpiryStatus(task);
 		this.taskDAO.updateTask(task);
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	@Override
 	public void saveTask(Task task) {
-		task = this.autoCheckAndCorrectExpiry(task);
+		// Auto correct expiry status before saving
+		task = this.autoCorrectExpiryStatus(task);
 		this.taskDAO.saveTask(task);
 	}
 
@@ -74,9 +81,8 @@ public class TaskServiceImpl implements TaskService {
 
 	@Override
 	public PlanningBean listPlanningDayByProject(Integer projectId) {
-		// TODO Finish checking
-		List<Task> tasks = this.taskDAO.listTasksByProject(projectId);
-		tasks = this.autoCorrectAndSave(tasks);
+		// Already verify expiry status
+		List<Task> tasks = this.listTasksByProject(projectId);
 
 		// Populate tasks into PlanningBean
 		PlanningBean planningBean = new PlanningBean(tasks);
@@ -85,18 +91,57 @@ public class TaskServiceImpl implements TaskService {
 	}
 
 	/**
-	 * Only check & apply only if task is not expired
+	 * Auto-correct and save multiple tasks
 	 */
-	private Task autoCheckAndCorrectExpiry(Task task) {
-		if (this.needsAction(task)) {
-			Date currentDate = new Date();// Instantiate to current date-time
-			Date deadline = task.getDeadline();
-			if (this.isExpired(currentDate, deadline)) {
-				task.setIsFinished(true);
-			}
+	private List<Task> autoCorrectExpiryStatusAndSaveTasks(List<Task> tasks) {
+		List<Task> updatedTasks = new ArrayList<Task>();
+		for (Task task : tasks) {
+			this.autoCorrectExpiryStatusAndSaveTask(task);
+			updatedTasks.add(task);
+		}
+
+		return updatedTasks;
+	}
+
+	/**
+	 * Auto-correct and save task
+	 */
+	private Task autoCorrectExpiryStatusAndSaveTask(Task task) {
+		// If not need action then return (task already finished)
+		Boolean needsActionBeforeChecking = this.needsAction(task);
+		if (needsActionBeforeChecking == false) {
+			return task;
+		}
+
+		task = this.autoCorrectExpiryStatus(task);
+		Boolean needsActionAfterChecking = this.needsAction(task);
+
+		// If different between statuses before and after checking then update
+		if (needsActionBeforeChecking != needsActionAfterChecking) {
+			this.taskDAO.updateTask(task);
+		}
+		return task;
+	}
+
+	/**
+	 * Auto correct expiry status (only check & apply only if task is not
+	 * expired)
+	 */
+	private Task autoCorrectExpiryStatus(Task task) {
+		if (this.needsActionAndIsExpired(task)) {
+			task.setIsFinished(true);
 		}
 
 		return task;
+	}
+
+	/**
+	 * Check whether needs action and already expired
+	 */
+	private boolean needsActionAndIsExpired(Task task) {
+		Date deadline = task.getDeadline();
+
+		return this.needsAction(task) && this.isExpired(deadline);
 	}
 
 	/**
@@ -112,30 +157,11 @@ public class TaskServiceImpl implements TaskService {
 		}
 	}
 
-	private boolean isExpired(Date currentDate, Date deadline) {
+	/**
+	 * Check whether currentDate is after deadline
+	 */
+	private boolean isExpired(Date deadline) {
+		Date currentDate = this.dateUtils.getCurrentDate();
 		return deadline != null && deadline.before(currentDate);
 	}
-
-	private List<Task> autoCorrectAndSave(List<Task> tasks) {
-		List<Task> updatedTasks = new ArrayList<Task>();
-		for (Task task : tasks) {
-			this.autoCorrectAndSave(task);
-			updatedTasks.add(task);
-		}
-
-		return updatedTasks;
-	}
-
-	private Task autoCorrectAndSave(Task task) {
-		// Check whether task expired & auto-correct
-		Boolean needsActionBeforeChecking = this.needsAction(task);
-		task = this.autoCheckAndCorrectExpiry(task);
-		Boolean needsActionAfterChecking = this.needsAction(task);
-		// If different between before and after then update task
-		if (needsActionBeforeChecking != needsActionAfterChecking) {
-			this.taskDAO.updateTask(task);
-		}
-		return task;
-	}
-
 }

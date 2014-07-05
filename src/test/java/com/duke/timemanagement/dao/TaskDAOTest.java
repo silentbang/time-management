@@ -60,6 +60,7 @@ public class TaskDAOTest extends CustomAbstractTransactionalJUnit4SpringContextT
 		assertEquals(100, task.getCompletedPercentage().doubleValue(), Constant.DELTA);
 	}
 
+	@SuppressWarnings("deprecation")
 	@Test
 	public void testUpdateTask() {
 		Date deadline = new Date(115, 7, 21, 20, 10, 48);
