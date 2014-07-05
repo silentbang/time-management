@@ -1,6 +1,5 @@
 package com.duke.timemanagement.service;
 
-import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -49,17 +48,18 @@ public class ProjectServiceImpl implements ProjectService {
 		this.projectDAO.deleteProject(project);
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
-	public Map<String, BigDecimal> calculateProjectDurationByTaskType(Project project) {
+	public Map<String, Double> calculateProjectDurationByTaskType(Project project) {
 		List<Object> results = this.projectDAO.calculateProjectDurationByTaskType(project);
 		Iterator<Object> iterator = results.iterator();
 
-		Map<String, BigDecimal> durationCountMap = new HashMap<String, BigDecimal>();
+		Map<String, Double> durationCountMap = new HashMap<String, Double>();
 		while (iterator.hasNext()) {
 			Map row = (Map) iterator.next();
 			// Extract information
-			Short taskTypeId = (Short) row.get(Constant.Tag.TASK_TASKTYPEID);
-			BigDecimal sum = (BigDecimal) row.get(Constant.Tag.SUM);
+			Integer taskTypeId = (Integer) row.get(Constant.Tag.TASK_TASKTYPEID);
+			Double sum = (Double) row.get(Constant.Tag.SUM_ESTIMATEDDURATION);
 
 			durationCountMap.put(taskTypeId.toString(), sum);
 		}

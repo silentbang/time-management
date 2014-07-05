@@ -12,23 +12,23 @@ public class UIUtils {
 	}
 
 	public String computeProgressBarCSSClass(String progressText) {
-		if (progressText.equals(Constant.EMPTY)) {
+		if (progressText == null || progressText.equals(Constant.EMPTY)) {
 			return Constant.EMPTY;
 		}
 
 		double progress = Double.parseDouble(progressText);
 
 		if (progress > 0 && progress <= 25) {
-			return "progress-bar-danger";
+			return Constant.UI_CSS_CLASS.PROGRESS_BAR_DANGER;
 		}
 		else if (progress > 25 && progress <= 50) {
-			return "progress-bar-warning";
+			return Constant.UI_CSS_CLASS.PROGRESS_BAR_WARNING;
 		}
 		else if (progress > 50 && progress <= 75) {
-			return "progress-bar-success";
+			return Constant.UI_CSS_CLASS.PROGRESS_BAR_SUCCESS;
 		}
 		else {
-			return "progress-bar-info";
+			return Constant.UI_CSS_CLASS.PROGRESS_BAR_INFO;
 		}
 	}
 }

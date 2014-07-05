@@ -84,16 +84,6 @@ public class TaskServiceImpl implements TaskService {
 		return planningBean;
 	}
 
-	// private List<Task> autoCheckAndCorrectExpiry(List<Task> tasks) {
-	// List<Task> updatedTasks = new ArrayList<Task>();
-	// for (Task task : tasks) {
-	// task = this.autoCheckAndCorrectExpiry(task);
-	// updatedTasks.add(task);
-	// }
-	//
-	// return updatedTasks;
-	// }
-
 	/**
 	 * Only check & apply only if task is not expired
 	 */

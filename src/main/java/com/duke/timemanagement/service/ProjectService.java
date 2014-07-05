@@ -17,5 +17,5 @@ public interface ProjectService {
 
 	public void deleteProject(Project project);
 
-	public Map<String, BigDecimal> calculateProjectDurationByTaskType(Project project);
+	public Map<String, Double> calculateProjectDurationByTaskType(Project project);
 }
