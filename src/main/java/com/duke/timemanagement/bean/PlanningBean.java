@@ -9,8 +9,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.duke.timemanagement.common.DateUtils;
 import com.duke.timemanagement.model.Task;
 
@@ -18,10 +16,11 @@ public class PlanningBean {
 	private Map<String, DayBean> tasksByDays;
 	private final Set<String> dateTexts;
 
-	@Autowired
-	private DateUtils dateUtils;
+	private final DateUtils dateUtils;
 
 	public PlanningBean(List<Task> tasks) {
+		// TODO Autowire instead
+		this.dateUtils = new DateUtils();// Init instead of autowire
 		this.dateTexts = new HashSet<String>();
 		this.populateTasksByDays(tasks);
 	}

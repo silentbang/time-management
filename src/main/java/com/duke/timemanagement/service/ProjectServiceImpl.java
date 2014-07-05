@@ -1,5 +1,6 @@
 package com.duke.timemanagement.service;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -60,12 +61,18 @@ public class ProjectServiceImpl implements ProjectService {
 			// Extract information
 			int taskTypeId;
 			try {
+				// Web environment
 				taskTypeId = (Integer) row.get(Constant.Tag.TASK_TASKTYPEID);
 			}
 			catch (ClassCastException e) {
+				// Test environment
 				taskTypeId = (Short) row.get(Constant.Tag.TASK_TASKTYPEID);
 			}
+			// Test environment
 			Double sum = (Double) row.get(Constant.Tag.SUM_ESTIMATEDDURATION);
+			if (sum == null) {// Web environment
+				sum = ((BigDecimal) row.get(Constant.Tag.SUM)).doubleValue();
+			}
 
 			durationCountMap.put(Integer.toString(taskTypeId), sum);
 		}
