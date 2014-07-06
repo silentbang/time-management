@@ -19,12 +19,26 @@
 	margin-top: 4px;
 }
 
-.tableHead {
-	background-color: #99EC6F;
-	color: white;
-}
+/* Tables */
+/* .tableHead { */
+/* 	background-color: #99EC6F; */
+/* 	color: white; */
+/* } */
 
 .tableHead th {
 	font-weight: 900;
 	font-size: small;
+}
+
+.table-hover tbody tr:hover>td, .table-hover tbody tr:hover>th {
+    background-color: #9EBCFB;
+    color: white;
+}
+
+/* Task list */
+.task-list-body {
+	padding: 14px 13px 10px 19px;
+}
+.task {
+	padding: 5px 8px 0;
 }

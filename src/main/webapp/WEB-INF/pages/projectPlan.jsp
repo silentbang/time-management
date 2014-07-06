@@ -51,7 +51,7 @@
 					<c:set var="dateText" value="${entry.key}"/>
 					<c:set var="tasksByDate" value="${entry.value.tasks}"/>
 					
-					<table class="table no-more-tables">
+					<table class="table table-hover no-more-tables">
 						<thead>
 							<tr class="tableHead">
 								<th style="width:1%">
@@ -67,7 +67,7 @@
 								<th style="width:4%">
 									${entry.value.totalActualDuration}
 								</th>
-								<th style="width:10%">${dateText}</th>
+								<th style="width:10%"><span class="label label-inverse">${dateText}</span></th>
 								<th style="width:10%">
 									<fmt:formatNumber value="${entry.value.averageProgress}" maxFractionDigits="2"/>%
 								</th>
@@ -86,7 +86,7 @@
 										${task.name}
 									</td>
 									<td class="v-align-middle">
-										<span class="muted">${task.estimatedDuration}</span>
+										${task.estimatedDuration}
 									</td>
 									<td>
 										<!-- Highlight when differences happen -->
@@ -98,12 +98,12 @@
 												<span class="badge badge-important">${task.actualDuration}</span>
 											</c:when>
 											<c:otherwise>
-												<span class="muted">${task.actualDuration}</span>
+												${task.actualDuration}
 											</c:otherwise>
 										</c:choose>
 									</td>
 									<td>
-										<span class="muted"><fmt:formatDate value="${task.deadline}" pattern="<%=Constant.FORMAT_DATE_TIME %>" /></span>
+										<fmt:formatDate value="${task.deadline}" pattern="<%=Constant.FORMAT_DATE_TIME %>" />
 									</td>
 									<td class="v-align-middle">
 										<div class="progress">

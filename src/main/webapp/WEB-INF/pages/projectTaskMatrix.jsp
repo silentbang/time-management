@@ -21,7 +21,7 @@
 			
 			<div class="col-md-6 col-sm-6 spacing-bottom">
 				<div class="tiles ${taskType.color} weather-widget ">
-					<div class="tiles-body">
+					<div class="tiles-body task-list-body">
 						<div class="controller">
 							<a href="javascript:;" class="reload"></a>
 							<a href="javascript:;" class="remove"></a>
@@ -46,7 +46,7 @@
 							</div>
 							<c:forEach items="${tasks}" var="task">
 								<c:if test="${task.taskTypeId == taskType.value }">
-									<div id="taskInfo_${task.taskId}" class="notification-messages info task-info">
+									<div id="taskInfo_${task.taskId}" class="notification-messages info task-info task">
 										<div class="message-wrapper">
 											<c:set var="taskHeaderStyle"></c:set>
 											<c:if test="${task.isFinished == true}">

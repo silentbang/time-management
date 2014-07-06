@@ -28,6 +28,7 @@
 			<div class="page-content">
 				<div class="content">
 					<div class="page-title">
+						<a onclick="history.back()"><i class="icon-custom-left"></i></a>
 						<h3>
 							<c:set var="headTitle"><tiles:getAsString name="headTitle" ignore="true"/></c:set>
 							<spring:message code="${headTitle}"/>

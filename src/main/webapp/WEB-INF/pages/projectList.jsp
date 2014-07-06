@@ -42,12 +42,8 @@
 											<input type="checkbox" value="3" id="checkbox3"><label for="checkbox3"></label>
 										</div>
 									</td>
-									<td>
-										<c:out value="${project.name}"/>
-									</td>
-									<td>
-										<span class="muted">${project.createdDate}</span>
-									</td>
+									<td>${project.name}</td>
+									<td>${project.createdDate}</td>
 									<td>
 										<div class="progress">
 											<div data-percentage="70%" class="progress-bar progress-bar-primary animate-progress-bar">
