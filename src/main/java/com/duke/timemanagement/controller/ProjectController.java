@@ -1,7 +1,9 @@
 package com.duke.timemanagement.controller;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.duke.timemanagement.bean.ProjectBean;
+import com.duke.timemanagement.common.Constant;
 import com.duke.timemanagement.model.Project;
 import com.duke.timemanagement.service.ProjectService;
 
@@ -26,7 +29,8 @@ public class ProjectController {
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView listProjects() {
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("projects", this.prepareListOfBeans(this.projectService.listProjects()));
+		List<Project> projects = this.projectService.listProjects();
+		mav.addObject("projects", this.prepareListOfBeans(projects));
 		mav.setViewName("projectList");
 
 		return mav;
@@ -80,10 +84,15 @@ public class ProjectController {
 			ProjectBean bean = null;
 
 			for (Project project : projects) {
+				// Query for estimated & actual durations
+				Map<String, BigDecimal> projectDurations = this.projectService.calculateProjectDuration(project);
+
 				bean = new ProjectBean();
 				bean.setProjectId(project.getProjectId());
 				bean.setName(project.getName());
 				bean.setCreatedDate(project.getCreatedDate());
+				bean.setTotalEstimatedDuration(projectDurations.get(Constant.Tag.SUM_TOTALESTIMATEDDURATION).doubleValue());
+				bean.setTotalActualDuration(projectDurations.get(Constant.Tag.SUM_TOTALACTUALDURATION).doubleValue());
 
 				beans.add(bean);
 			}

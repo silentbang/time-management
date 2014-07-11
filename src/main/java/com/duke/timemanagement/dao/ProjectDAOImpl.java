@@ -19,6 +19,10 @@ public class ProjectDAOImpl implements ProjectDAO {
 	@Autowired
 	private SessionFactory sessionFactory;
 
+	private final String SQL_DURATION_BY_TASK_TYPE = "SELECT \"taskTypeId\", SUM(\"estimatedDuration\") " + "FROM \"task\" "
+			+ "WHERE \"projectId\" = :projectId GROUP BY \"taskTypeId\" ORDER BY \"taskTypeId\" ASC";
+	private final String SQL_DURATION_BY_PROJECT = "SELECT SUM(\"estimatedDuration\") as \"totalEstimatedDuration\", SUM(\"actualDuration\") as \"totalActualDuration\" FROM \"task\" WHERE \"projectId\" = :projectId";
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Project> listProjects() {
@@ -50,11 +54,21 @@ public class ProjectDAOImpl implements ProjectDAO {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Object> calculateProjectDurationByTaskType(Project project) {
-		String sql = "SELECT \"taskTypeId\", SUM(\"estimatedDuration\") " + "FROM \"task\" " + "WHERE \"projectId\" = :projectId GROUP BY \"taskTypeId\" ORDER BY \"taskTypeId\" ASC";
-		Query query = this.sessionFactory.getCurrentSession().createSQLQuery(sql).setParameter("projectId", project.getProjectId()).setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+		Query query = this.sessionFactory.getCurrentSession().createSQLQuery(this.SQL_DURATION_BY_TASK_TYPE).setParameter("projectId", project.getProjectId())
+				.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
 		List<Object> result = query.list();
 
 		return result;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Object calculateProjectDuration(Project project) {
+		Query query = this.sessionFactory.getCurrentSession().createSQLQuery(this.SQL_DURATION_BY_PROJECT).setParameter("projectId", project.getProjectId())
+				.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
+		List<Object> result = query.list();
+
+		return (result.isEmpty() ? null : result.get(0));
 	}
 
 }

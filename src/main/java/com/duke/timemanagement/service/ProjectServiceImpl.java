@@ -79,4 +79,19 @@ public class ProjectServiceImpl implements ProjectService {
 
 		return durationCountMap;
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Map<String, BigDecimal> calculateProjectDuration(Project project) {
+		Map<String, BigDecimal> projectDurations = (Map<String, BigDecimal>) this.projectDAO.calculateProjectDuration(project);
+		// If null then replace by zero
+		if (projectDurations.get(Constant.Tag.SUM_TOTALESTIMATEDDURATION) == null) {
+			projectDurations.put(Constant.Tag.SUM_TOTALESTIMATEDDURATION, BigDecimal.valueOf(0));
+		}
+		if (projectDurations.get(Constant.Tag.SUM_TOTALACTUALDURATION) == null) {
+			projectDurations.put(Constant.Tag.SUM_TOTALACTUALDURATION, BigDecimal.valueOf(0));
+		}
+
+		return projectDurations;
+	}
 }

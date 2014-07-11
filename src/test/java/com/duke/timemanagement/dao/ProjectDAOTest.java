@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -88,5 +89,17 @@ public class ProjectDAOTest extends CustomAbstractTransactionalJUnit4SpringConte
 		Map result4 = (Map) results.get(3);
 		assertEquals(14.0, result4.get(Constant.Tag.SUM_ESTIMATEDDURATION));
 		assertEquals(4, result4.get(Constant.Tag.TASK_TASKTYPEID));
+	}
+
+	@SuppressWarnings("rawtypes")
+	@Test
+	public void testCalculateProjectDuration() {
+		Project project = this.projectDAO.findProjectById(2);
+		Object result = this.projectDAO.calculateProjectDuration(project);
+		Assert.assertNotNull(result);
+
+		Map resultMap = (Map) result;
+		assertEquals(43.25, resultMap.get(Constant.Tag.SUM_TOTALESTIMATEDDURATION));
+		assertEquals(36.25, resultMap.get(Constant.Tag.SUM_TOTALACTUALDURATION));
 	}
 }

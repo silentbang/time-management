@@ -25,8 +25,11 @@
 								<th style="width: 10%">
 									<spring:message code="label.project.name"/>
 								</th>
-								<th style="width: 10%" data-hide="phone,tablet">
+								<th style="width: 5%" data-hide="phone,tablet">
 									<spring:message code="label.project.createdDate"/>
+								</th>
+								<th style="width: 5%" data-hide="phone,tablet">
+									<spring:message code="label.project.estimatedOverActual"/>
 								</th>
 								<th style="width: 10%" data-hide="phone,tablet">
 									<spring:message code="label.project.completedPercentage"/>
@@ -44,6 +47,7 @@
 									</td>
 									<td>${project.name}</td>
 									<td>${project.createdDate}</td>
+									<td>${project.totalEstimatedDuration}h / ${project.totalActualDuration}h</td>
 									<td>
 										<div class="progress">
 											<div data-percentage="70%" class="progress-bar progress-bar-primary animate-progress-bar">

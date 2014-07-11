@@ -1,5 +1,6 @@
 package com.duke.timemanagement.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -17,4 +18,6 @@ public interface ProjectService {
 	public void deleteProject(Project project);
 
 	public Map<String, Double> calculateProjectDurationByTaskType(Project project);
+
+	public Map<String, BigDecimal> calculateProjectDuration(Project project);
 }

@@ -16,6 +16,8 @@ public class Constant {
 	public class Tag {
 		public static final String SUM = "sum";
 		public static final String SUM_ESTIMATEDDURATION = "SUM(\"estimatedDuration\")";
+		public static final String SUM_TOTALESTIMATEDDURATION = "totalEstimatedDuration";
+		public static final String SUM_TOTALACTUALDURATION = "totalActualDuration";
 
 		public static final String TASK_TASKTYPEID = "taskTypeId";
 	}

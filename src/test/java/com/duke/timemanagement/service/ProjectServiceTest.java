@@ -2,6 +2,7 @@ package com.duke.timemanagement.service;
 
 import static org.junit.Assert.assertEquals;
 
+import java.math.BigDecimal;
 import java.util.Map;
 
 import org.junit.Test;
@@ -24,5 +25,13 @@ public class ProjectServiceTest extends CustomAbstractTransactionalJUnit4SpringC
 		assertEquals(7, durationsByTaskType.get("2").doubleValue(), Constant.DELTA);
 		assertEquals(5.25, durationsByTaskType.get("3").doubleValue(), Constant.DELTA);
 		assertEquals(14, durationsByTaskType.get("4").doubleValue(), Constant.DELTA);
+	}
+
+	@Test
+	public void testCalculateProjectDuration() {
+		Project project = this.projectService.findProjectById(2);
+		Map<String, BigDecimal> projectDurations = this.projectService.calculateProjectDuration(project);
+		assertEquals(43.25, projectDurations.get(Constant.Tag.SUM_TOTALESTIMATEDDURATION));
+		assertEquals(36.25, projectDurations.get(Constant.Tag.SUM_TOTALACTUALDURATION));
 	}
 }
