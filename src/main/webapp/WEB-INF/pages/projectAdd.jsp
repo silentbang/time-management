@@ -12,7 +12,7 @@
 				</div>
 			</div>
 			<div class="grid-body no-border">
-				<form:form method="POST" commandName="project" action="/TimeManagement/projects/save">
+				<form:form method="POST" commandName="project" action="/Passato/projects/save">
 					<form:hidden path="projectId" value="${project.projectId}"/>
 					<div class="form-group">
 						<form:label path="name" cssClass="form-label"><spring:message code="label.project.name"/></form:label>

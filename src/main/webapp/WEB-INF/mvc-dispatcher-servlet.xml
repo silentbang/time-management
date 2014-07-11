@@ -14,7 +14,7 @@
 
 	<mvc:annotation-driven/>  
     <context:annotation-config/>  
-	<context:component-scan base-package="com.duke.timemanagement"></context:component-scan>
+	<context:component-scan base-package="com.duke.passato"></context:component-scan>
 	
 	<mvc:resources mapping="/assets/**" location="/assets/" />
 
@@ -33,8 +33,8 @@
 		<property name="dataSource" ref="dataSource"></property>
 		<property name="annotatedClasses">
 			<list>
-				<value>com.duke.timemanagement.model.Project</value>
-				<value>com.duke.timemanagement.model.Task</value>
+				<value>com.duke.passato.model.Project</value>
+				<value>com.duke.passato.model.Task</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">

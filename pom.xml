@@ -2,10 +2,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.duke</groupId>
-	<artifactId>timemanagement</artifactId>
+	<artifactId>passato</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Time Management Maven Webapp</name>
+	<name>Personal Agenda Stewardship Scheduling TOol</name>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<spring.version>3.2.9.RELEASE</spring.version>
@@ -13,7 +13,6 @@
 		<org.slf4j.version>1.5.10</org.slf4j.version>
 		<javax.jstl.version>1.2</javax.jstl.version>
 		<jackson.databind-version>2.2.3</jackson.databind-version>
-		<powermock.version>1.5</powermock.version>
 	</properties>
 	<repositories>
 		<repository>
@@ -34,25 +33,6 @@
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-all</artifactId>
 			<version>1.9.5</version>
-		</dependency>
-		<dependency>
-			<groupId>org.powermock</groupId>
-			<artifactId>powermock-mockito-release-full</artifactId>
-			<version>${powermock.version}</version>
-			<classifier>full</classifier>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.powermock</groupId>
-			<artifactId>powermock-module-junit4-rule</artifactId>
-			<version>${powermock.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.powermock</groupId>
-			<artifactId>powermock-classloading-xstream</artifactId>
-			<version>${powermock.version}</version>
-			<scope>test</scope>
 		</dependency>
 
 		<!-- Spring dependencies -->
@@ -176,7 +156,7 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<finalName>TimeManagement</finalName>
+		<finalName>Passato</finalName>
 		<plugins>
 			<!-- Compile -->
 			<plugin>
@@ -186,6 +166,21 @@
 				<configuration>
 					<source>1.7</source>
 					<target>1.7</target>
+				</configuration>
+			</plugin>
+			<!-- Test -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.17</version>
+				<configuration>
+					<includes>
+						<include>**/*Test.java</include>
+						<include>**/Test*.java</include>
+						<include>**/Tests*.java</include>
+						<include>**/*Tests.java</include>
+						<include>**/*TestCases.java</include>
+					</includes>
 				</configuration>
 			</plugin>
 		</plugins>

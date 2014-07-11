@@ -5,7 +5,7 @@
 	<div class="span12">
 		<div class="grid simple ">
 			<div class="grid-title">
-				<a class="btn btn-small btn-info btn-cons" href="/TimeManagement/projects/add">
+				<a class="btn btn-small btn-info btn-cons" href="/Passato/projects/add">
 					<i class="fa fa-paste"></i> <spring:message code="crud.add" />
 				</a>
 				<div class="tools">
@@ -55,12 +55,12 @@
 										</div>
 									</td>
 									<td>
-										<a href="/TimeManagement/projects/update/${project.projectId}" class="btn btn-small btn-primary btn-xs btn-mini" ><i class="fa fa-paste"></i> Update</a>
-										<a href="javascript:deleteEntity('/TimeManagement/projects/delete/${project.projectId}');" class="btn btn-small btn-danger btn-xs btn-mini">
+										<a href="/Passato/projects/update/${project.projectId}" class="btn btn-small btn-primary btn-xs btn-mini" ><i class="fa fa-paste"></i> Update</a>
+										<a href="javascript:deleteEntity('/Passato/projects/delete/${project.projectId}');" class="btn btn-small btn-danger btn-xs btn-mini">
 											<i class="fa fa-file-text-o"></i> Delete
 										</a>
-										<a href="/TimeManagement/tasks/${project.projectId}" class="btn btn-small btn-warning btn-xs btn-mini" ><i class="fa fa-paste"></i> Manage tasks</a>
-										<a href="/TimeManagement/tasks/plan/${project.projectId}" class="btn btn-small btn-warning btn-xs btn-mini" ><i class="fa fa-paste"></i> Planning</a>
+										<a href="/Passato/tasks/${project.projectId}" class="btn btn-small btn-warning btn-xs btn-mini" ><i class="fa fa-paste"></i> Manage tasks</a>
+										<a href="/Passato/tasks/plan/${project.projectId}" class="btn btn-small btn-warning btn-xs btn-mini" ><i class="fa fa-paste"></i> Planning</a>
 									</td>
 								</tr>
 							</c:forEach>

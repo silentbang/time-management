@@ -1,9 +1,9 @@
-<%@page import="com.duke.timemanagement.common.Constant"%>
+<%@page import="com.duke.passato.common.Constant"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>  
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@page import="com.duke.timemanagement.common.TaskType"%>
+<%@page import="com.duke.passato.common.TaskType"%>
 <spring:message code="label.task.name" var="labelTaskName"/>
 <spring:message code="label.task.estimatedDuration" var="labelTaskEstimatedDuration"/>
 <spring:message code="label.task.actualDuration" var="labelTaskActualDuration"/>
@@ -55,7 +55,7 @@
 											<div class="heading ${taskHeaderStyle}">${task.name}</div>
 											<div class="description"><fmt:formatDate value="${task.deadline}" pattern="<%=Constant.FORMAT_DATE_TIME %>" /></div>
 										</div>
-										<div class="date pull-right"><span class="badge" onClick="deleteEntity('/TimeManagement/tasks/delete/${task.taskId}');"><i class="fa fa-trash-o"></i></span></div>
+										<div class="date pull-right"><span class="badge" onClick="deleteEntity('/Passato/tasks/delete/${task.taskId}');"><i class="fa fa-trash-o"></i></span></div>
 										<div class="date pull-right">${task.estimatedDuration}h &nbsp;</div>
 									</div>
 								</c:if>
@@ -101,7 +101,7 @@
 						</div>
 					</div>
 					<div class="widget-body">
-						<form:form method="POST" commandName="task" action="/TimeManagement/tasks/save">
+						<form:form method="POST" commandName="task" action="/Passato/tasks/save">
 							<form:hidden path="projectId" value="${task.projectId}"/>
 							<form:hidden path="taskId" value="${task.taskId}"/>
 							<form:hidden path="taskTypeId" value="${task.taskTypeId}"/>

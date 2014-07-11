@@ -15,7 +15,7 @@ $(document).ready(function() {
 		// Call web service
 		$.ajax({
 			type : "POST",
-			url : "/TimeManagement/tasks/update/" + taskId,
+			url : "/Passato/tasks/update/" + taskId,
 			taskIdValue : taskId,
 			success : onFetchTaskSuccess,
 			error : onFetchTaskError

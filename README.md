@@ -1,15 +1,16 @@
-time-management
+PASSATO
 ===============
 
-Time Management
+Personal Agenda Stewardship Scheduling TOol 
 
+PostgreSQL 9.2
 
-MySQL 5.5
-
-	Root User: adminKDSaImR
-	Root Password: KXXwqRdBEvaa
-	Database Name: duke
-	Connection URL: mysql://$OPENSHIFT_MYSQL_DB_HOST:$OPENSHIFT_MYSQL_DB_PORT/
-
-PHPMyAdmin
-	URL: https://duke-timemanagement.rhcloud.com/phpmyadmin/
+	Root User: adminz2aluck
+	Root Password: 1S-NF1kR4lZw
+	Database Name: tms
+	Connection URL: postgresql://$OPENSHIFT_POSTGRESQL_DB_HOST:$OPENSHIFT_POSTGRESQL_DB_PORT
+	
+Jenkins
+	User: admin
+	Password: GNxe5GJ4YA-W
+	Note:  You can change your password at: https://jenkins-timemanagement.rhcloud.com/me/configure

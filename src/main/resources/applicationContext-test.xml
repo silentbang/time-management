@@ -14,7 +14,7 @@
 			
 	<mvc:annotation-driven/>  
     <context:annotation-config/>  
-	<context:component-scan base-package="com.duke.timemanagement"></context:component-scan>
+	<context:component-scan base-package="com.duke.passato"></context:component-scan>
 
 	<context:property-placeholder location="classpath:/database-test.properties"></context:property-placeholder>
 	<bean class="org.springframework.jdbc.datasource.DriverManagerDataSource"
@@ -30,8 +30,8 @@
 		<property name="dataSource" ref="dataSource"></property>
 		<property name="annotatedClasses">
 			<list>
-				<value>com.duke.timemanagement.model.Project</value>
-				<value>com.duke.timemanagement.model.Task</value>
+				<value>com.duke.passato.model.Project</value>
+				<value>com.duke.passato.model.Task</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
