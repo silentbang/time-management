@@ -51,7 +51,7 @@
 					<c:set var="dateText" value="${entry.key}"/>
 					<c:set var="tasksByDate" value="${entry.value.tasks}"/>
 					
-					<table class="table table-hover no-more-tables">
+					<table class="table no-more-tables">
 						<thead>
 							<tr class="tableHead">
 								<th style="width:1%">

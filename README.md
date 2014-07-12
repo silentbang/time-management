@@ -1,7 +1,7 @@
 PASSATO
 ===============
 
-Personal Agenda Stewardship Scheduling TOol 
+Personal Agenda StewardShip And scheduling TOol 
 
 PostgreSQL 9.2
 

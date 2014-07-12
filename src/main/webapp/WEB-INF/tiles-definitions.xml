@@ -15,6 +15,10 @@
 		<put-attribute name="footer" value="/WEB-INF/templates/fragments/footer.jsp" />
 		<put-attribute name="footerResources"
 			value="/WEB-INF/templates/fragments/footerResources.jsp" />
+		<put-list-attribute name="styleSheets">
+	  	</put-list-attribute>
+	  	<put-list-attribute name="jsScripts">
+	  	</put-list-attribute>
 	</definition>
 
 	<definition name="dashboard" extends="mainLayout">
@@ -36,6 +40,12 @@
 	<definition name="projectTaskMatrix" extends="mainLayout">
 		<put-attribute name="headTitle" value="headTitle.projectTaskMatrix" />
 		<put-attribute name="body" value="/WEB-INF/pages/projectTaskMatrix.jsp" />
+		<put-list-attribute name="styleSheets">
+			<add-attribute value="/assets/css/appProjectTaskMatrix.css"></add-attribute>
+	  	</put-list-attribute>
+		<put-list-attribute name="jsScripts">
+			<add-attribute value="/assets/js/appProjectTaskMatrix.js"></add-attribute>
+	  	</put-list-attribute>
 	</definition>
 	<definition name="projectPlan" extends="mainLayout">
 		<put-attribute name="headTitle" value="headTitle.projectPlan" />

@@ -42,5 +42,14 @@
 		</div>
 		
 		<tiles:insertAttribute name="footerResources"/>
+		
+		<tiles:importAttribute name="jsScripts" />
+		<tiles:importAttribute name="styleSheets" />
+		<c:forEach var="cssFileName" items="${styleSheets}">  
+	    	<link type="text/css" href="<c:url value="${cssFileName}" />" rel="stylesheet" type="text/css"/>  
+		</c:forEach>
+		<c:forEach var="jsFileName" items="${jsScripts}">  
+	    	<script src="<c:url value="${jsFileName}" />"></script>   
+		</c:forEach>
 	</body>
 </html>
