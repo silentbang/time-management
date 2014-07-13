@@ -12,6 +12,19 @@
 <spring:message code="label.task.completedPercentage" var="labelTaskCompletedPercentage"/>
 <spring:message code="label.task.isFinished" var="labelTaskIsFinished"/>
 
+<div class="row spacing-bottom">
+	<div class="col-md-12">
+<!-- 		<div class="pull-left"> -->
+<!-- 			abc -->
+<!-- 		</div> -->
+		<div class="pull-right">
+		 	<div class="btn-group" data-toggle="buttons-radio">
+		    	<button id="hideExpired" class="btn btn-primary active tip" title='<spring:message code="page.taskMatrix.tooltip.hideExpiredTasks" />' data-toggle="tooltip" type="button"><i class="fa fa-th-list"></i></button>
+		    	<button id="showExpired" class="btn btn-primary tip" title='<spring:message code="page.taskMatrix.tooltip.showExpiredTasks" />' data-toggle="tooltip" type="button"><i class="fa fa-th-large"></i></button>
+			</div>
+		</div>
+	</div>
+</div>
 <div class="row">
 	<div class="col-md-8 spacing-bottom">
 		<c:forEach items="${taskTypes}" var="taskType" varStatus="counter">
@@ -46,12 +59,16 @@
 							</div>
 							<c:forEach items="${tasks}" var="task">
 								<c:if test="${task.taskTypeId == taskType.value }">
-									<div id="taskInfo_${task.taskId}" class="notification-messages info task-info task">
+									<!-- Choose CSS style -->
+									<c:set var="taskInfoStyle"></c:set>
+									<c:set var="taskHeaderStyle"></c:set>
+									<c:if test="${task.isFinished == true}">
+										<c:set var="taskInfoStyle">taskInfoDone</c:set>
+										<c:set var="taskHeaderStyle">taskDone</c:set>
+									</c:if>
+									
+									<div id="taskInfo_${task.taskId}" class="notification-messages info task-info task ${taskInfoStyle}">
 										<div class="message-wrapper">
-											<c:set var="taskHeaderStyle"></c:set>
-											<c:if test="${task.isFinished == true}">
-												<c:set var="taskHeaderStyle">taskDone</c:set>
-											</c:if>
 											<div class="heading ${taskHeaderStyle}">${task.name}</div>
 											<div class="description"><fmt:formatDate value="${task.deadline}" pattern="<%=Constant.FORMAT_DATE_TIME %>" /></div>
 										</div>

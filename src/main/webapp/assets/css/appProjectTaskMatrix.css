@@ -1,3 +1,11 @@
+.taskDone {
+	text-decoration: line-through;
+}
+
+.taskInfoDone {
+	display: none;
+}
+
 /* Buttons */
 .btn-medium {
 	padding: 7px 14px;

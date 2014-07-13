@@ -30,6 +30,22 @@ $(document).ready(function() {
 		resetTaskForm();
 		showTaskFormAndUpdateTaskTypeId(taskTypeId);
 	});
+	
+	// Toggle display for expired tasks
+	$("#hideExpired").click(function(){
+		// Set active button
+		$(this).addClass("active");
+		$("#removeLineThrough").removeClass("active");
+		
+		// Hide task infos which are done
+		$(".taskInfoDone").css("display", "none");
+	});
+	$("#showExpired").click(function(){
+		$(this).addClass("active");
+		$("#addLineThrough").removeClass("active");
+		
+		$(".taskInfoDone").css("display", "block");
+	});
 });
 
 //Block form

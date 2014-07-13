@@ -44,6 +44,7 @@
 			<add-attribute value="/assets/css/appProjectTaskMatrix.css"></add-attribute>
 	  	</put-list-attribute>
 		<put-list-attribute name="jsScripts">
+			<add-attribute value="/assets/js/messages_notifications.js"></add-attribute>
 			<add-attribute value="/assets/js/appProjectTaskMatrix.js"></add-attribute>
 	  	</put-list-attribute>
 	</definition>

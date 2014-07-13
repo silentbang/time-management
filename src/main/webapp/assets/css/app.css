@@ -1,9 +1,9 @@
-.taskDone {
-	text-decoration: line-through;
-}
-
 .app-hidden {
 	visibility: hidden;
+}
+
+.app-visible {
+	visibility: visible;
 }
 
 /* Tables */
