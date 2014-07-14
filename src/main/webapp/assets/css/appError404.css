@@ -1,0 +1,56 @@
+/* common */
+* { outline: none; }
+body { margin: 0; background: url(../img/404/bg-navy.png) #000; font-family: arial; font-size: 14px; line-height: 20px; }
+header, section, footer { text-align: center; margin: 40px 0 0 0; }
+section { margin-top: 30px; }
+img { border: 0; }
+.ribbon { margin-top: 31px; }
+
+/* backgrounds */
+.background-navy { background: url(../img/404/bg-navy.png) #000; }
+
+/* transitions */
+#n1, #n2, #n3 { -webkit-transition-duration: 2s; -moz-transition-duration: 2s; -o-transition-duration: 2s; -ms-transition-duration: 2s; transition-duration: 2s; }
+
+/* errors */
+.error { background-position: center 185px; background-repeat: no-repeat; }
+.error .number { width: 348px; height: 225px; margin: 0 auto; }
+#n1, #n2, #n3 { float: left; width: 100px; height: 150px; margin: 0 8px; background: url(../img/404/numbers.png) 0 -1500px repeat-y; }
+.error-400 { background-image: url(../img/404/400.png); }
+.error-401 { background-image: url(../img/404/401.png); }
+.error-403 { background-image: url(../img/404/403.png); }
+.error-404 { background-image: url(../img/404/404.png); }
+.error-408 { background-image: url(../img/404/408.png); }
+.error-500 { background-image: url(../img/404/500.png); }
+.error-503 { background-image: url(../img/404/503.png); }
+.error-400 #n1 { background-position: 0 -600px; }
+.error-400 #n2 { background-position: 0 0; }
+.error-400 #n3 { background-position: 0 0; }
+.error-401 #n1 { background-position: 0 -600px; }
+.error-401 #n2 { background-position: 0 0; }
+.error-401 #n3 { background-position: 0 -150px; }
+.error-403 #n1 { background-position: 0 -600px; }
+.error-403 #n2 { background-position: 0 0; }
+.error-403 #n3 { background-position: 0 -450px; }
+.error-404 #n1 { background-position: 0 -600px; }
+.error-404 #n2 { background-position: 0 0; }
+.error-404 #n3 { background-position: 0 -600px; }
+.error-408 #n1 { background-position: 0 -600px; }
+.error-408 #n2 { background-position: 0 0; }
+.error-408 #n3 { background-position: 0 -1200px; }
+.error-500 #n1 { background-position: 0 -750px; }
+.error-500 #n2 { background-position: 0 0; }
+.error-500 #n3 { background-position: 0 0; }
+.error-503 #n1 { background-position: 0 -750px; }
+.error-503 #n2 { background-position: 0 0; }
+.error-503 #n3 { background-position: 0 -450px; }
+
+/* footer */
+footer { height: 72px; background: url(../img/404/footer-background.png) 0 0 repeat-x; margin: 80px auto 0 auto;  }
+footer .container { width: 552px; height: 32px; margin: 0 auto; padding: 20px 0; }
+footer .search .button { display: block; float: left; width: 80px; height: 30px; background: transparent; border: 0; cursor: pointer; }
+
+/* Button */
+.button {
+/* 	// TODO */
+}
