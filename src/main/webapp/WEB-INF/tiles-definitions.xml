@@ -20,6 +20,12 @@
 	  	<put-list-attribute name="jsScripts">
 	  	</put-list-attribute>
 	</definition>
+	
+	
+	<definition name="error" template="/WEB-INF/pages/genericError.jsp">
+<!-- 		<put-attribute name="headTitle" value="headTitle.dashboard" /> -->
+<!-- 		<put-attribute name="body" value="/WEB-INF/pages/dashboard.jsp" /> -->
+	</definition>
 
 	<definition name="dashboard" extends="mainLayout">
 		<put-attribute name="headTitle" value="headTitle.dashboard" />

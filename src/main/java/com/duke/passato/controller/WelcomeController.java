@@ -7,7 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/welcome")
-public class WelcomeController {
+public class WelcomeController extends GenericController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView printWelcome() {
