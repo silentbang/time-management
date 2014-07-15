@@ -34,5 +34,6 @@ public class ProjectServiceTest extends CustomAbstractTransactionalJUnit4SpringC
 		Map<String, BigDecimal> projectDurations = this.projectService.calculateProjectDuration(project);
 		assertEquals(43.25, projectDurations.get(Constant.Tag.SUM_TOTALESTIMATEDDURATION));
 		assertEquals(36.25, projectDurations.get(Constant.Tag.SUM_TOTALACTUALDURATION));
+		assertEquals(80.57692307692308, projectDurations.get(Constant.Tag.SUM_AVERAGEPROGRESS));
 	}
 }

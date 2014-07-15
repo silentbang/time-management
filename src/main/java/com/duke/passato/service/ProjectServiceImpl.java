@@ -91,6 +91,9 @@ public class ProjectServiceImpl implements ProjectService {
 		if (projectDurations.get(Constant.Tag.SUM_TOTALACTUALDURATION) == null) {
 			projectDurations.put(Constant.Tag.SUM_TOTALACTUALDURATION, BigDecimal.valueOf(0));
 		}
+		if (projectDurations.get(Constant.Tag.SUM_AVERAGEPROGRESS) == null) {
+			projectDurations.put(Constant.Tag.SUM_AVERAGEPROGRESS, BigDecimal.valueOf(0));
+		}
 
 		return projectDurations;
 	}

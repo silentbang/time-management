@@ -18,6 +18,7 @@ public class Constant {
 		public static final String SUM_ESTIMATEDDURATION = "SUM(\"estimatedDuration\")";
 		public static final String SUM_TOTALESTIMATEDDURATION = "totalEstimatedDuration";
 		public static final String SUM_TOTALACTUALDURATION = "totalActualDuration";
+		public static final String SUM_AVERAGEPROGRESS = "averageProgress";
 
 		public static final String TASK_TASKTYPEID = "taskTypeId";
 	}

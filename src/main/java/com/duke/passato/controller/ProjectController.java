@@ -21,7 +21,7 @@ import com.duke.passato.service.ProjectService;
 
 @Controller
 @RequestMapping(value = "/projects")
-public class ProjectController {
+public class ProjectController extends GenericController {
 
 	@Autowired
 	private ProjectService projectService;
@@ -93,6 +93,7 @@ public class ProjectController {
 				bean.setCreatedDate(project.getCreatedDate());
 				bean.setTotalEstimatedDuration(projectDurations.get(Constant.Tag.SUM_TOTALESTIMATEDDURATION).doubleValue());
 				bean.setTotalActualDuration(projectDurations.get(Constant.Tag.SUM_TOTALACTUALDURATION).doubleValue());
+				bean.setAverageProgress(projectDurations.get(Constant.Tag.SUM_AVERAGEPROGRESS).doubleValue());
 
 				beans.add(bean);
 			}

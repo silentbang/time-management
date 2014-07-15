@@ -101,5 +101,6 @@ public class ProjectDAOTest extends CustomAbstractTransactionalJUnit4SpringConte
 		Map resultMap = (Map) result;
 		assertEquals(43.25, resultMap.get(Constant.Tag.SUM_TOTALESTIMATEDDURATION));
 		assertEquals(36.25, resultMap.get(Constant.Tag.SUM_TOTALACTUALDURATION));
+		assertEquals(80.57692307692308, ((Double) resultMap.get(Constant.Tag.SUM_AVERAGEPROGRESS)).doubleValue(), Constant.DELTA);
 	}
 }

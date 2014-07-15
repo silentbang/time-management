@@ -21,7 +21,8 @@ public class ProjectDAOImpl implements ProjectDAO {
 
 	private final String SQL_DURATION_BY_TASK_TYPE = "SELECT \"taskTypeId\", SUM(\"estimatedDuration\") " + "FROM \"task\" "
 			+ "WHERE \"projectId\" = :projectId GROUP BY \"taskTypeId\" ORDER BY \"taskTypeId\" ASC";
-	private final String SQL_DURATION_BY_PROJECT = "SELECT SUM(\"estimatedDuration\") as \"totalEstimatedDuration\", SUM(\"actualDuration\") as \"totalActualDuration\" FROM \"task\" WHERE \"projectId\" = :projectId";
+	private final String SQL_DURATION_BY_PROJECT = "SELECT SUM(\"estimatedDuration\") as \"totalEstimatedDuration\", " + " SUM(\"actualDuration\") as \"totalActualDuration\", "
+			+ " SUM(\"completedPercentage\") / count(\"taskId\") as \"averageProgress\" " + " FROM \"task\" " + " WHERE \"projectId\" = :projectId";
 
 	@SuppressWarnings("unchecked")
 	@Override

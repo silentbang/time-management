@@ -8,6 +8,7 @@ public class ProjectBean {
 	private Date createdDate;
 	private Double totalEstimatedDuration;
 	private Double totalActualDuration;
+	private Double averageProgress;
 
 	public Integer getProjectId() {
 		return this.projectId;
@@ -47,6 +48,14 @@ public class ProjectBean {
 
 	public void setTotalActualDuration(Double totalActualDuration) {
 		this.totalActualDuration = totalActualDuration;
+	}
+
+	public Double getAverageProgress() {
+		return this.averageProgress;
+	}
+
+	public void setAverageProgress(Double averageProgress) {
+		this.averageProgress = averageProgress;
 	}
 
 }

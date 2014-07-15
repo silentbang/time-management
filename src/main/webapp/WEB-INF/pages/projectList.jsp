@@ -50,7 +50,7 @@
 									<td>${project.totalEstimatedDuration}h / ${project.totalActualDuration}h</td>
 									<td>
 										<div class="progress">
-											<div data-percentage="70%" class="progress-bar progress-bar-primary animate-progress-bar">
+											<div data-percentage="${project.averageProgress}%" class="progress-bar progress-bar-primary animate-progress-bar">
 											</div>
 										</div>
 									</td>
