@@ -10,6 +10,7 @@
 		<put-attribute name="headerResources"
 			value="/WEB-INF/templates/fragments/headerResources.jsp" />
 		<put-attribute name="header" value="/WEB-INF/templates/fragments/header.jsp" />
+		<put-attribute name="messages" value="/WEB-INF/templates/fragments/messages.jsp" />
 		<put-attribute name="menu" value="/WEB-INF/templates/fragments/menu.jsp" />
 		<put-attribute name="headTitle" value="" />
 		<put-attribute name="footer" value="/WEB-INF/templates/fragments/footer.jsp" />

@@ -34,6 +34,9 @@
 							<spring:message code="${headTitle}"/>
 						</h3>
 					</div>
+					<div id="messageContainer">
+						<tiles:insertAttribute name="messages" />
+					</div>
 					<div id="container">
 						<tiles:insertAttribute name="body"/>
 					</div>

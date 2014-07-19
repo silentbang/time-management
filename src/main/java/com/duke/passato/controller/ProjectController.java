@@ -13,9 +13,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.duke.passato.bean.ProjectBean;
 import com.duke.passato.common.Constant;
+import com.duke.passato.common.Message;
+import com.duke.passato.common.MessageType;
 import com.duke.passato.model.Project;
 import com.duke.passato.service.ProjectService;
 
@@ -46,9 +49,12 @@ public class ProjectController extends GenericController {
 	}
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public ModelAndView saveProject(@ModelAttribute("project") ProjectBean projectBean, BindingResult result) {
+	public ModelAndView saveProject(@ModelAttribute("project") ProjectBean projectBean, BindingResult result, RedirectAttributes redirectAttributes) {
 		Project project = this.prepareModel(projectBean);
 		this.projectService.insertProject(project);
+
+		this.postSingleMessage(redirectAttributes, new Message(MessageType.SUCCESS, "success.project.create", project.getName()));
+
 		return new ModelAndView("redirect:/projects");
 	}
 
@@ -63,16 +69,20 @@ public class ProjectController extends GenericController {
 	}
 
 	@RequestMapping(value = "/update/{projectId}", method = RequestMethod.POST)
-	public ModelAndView updateProject(@ModelAttribute Project project, @PathVariable Integer projectId) {
+	public ModelAndView updateProject(@ModelAttribute Project project, @PathVariable Integer projectId, RedirectAttributes redirectAttributes) {
 		this.projectService.updateProject(project);
+
+		this.postSingleMessage(redirectAttributes, new Message(MessageType.SUCCESS, "success.project.create", project.getName()));
 
 		return new ModelAndView("redirect:/projects");
 	}
 
 	@RequestMapping(value = "/delete/{projectId}", method = RequestMethod.GET)
-	public ModelAndView deleteProject(@PathVariable Integer projectId) {
+	public ModelAndView deleteProject(@PathVariable Integer projectId, RedirectAttributes redirectAttributes) {
 		Project project = this.projectService.findProjectById(projectId);
 		this.projectService.deleteProject(project);
+
+		this.postSingleMessage(redirectAttributes, new Message(MessageType.SUCCESS, "success.project.delete", project.getName()));
 
 		return new ModelAndView("redirect:/projects");
 	}
