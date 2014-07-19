@@ -29,6 +29,7 @@ $(document).ready(function() {
 
 		resetTaskForm();
 		showTaskFormAndUpdateTaskTypeId(taskTypeId);
+		focusOnForm();
 	});
 	
 	// Toggle display for expired tasks
@@ -84,8 +85,6 @@ function resetTaskForm(){
 	$("#deadlineTime").val("00:00:00");
 	$("#note").val(null);
 	$("#completedPercentage").slider("setValue", 0);
-	
-	focusOnForm();
 }
 
 function onFetchTaskSuccess(data, statuss) {

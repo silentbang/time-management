@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
 		<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 		<meta charset="utf-8" />
-		<title>Webarch - Responsive Admin Dashboard</title>
+		<title><spring:message code="global.title"/></title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 		<meta content="" name="description" />
 		<meta content="" name="author" />
@@ -28,6 +29,9 @@
 				position: unset;
 				margin-top: 3%;
 			}
+			.stacktrace {
+				text-align: left;
+			}
 		</style>
 	</head>
 	<body class="error-body no-top">
@@ -39,13 +43,15 @@
 					  	<div class="error-description-mini">${url}</div>
 					  	<div class="error-description-mini">${exception.message}</div>
 					  	<br>
+					  	<div class="stacktrace">
+					  		<blockquote class="margin-top-20">
+						        <c:forEach items="${exception.stackTrace}" var="stackTrace">    
+						        	${stackTrace} 
+						    	</c:forEach>
+			    			</blockquote>
+			    			<button class="btn btn-primary btn-cons" onclick="javascript:history.back()" type="button">Back</button>
+					  	</div>
 					</div>
-				  	<blockquote class="margin-top-20">
-				        <c:forEach items="${exception.stackTrace}" var="stackTrace">    
-				        	${stackTrace} 
-				    	</c:forEach>
-			    	</blockquote>
-			    	<button class="btn btn-primary btn-cons" onclick="javascript:history.back()" type="button">Back</button>
 				</div>
 			</div>
 		</div>

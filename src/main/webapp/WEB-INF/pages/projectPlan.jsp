@@ -17,8 +17,6 @@
 				</div>
 			</div>
 			<div class="grid-body no-border">
-				<h3>Basic <span class="semi-bold">Table</span></h3>
-				
 				<table class="table no-more-tables">
 					<thead>
 						<tr>

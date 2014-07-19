@@ -11,8 +11,8 @@
 }
 
 .notification-messages.taskPast {
-	background: #CF4AC8;
-	color: white;
+	background: #EBF5AC;
+	color: black;
 }
 
 .notification-messages .message-wrapper .heading.taskIn3Days {
@@ -22,7 +22,6 @@
 }
 
 .notification-messages .message-wrapper .heading.taskPast {
-	color: white;
 }
 
 /* Color badge */
@@ -42,8 +41,8 @@
 }
 
 .label-past {
-	color: white;
-	background: #CF4AC8;
+	color: black;
+	background: #EBF5AC;
 }
 
 /* Buttons */

@@ -96,12 +96,12 @@ public class DateUtilsTest extends CustomAbstractTransactionalJUnit4SpringContex
 	}
 
 	@Test
-	public void testIsWithin3Days_caseDaysBefore_true() {
+	public void testIsWithin3Days_caseDaysBefore_false() {
 		DateUtils dateUtilsSpy = Mockito.spy(new DateUtils());
 		Mockito.when(dateUtilsSpy.getCurrentDate()).thenReturn(this.date);
 
-		assertEquals(true, dateUtilsSpy.isWithin3Days(new Date(114, 7, 19, 13, 20, 30)));
-		assertEquals(true, dateUtilsSpy.isWithin3Days(new Date(114, 7, 18, 13, 20, 30)));
-		assertEquals(true, dateUtilsSpy.isWithin3Days(new Date(114, 7, 17, 13, 20, 30)));
+		assertEquals(false, dateUtilsSpy.isWithin3Days(new Date(114, 7, 19, 13, 20, 30)));
+		assertEquals(false, dateUtilsSpy.isWithin3Days(new Date(114, 7, 18, 13, 20, 30)));
+		assertEquals(false, dateUtilsSpy.isWithin3Days(new Date(114, 7, 17, 13, 20, 30)));
 	}
 }

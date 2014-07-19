@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.duke.passato.common.Constant;
+import com.duke.passato.common.TaskType;
 import com.duke.passato.dao.ProjectDAO;
 import com.duke.passato.model.Project;
 
@@ -55,7 +56,12 @@ public class ProjectServiceImpl implements ProjectService {
 		List<Object> results = this.projectDAO.calculateProjectDurationByTaskType(project);
 		Iterator<Object> iterator = results.iterator();
 
+		// Initialize all sums to 0
 		Map<String, Double> durationCountMap = new HashMap<String, Double>();
+		for (TaskType taskType : TaskType.values()) {
+			durationCountMap.put(Integer.toString(taskType.getValue()), Double.valueOf(0));
+		}
+
 		while (iterator.hasNext()) {
 			Map row = (Map) iterator.next();
 			// Extract information

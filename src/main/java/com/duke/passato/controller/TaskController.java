@@ -14,10 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.duke.passato.bean.PlanningBean;
 import com.duke.passato.bean.TaskBean;
 import com.duke.passato.common.DateUtils;
+import com.duke.passato.common.Message;
+import com.duke.passato.common.MessageType;
 import com.duke.passato.common.TaskType;
 import com.duke.passato.common.UIUtils;
 import com.duke.passato.comparator.TaskComparator;
@@ -57,27 +60,33 @@ public class TaskController extends GenericController {
 	}
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public ModelAndView saveTask(@ModelAttribute("task") TaskBean taskBean, BindingResult result) {
+	public ModelAndView saveTask(@ModelAttribute("task") TaskBean taskBean, BindingResult result, RedirectAttributes redirectAttributes) {
 		Task task = this.prepareModel(taskBean);
 		this.taskService.saveTask(task);
+
+		this.postSingleMessage(redirectAttributes, new Message(MessageType.SUCCESS, "success.task.save", task.getName()));
 
 		return new ModelAndView("redirect:/tasks/" + task.getProject().getProjectId());
 	}
 
 	@RequestMapping(value = "/update/{taskId}", method = RequestMethod.POST)
 	@ResponseBody
-	public TaskBean updateTask(@PathVariable Integer taskId) {
+	public TaskBean updateTask(@PathVariable Integer taskId, RedirectAttributes redirectAttributes) {
 		Task task = this.taskService.findTaskById(taskId);
 		TaskBean taskBean = this.prepareBean(task);
+
+		this.postSingleMessage(redirectAttributes, new Message(MessageType.SUCCESS, "success.task.update", task.getName()));
 
 		return taskBean;
 	}
 
 	// TODO Use JSON
 	@RequestMapping(value = "/delete/{taskId}", method = RequestMethod.GET)
-	public ModelAndView deleteTask(@PathVariable Integer taskId) {
+	public ModelAndView deleteTask(@PathVariable Integer taskId, RedirectAttributes redirectAttributes) {
 		Task task = this.taskService.findTaskById(taskId);
 		this.taskService.deleteTask(task);
+
+		this.postSingleMessage(redirectAttributes, new Message(MessageType.SUCCESS, "success.task.delete", task.getName()));
 
 		return new ModelAndView("redirect:/tasks/" + task.getProject().getProjectId());
 	}
@@ -90,7 +99,6 @@ public class TaskController extends GenericController {
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("project", project);
-		// mav.addObject("tasks", tasks);
 		mav.addObject("plan", new PlanningBean(tasks));
 		mav.addObject("uiUtils", UIUtils.getInstance());
 		mav.setViewName("projectPlan");

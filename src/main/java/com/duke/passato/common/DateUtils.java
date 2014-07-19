@@ -47,7 +47,7 @@ public class DateUtils {
 
 	public boolean isWithin3Days(Date date) {
 		Days days = this.daysFromToday(date);
-		return Math.abs(days.getDays()) <= 3;
+		return days.getDays() <= 3 && days.getDays() > 0;
 	}
 
 	private Days daysFromToday(Date date) {

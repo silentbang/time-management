@@ -14,7 +14,7 @@
 			</div>
 			<div class="grid-body ">
 				<c:if test="${!empty projects}">
-					<table class="table table-hover table-condensed" id="example">
+					<table class="table table-condensed" id="example">
 						<thead>
 							<tr>
 								<th style="width: 1%">

@@ -43,7 +43,7 @@
 							<a href="javascript:;" class="remove"></a>
 						</div>
 						<div class="tiles-title">
-							 ${taskType.typeName}
+							<spring:message code="${taskType.displayName }"/>
 						</div>
 						<br />
 						<div class="widget-body">
@@ -68,7 +68,7 @@
 									
 									<div id="taskInfo_${task.taskId}" class="notification-messages info task-info task ${taskInfoStyle} ${taskStyleByTime}">
 										<div class="message-wrapper">
-											<div class="heading ${taskStyleByTime}">${task.name}</div>
+											<div class="heading tip ${taskStyleByTime}" title="${task.name}" data-toggle="tooltip">${task.name}</div>
 											<div class="description"><fmt:formatDate value="${task.deadline}" pattern="<%=Constant.FORMAT_DATE_TIME %>" /></div>
 										</div>
 										<div class="date pull-right"><span class="badge" onClick="deleteEntity('/Passato/tasks/delete/${task.taskId}');"><i class="fa fa-trash-o"></i></span></div>
