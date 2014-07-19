@@ -13,6 +13,8 @@ public class Constant {
 	// still considered equal (JUnit)
 	public static final double DELTA = 1e-15;
 
+	public static final String MESSAGE_LIST = "messages";
+
 	public class Tag {
 		public static final String SUM = "sum";
 		public static final String SUM_ESTIMATEDDURATION = "SUM(\"estimatedDuration\")";

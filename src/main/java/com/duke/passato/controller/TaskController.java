@@ -28,7 +28,7 @@ import com.duke.passato.service.TaskService;
 
 @Controller
 @RequestMapping(value = "/tasks")
-public class TaskController {
+public class TaskController extends GenericController {
 
 	@Autowired
 	private TaskService taskService;
@@ -48,7 +48,7 @@ public class TaskController {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("project", project);
 		mav.addObject("taskTypes", TaskType.values());
-		mav.addObject("tasks", tasks);
+		mav.addObject("tasks", this.prepareBeans(tasks));
 		mav.addObject("task", taskBean);
 		mav.addObject("hoursByType", this.projectService.calculateProjectDurationByTaskType(project));
 		mav.setViewName("projectTaskMatrix");
@@ -117,6 +117,15 @@ public class TaskController {
 		return task;
 	}
 
+	private List<TaskBean> prepareBeans(List<Task> tasks) {
+		List<TaskBean> taskBeans = new ArrayList<TaskBean>();
+		for (Task task : tasks) {
+			taskBeans.add(this.prepareBean(task));
+		}
+
+		return taskBeans;
+	}
+
 	private TaskBean prepareBean(Task task) {
 		TaskBean taskBean = new TaskBean();
 		taskBean.setTaskId(task.getTaskId());
@@ -125,14 +134,19 @@ public class TaskController {
 		taskBean.setName(task.getName());
 		taskBean.setEstimatedDuration(task.getEstimatedDuration());
 		taskBean.setActualDuration(task.getActualDuration());
-		taskBean.setDeadlineDate(task.getDeadline());
-		taskBean.setDeadlineTime(task.getDeadline());
-		taskBean.setDeadlineDateText(this.dateUtils.convertToDateText(task.getDeadline()));
-		taskBean.setDeadlineTimeText(this.dateUtils.convertToTimeText(task.getDeadline()));
+
+		Date deadline = task.getDeadline();
+		taskBean.setDeadline(deadline);
+		taskBean.setDeadlineDate(deadline);
+		taskBean.setDeadlineTime(deadline);
+		taskBean.setDeadlineDateText(this.dateUtils.convertToDateText(deadline));
+		taskBean.setDeadlineTimeText(this.dateUtils.convertToTimeText(deadline));
+		taskBean.setIsToday(this.dateUtils.isToday(deadline));
+		taskBean.setIsWithin3Days(this.dateUtils.isWithin3Days(deadline));
 
 		taskBean.setNote(task.getNote());
 		taskBean.setCompletedPercentage(task.getCompletedPercentage());
-		taskBean.setIsFinished(taskBean.getIsFinished());
+		taskBean.setIsFinished(task.getIsFinished());
 
 		return taskBean;
 	}

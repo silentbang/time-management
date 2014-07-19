@@ -3,6 +3,8 @@ package com.duke.passato.common;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.joda.time.DateTime;
+import org.joda.time.Days;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -36,5 +38,23 @@ public class DateUtils {
 
 	public String convertToTimeText(Date date) {
 		return new SimpleDateFormat(Constant.FORMAT_TIME).format(date);
+	}
+
+	public boolean isToday(Date date) {
+		Days days = this.daysFromToday(date);
+		return Math.abs(days.getDays()) == 0;
+	}
+
+	public boolean isWithin3Days(Date date) {
+		Days days = this.daysFromToday(date);
+		return Math.abs(days.getDays()) <= 3;
+	}
+
+	private Days daysFromToday(Date date) {
+		DateTime today = new DateTime(this.getCurrentDate());
+		DateTime convertedDate = new DateTime(date);
+
+		Days days = Days.daysBetween(today, convertedDate);
+		return days;
 	}
 }

@@ -1,9 +1,49 @@
-.taskDone {
-	text-decoration: line-through;
-}
-
 .taskInfoDone {
 	display: none;
+}
+
+.notification-messages.taskIn3Days {
+	background: white;
+}
+
+.notification-messages.taskToday {
+	background: #B0FFAC;
+}
+
+.notification-messages.taskPast {
+	background: #CF4AC8;
+	color: white;
+}
+
+.notification-messages .message-wrapper .heading.taskIn3Days {
+}
+
+.notification-messages .message-wrapper .heading.taskToday {
+}
+
+.notification-messages .message-wrapper .heading.taskPast {
+	color: white;
+}
+
+/* Color badge */
+.label-far-future {
+	color: black;
+	background: #edf7fc;
+}
+
+.label-3-days {
+	color: black;
+	background: white;
+}
+
+.label-today {
+	color: black;
+	background: #B0FFAC;
+}
+
+.label-past {
+	color: white;
+	background: #CF4AC8;
 }
 
 /* Buttons */
@@ -25,4 +65,12 @@
 }
 .task {
 	padding: 5px 8px 0;
+}
+
+/* Submit button*/
+.form-actions {
+	background-color: white;
+    border: 0 none;
+    margin: 0;
+    padding: 19px 20px;
 }

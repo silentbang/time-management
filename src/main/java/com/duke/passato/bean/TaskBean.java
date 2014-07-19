@@ -14,6 +14,8 @@ public class TaskBean {
 	private Double estimatedDuration;
 	private Double actualDuration;
 	@DateTimeFormat(pattern = Constant.FORMAT_DATE)
+	private Date deadline;
+	@DateTimeFormat(pattern = Constant.FORMAT_DATE)
 	private Date deadlineDate;
 	@DateTimeFormat(pattern = Constant.FORMAT_TIME)
 	private Date deadlineTime;
@@ -23,6 +25,8 @@ public class TaskBean {
 
 	private String deadlineDateText;
 	private String deadlineTimeText;
+	private boolean isToday;
+	private boolean isWithin3Days;
 
 	public Integer getTaskId() {
 		return this.taskId;
@@ -112,6 +116,14 @@ public class TaskBean {
 		this.isFinished = isFinished;
 	}
 
+	public Date getDeadline() {
+		return this.deadline;
+	}
+
+	public void setDeadline(Date deadline) {
+		this.deadline = deadline;
+	}
+
 	public String getDeadlineTimeText() {
 		return this.deadlineTimeText;
 	}
@@ -126,6 +138,22 @@ public class TaskBean {
 
 	public void setDeadlineDateText(String deadlineDateText) {
 		this.deadlineDateText = deadlineDateText;
+	}
+
+	public boolean getIsToday() {
+		return this.isToday;
+	}
+
+	public void setIsToday(boolean isToday) {
+		this.isToday = isToday;
+	}
+
+	public boolean getIsWithin3Days() {
+		return this.isWithin3Days;
+	}
+
+	public void setIsWithin3Days(boolean isWithin3Days) {
+		this.isWithin3Days = isWithin3Days;
 	}
 
 }

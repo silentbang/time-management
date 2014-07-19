@@ -12,7 +12,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.duke.passato.common.Constant;
 import com.duke.passato.common.Message;
-import com.duke.passato.common.MessageType;
 
 @Controller
 public class GenericController {

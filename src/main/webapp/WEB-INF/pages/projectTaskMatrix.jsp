@@ -14,9 +14,12 @@
 
 <div class="row spacing-bottom">
 	<div class="col-md-12">
-<!-- 		<div class="pull-left"> -->
-<!-- 			abc -->
-<!-- 		</div> -->
+		<div class="pull-left">
+			<span class="label label-far-future"><spring:message code="page.taskMatrix.label.farFuture"/></span>
+			<span class="label label-3-days"><spring:message code="page.taskMatrix.label.next3Days"/></span>
+			<span class="label label-today"><spring:message code="page.taskMatrix.label.today"/></span>
+			<span class="label label-past"><spring:message code="page.taskMatrix.label.past"/></span>
+		</div>
 		<div class="pull-right">
 		 	<div class="btn-group" data-toggle="buttons-radio">
 		    	<button id="hideExpired" class="btn btn-primary active tip" title='<spring:message code="page.taskMatrix.tooltip.hideExpiredTasks" />' data-toggle="tooltip" type="button"><i class="fa fa-th-list"></i></button>
@@ -43,33 +46,29 @@
 							 ${taskType.typeName}
 						</div>
 						<br />
-<!-- 						<div class="heading"> -->
-<!-- 							<div class="pull-left"> -->
-<!-- 								 Tuesday -->
-<!-- 							</div> -->
-<!-- 							<div class="pull-right"> -->
-<!-- 								 55 -->
-<!-- 							</div> -->
-<!-- 							<div class="clearfix"> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
 						<div class="widget-body">
-							<div class="pull-left ">
-<%-- 								<button id="btnAddTask_${taskType.value}" class="btn btn-dark btn-small btnAddTask" type="button"><i class="fa fa-plus"></i></button> --%>
-							</div>
 							<c:forEach items="${tasks}" var="task">
 								<c:if test="${task.taskTypeId == taskType.value }">
 									<!-- Choose CSS style -->
 									<c:set var="taskInfoStyle"></c:set>
 									<c:set var="taskHeaderStyle"></c:set>
-									<c:if test="${task.isFinished == true}">
-										<c:set var="taskInfoStyle">taskInfoDone</c:set>
-										<c:set var="taskHeaderStyle">taskDone</c:set>
-									</c:if>
+									<c:set var="taskStyleByTime"></c:set>
+									<c:choose>
+										<c:when test="${task.isToday == true}">
+											<c:set var="taskStyleByTime">taskToday</c:set>
+										</c:when>
+										<c:when test="${task.isWithin3Days == true}">
+											<c:set var="taskStyleByTime">taskIn3Days</c:set>
+										</c:when>
+										<c:when test="${task.isFinished == true}">
+											<c:set var="taskInfoStyle">taskInfoDone</c:set>
+											<c:set var="taskStyleByTime">taskPast</c:set>
+										</c:when>
+									</c:choose>
 									
-									<div id="taskInfo_${task.taskId}" class="notification-messages info task-info task ${taskInfoStyle}">
+									<div id="taskInfo_${task.taskId}" class="notification-messages info task-info task ${taskInfoStyle} ${taskStyleByTime}">
 										<div class="message-wrapper">
-											<div class="heading ${taskHeaderStyle}">${task.name}</div>
+											<div class="heading ${taskStyleByTime}">${task.name}</div>
 											<div class="description"><fmt:formatDate value="${task.deadline}" pattern="<%=Constant.FORMAT_DATE_TIME %>" /></div>
 										</div>
 										<div class="date pull-right"><span class="badge" onClick="deleteEntity('/Passato/tasks/delete/${task.taskId}');"><i class="fa fa-trash-o"></i></span></div>
@@ -106,6 +105,7 @@
 		
 	</div>
 	
+	<!-- Form -->
 	<div id="taskForm" class="app-hidden col-md-4">
 		<div class="row">
 			<div class="col-md-12 col-sm-6 spacing-bottom">
