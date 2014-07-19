@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -49,32 +51,43 @@ public class ProjectController extends GenericController {
 	}
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public ModelAndView saveProject(@ModelAttribute("project") ProjectBean projectBean, BindingResult result, RedirectAttributes redirectAttributes) {
-		Project project = this.prepareModel(projectBean);
-		this.projectService.insertProject(project);
+	public ModelAndView saveProject(@Valid @ModelAttribute("project") ProjectBean projectBean, BindingResult result, RedirectAttributes redirectAttributes) {
+		if (result.hasErrors()) {
+			return new ModelAndView("projectAdd");
+		}
+		else {
+			Project project = this.prepareModel(projectBean);
+			this.projectService.insertProject(project);
 
-		this.postSingleMessage(redirectAttributes, new Message(MessageType.SUCCESS, "success.project.create", project.getName()));
+			this.postSingleMessage(redirectAttributes, new Message(MessageType.SUCCESS, "success.project.create", project.getName()));
 
-		return new ModelAndView("redirect:/projects");
+			return new ModelAndView("redirect:/projects");
+		}
 	}
 
 	@RequestMapping(value = "/update/{projectId}", method = RequestMethod.GET)
 	public ModelAndView updateProject(@PathVariable Integer projectId) {
 		Project project = this.projectService.findProjectById(projectId);
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("project", project);
+		mav.addObject("project", this.prepareBean(project));
 		mav.setViewName("projectUpdate");
 
 		return mav;
 	}
 
 	@RequestMapping(value = "/update/{projectId}", method = RequestMethod.POST)
-	public ModelAndView updateProject(@ModelAttribute Project project, @PathVariable Integer projectId, RedirectAttributes redirectAttributes) {
-		this.projectService.updateProject(project);
+	public ModelAndView updateProject(@Valid @ModelAttribute("project") ProjectBean projectBean, BindingResult result, @PathVariable Integer projectId, RedirectAttributes redirectAttributes) {
+		if (result.hasErrors()) {
+			return new ModelAndView("projectUpdate");
+		}
+		else {
+			Project project = this.prepareModel(projectBean);
+			this.projectService.updateProject(project);
 
-		this.postSingleMessage(redirectAttributes, new Message(MessageType.SUCCESS, "success.project.create", project.getName()));
+			this.postSingleMessage(redirectAttributes, new Message(MessageType.SUCCESS, "success.project.update", project.getName()));
 
-		return new ModelAndView("redirect:/projects");
+			return new ModelAndView("redirect:/projects");
+		}
 	}
 
 	@RequestMapping(value = "/delete/{projectId}", method = RequestMethod.GET)
@@ -94,22 +107,27 @@ public class ProjectController extends GenericController {
 			ProjectBean bean = null;
 
 			for (Project project : projects) {
-				// Query for estimated & actual durations
-				Map<String, BigDecimal> projectDurations = this.projectService.calculateProjectDuration(project);
-
-				bean = new ProjectBean();
-				bean.setProjectId(project.getProjectId());
-				bean.setName(project.getName());
-				bean.setCreatedDate(project.getCreatedDate());
-				bean.setTotalEstimatedDuration(projectDurations.get(Constant.Tag.SUM_TOTALESTIMATEDDURATION).doubleValue());
-				bean.setTotalActualDuration(projectDurations.get(Constant.Tag.SUM_TOTALACTUALDURATION).doubleValue());
-				bean.setAverageProgress(projectDurations.get(Constant.Tag.SUM_AVERAGEPROGRESS).doubleValue());
-
+				bean = this.prepareBean(project);
 				beans.add(bean);
 			}
 		}
 
 		return beans;
+	}
+
+	private ProjectBean prepareBean(Project project) {
+		// Query for estimated & actual durations
+		Map<String, BigDecimal> projectDurations = this.projectService.calculateProjectDuration(project);
+
+		ProjectBean bean = new ProjectBean();
+		bean.setProjectId(project.getProjectId());
+		bean.setName(project.getName());
+		bean.setCreatedDate(project.getCreatedDate());
+		bean.setTotalEstimatedDuration(projectDurations.get(Constant.Tag.SUM_TOTALESTIMATEDDURATION).doubleValue());
+		bean.setTotalActualDuration(projectDurations.get(Constant.Tag.SUM_TOTALACTUALDURATION).doubleValue());
+		bean.setAverageProgress(projectDurations.get(Constant.Tag.SUM_AVERAGEPROGRESS).doubleValue());
+
+		return bean;
 	}
 
 	private Project prepareModel(ProjectBean projectBean) {

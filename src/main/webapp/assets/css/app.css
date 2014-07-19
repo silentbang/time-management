@@ -16,3 +16,8 @@
     background-color: #9EBCFB;
     color: white;
 }
+
+/* Validation */
+.requiredSymbol {
+	color: red;
+}

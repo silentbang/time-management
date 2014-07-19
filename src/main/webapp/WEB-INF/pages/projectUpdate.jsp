@@ -13,9 +13,19 @@
 			</div>
 			<div class="grid-body no-border">
 				<form:form method="POST" commandName="project" action="/Passato/projects/update/${project.projectId}">
+					<spring:bind path = "*">
+					    <c:if test="${status.error}"> 
+					    	<div class="alert alert-error">
+								<button class="close" data-dismiss="alert"></button>
+								<form:errors path="*" element="div" />
+							</div>
+					    </c:if> 
+					</spring:bind>
+				
 					<form:hidden path="projectId" value="${project.projectId}"/>
 					<div class="form-group">
 						<form:label path="name" cssClass="form-label"><spring:message code="label.project.name"/></form:label>
+						<span class="requiredSymbol">*</span>
 						<span class="help"><spring:message code="hint.task.name"/></span>
 						<div class="input-with-icon right">
 							<i class=""></i>

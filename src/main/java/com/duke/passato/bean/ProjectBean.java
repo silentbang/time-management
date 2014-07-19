@@ -2,8 +2,11 @@ package com.duke.passato.bean;
 
 import java.util.Date;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 public class ProjectBean {
 	private Integer projectId;
+	@NotBlank
 	private String name;
 	private Date createdDate;
 	private Double totalEstimatedDuration;
