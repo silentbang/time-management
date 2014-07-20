@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -42,31 +44,45 @@ public class TaskController extends GenericController {
 
 	@RequestMapping(value = "/{projectId}", method = RequestMethod.GET)
 	public ModelAndView updateTaskMatrix(@PathVariable Integer projectId) {
-		Project project = this.projectService.findProjectById(projectId);
 		TaskBean taskBean = new TaskBean();
-		taskBean.setProjectId(project.getProjectId());
-		// Sort list of tasks
-		List<Task> tasks = this.sortTasksByDeadline(project);
+		taskBean.setProjectId(projectId);
 
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("project", project);
-		mav.addObject("taskTypes", TaskType.values());
-		mav.addObject("tasks", this.prepareBeans(tasks));
 		mav.addObject("task", taskBean);
-		mav.addObject("hoursByType", this.projectService.calculateProjectDurationByTaskType(project));
-		mav.setViewName("projectTaskMatrix");
+		mav = this.prepareTaskListView(mav, projectId);
 
 		return mav;
 	}
 
+	private ModelAndView prepareTaskListView(ModelAndView mav, Integer projectId) {
+		Project project = this.projectService.findProjectById(projectId);
+		// Sort list of tasks
+		List<Task> tasks = this.sortTasksByDeadline(project);
+
+		mav.addObject("project", project);
+		mav.addObject("taskTypes", TaskType.values());
+		mav.addObject("tasks", this.prepareBeans(tasks));
+		mav.addObject("hoursByType", this.projectService.calculateProjectDurationByTaskType(project));
+		mav.setViewName("projectTaskMatrix");
+		return mav;
+	}
+
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public ModelAndView saveTask(@ModelAttribute("task") TaskBean taskBean, BindingResult result, RedirectAttributes redirectAttributes) {
-		Task task = this.prepareModel(taskBean);
-		this.taskService.saveTask(task);
+	public ModelAndView saveTask(@Valid @ModelAttribute("task") TaskBean taskBean, BindingResult result, RedirectAttributes redirectAttributes) {
+		if (result.hasErrors()) {
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("task", taskBean);
+			mav = this.prepareTaskListView(mav, taskBean.getProjectId());
+			return mav;
+		}
+		else {
+			Task task = this.prepareModel(taskBean);
+			this.taskService.saveTask(task);
 
-		this.postSingleMessage(redirectAttributes, new Message(MessageType.SUCCESS, "success.task.save", task.getName()));
+			this.postSingleMessage(redirectAttributes, new Message(MessageType.SUCCESS, "success.task.save", task.getName()));
 
-		return new ModelAndView("redirect:/tasks/" + task.getProject().getProjectId());
+			return new ModelAndView("redirect:/tasks/" + task.getProject().getProjectId());
+		}
 	}
 
 	@RequestMapping(value = "/update/{taskId}", method = RequestMethod.POST)

@@ -32,6 +32,12 @@ $(document).ready(function() {
 		focusOnForm();
 	});
 	
+	// If errors exist then show form
+	var formErrorsDiv = $("#formErrorsDiv");
+	if (formErrorsDiv.text().trim().length){
+		showTaskForm();
+	}
+	
 	// Toggle display for expired tasks
 	$("#hideExpired").click(function(){
 		// Set active button

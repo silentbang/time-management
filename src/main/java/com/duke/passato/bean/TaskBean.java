@@ -2,6 +2,9 @@ package com.duke.passato.bean;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.duke.passato.common.Constant;
@@ -10,11 +13,14 @@ public class TaskBean {
 	private Integer taskId;
 	private Integer projectId;
 	private Integer taskTypeId;
+	@NotBlank
 	private String name;
+	@NotNull
 	private Double estimatedDuration;
 	private Double actualDuration;
 	@DateTimeFormat(pattern = Constant.FORMAT_DATE)
 	private Date deadline;
+	@NotNull
 	@DateTimeFormat(pattern = Constant.FORMAT_DATE)
 	private Date deadlineDate;
 	@DateTimeFormat(pattern = Constant.FORMAT_TIME)

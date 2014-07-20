@@ -119,15 +119,27 @@
 					</div>
 					<div class="widget-body">
 						<form:form method="POST" commandName="task" action="/Passato/tasks/save">
+							<div class="col-md-12">
+								<spring:bind path = "*">
+								    <c:if test="${status.error}"> 
+								    	<div class="alert alert-error">
+											<button class="close" data-dismiss="alert"></button>
+											<form:errors path="*" element="div" id="formErrorsDiv"/>
+										</div>
+								    </c:if> 
+								</spring:bind>
+							</div>
+						
 							<form:hidden path="projectId" value="${task.projectId}"/>
 							<form:hidden path="taskId" value="${task.taskId}"/>
 							<form:hidden path="taskTypeId" value="${task.taskTypeId}"/>
 							<div class="col-md-12">
+								&nbsp;<span class="requiredSymbol">*</span>
 								<form:input path="name" value="${task.name}" cssClass="form-control" placeholder="${labelTaskName}"/>
 							</div>
 							<br>
 							<div class="slider primary col-md-12">
-								<form:label path="estimatedDuration" cssClass="form-label"><spring:message code="label.task.estimatedDuration"/></form:label>
+								<form:label path="estimatedDuration" cssClass="form-label"><spring:message code="label.task.estimatedDuration"/>&nbsp;<span class="requiredSymbol">*</span></form:label>
 								<form:input path="estimatedDuration" value="${task.estimatedDuration}" cssClass="slider-element form-control" 
 									data-slider-min="0" data-slider-max="8" data-slider-step="0.25" data-slider-value="${task.estimatedDuration}" data-slider-orientation="horizontal" data-slider-selection="after" data-slider-tooltip="show"/>
 							</div>
@@ -139,11 +151,12 @@
 							</div>
 							<br>
 							<div class="col-md-12">
-								<form:label path="deadlineDate" cssClass="form-label"><spring:message code="label.task.deadline"/></form:label>
+								<form:label path="deadlineDate" cssClass="form-label"><spring:message code="label.task.deadline"/>&nbsp;<span class="requiredSymbol">*</span></form:label>
 							</div>
 							<div class="col-md-12">
 								<div class="input-append success date">
-									<form:input path="deadlineDate" value="${task.deadlineDate}" cssClass="form-control" />
+									<fmt:formatDate value="${task.deadlineDate}" var="deadlineDateText" pattern="<%=Constant.FORMAT_DATE %>" />
+									<form:input path="deadlineDate" value="${deadlineDateText}" cssClass="form-control" />
 			                      	<span class="add-on"><span class="arrow"></span><i class="fa fa-th"></i></span>
 								</div>
 							</div>
