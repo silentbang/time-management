@@ -28,6 +28,11 @@ public class ProjectServiceImpl implements ProjectService {
 		return this.projectDAO.listProjects();
 	}
 
+	@Override
+	public List<Project> listProject(Integer pageNumber, Integer maxResultsPerPage) {
+		return this.projectDAO.listProject(pageNumber, maxResultsPerPage);
+	}
+
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	@Override
 	public void insertProject(Project project) {
@@ -103,4 +108,10 @@ public class ProjectServiceImpl implements ProjectService {
 
 		return projectDurations;
 	}
+
+	@Override
+	public Long getProjectCount() {
+		return this.projectDAO.getProjectCount();
+	}
+
 }

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.duke.passato.common.Constant;
 import com.duke.passato.model.Project;
 
 @Repository("projectDAO")
@@ -19,6 +20,7 @@ public class ProjectDAOImpl implements ProjectDAO {
 	@Autowired
 	private SessionFactory sessionFactory;
 
+	private final String SQL_PROJECT_COUNT = "SELECT COUNT(*) FROM Project";
 	private final String SQL_DURATION_BY_TASK_TYPE = "SELECT \"taskTypeId\", SUM(\"estimatedDuration\") " + "FROM \"task\" "
 			+ "WHERE \"projectId\" = :projectId GROUP BY \"taskTypeId\" ORDER BY \"taskTypeId\" ASC";
 	private final String SQL_DURATION_BY_PROJECT = "SELECT SUM(\"estimatedDuration\") as \"totalEstimatedDuration\", " + " SUM(\"actualDuration\") as \"totalActualDuration\", "
@@ -28,6 +30,18 @@ public class ProjectDAOImpl implements ProjectDAO {
 	@Override
 	public List<Project> listProjects() {
 		return this.sessionFactory.getCurrentSession().createCriteria(Project.class).addOrder(Order.desc("projectId")).list();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Project> listProject(Integer pageNumber, Integer maxResultsPerPage) {
+		Criteria c = this.sessionFactory.getCurrentSession().createCriteria(Project.class).addOrder(Order.desc("projectId"));
+		int actualPageNumber = pageNumber - 1;
+		Integer firstRowNumber = actualPageNumber * maxResultsPerPage;
+		c.setFirstResult(firstRowNumber);
+		c.setMaxResults(maxResultsPerPage);
+
+		return c.list();
 	}
 
 	@Override
@@ -70,6 +84,11 @@ public class ProjectDAOImpl implements ProjectDAO {
 		List<Object> result = query.list();
 
 		return (result.isEmpty() ? null : result.get(0));
+	}
+
+	@Override
+	public Long getProjectCount() {
+		return (Long) this.sessionFactory.getCurrentSession().createQuery(this.SQL_PROJECT_COUNT).uniqueResult();
 	}
 
 }

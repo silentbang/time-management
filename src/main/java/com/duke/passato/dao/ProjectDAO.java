@@ -8,6 +8,8 @@ public interface ProjectDAO {
 
 	public List<Project> listProjects();
 
+	public List<Project> listProject(Integer pageNumber, Integer maxResultsPerPage);
+
 	public void insertProject(Project project);
 
 	public Project findProjectById(Integer projectId);
@@ -19,4 +21,6 @@ public interface ProjectDAO {
 	public List<Object> calculateProjectDurationByTaskType(Project project);
 
 	public Object calculateProjectDuration(Project project);
+
+	public Long getProjectCount();
 }

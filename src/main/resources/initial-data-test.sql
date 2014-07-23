@@ -1,7 +1,13 @@
 -- ----------------------------
 -- Records of project
 -- ----------------------------
+INSERT INTO "project" ("projectId", "name", "createdDate") VALUES ('1', '2014/05', '2014-05-30 23:44:50.66+07');
 INSERT INTO "project" ("projectId", "name", "createdDate") VALUES ('2', '2014/06', '2014-06-30 23:44:50.66+07');
+INSERT INTO "project" ("projectId", "name", "createdDate") VALUES ('3', '2014/07', '2014-07-30 23:44:50.66+07');
+INSERT INTO "project" ("projectId", "name", "createdDate") VALUES ('4', '2014/08', '2014-08-30 23:44:50.66+07');
+INSERT INTO "project" ("projectId", "name", "createdDate") VALUES ('5', '2014/09', '2014-09-30 23:44:50.66+07');
+INSERT INTO "project" ("projectId", "name", "createdDate") VALUES ('6', '2014/10', '2014-10-30 23:44:50.66+07');
+INSERT INTO "project" ("projectId", "name", "createdDate") VALUES ('7', '2014/11', '2014-11-30 23:44:50.66+07');
 
 -- ----------------------------
 -- Records of task

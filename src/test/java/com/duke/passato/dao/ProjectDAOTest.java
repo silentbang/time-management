@@ -21,10 +21,43 @@ public class ProjectDAOTest extends CustomAbstractTransactionalJUnit4SpringConte
 	@Test
 	public void testListProjects() {
 		List<Project> projects = this.projectDAO.listProjects();
+		assertEquals(7, projects.size());
+		assertEquals(7, projects.get(0).getProjectId().intValue());
+		assertEquals("2014/11", projects.get(0).getName());
+		assertEquals("2014-11-30 23:44:50.66", projects.get(0).getCreatedDate().toString());
+	}
+
+	@Test
+	public void testListProjects_firstPage() {
+		List<Project> projects = this.projectDAO.listProject(1, 2);
+		assertEquals(2, projects.size());
+		assertEquals(7, projects.get(0).getProjectId().intValue());
+		assertEquals(6, projects.get(1).getProjectId().intValue());
+		assertEquals("2014/11", projects.get(0).getName());
+		assertEquals("2014-11-30 23:44:50.66", projects.get(0).getCreatedDate().toString());
+		assertEquals("2014/10", projects.get(1).getName());
+		assertEquals("2014-10-30 23:44:50.66", projects.get(1).getCreatedDate().toString());
+	}
+
+	@Test
+	public void testListProjects_secondPage() {
+		List<Project> projects = this.projectDAO.listProject(2, 2);
+		assertEquals(2, projects.size());
+		assertEquals(5, projects.get(0).getProjectId().intValue());
+		assertEquals(4, projects.get(1).getProjectId().intValue());
+		assertEquals("2014/09", projects.get(0).getName());
+		assertEquals("2014-09-30 23:44:50.66", projects.get(0).getCreatedDate().toString());
+		assertEquals("2014/08", projects.get(1).getName());
+		assertEquals("2014-08-30 23:44:50.66", projects.get(1).getCreatedDate().toString());
+	}
+
+	@Test
+	public void testListProjectsWithPaging_lastPage() {
+		List<Project> projects = this.projectDAO.listProject(4, 2);
 		assertEquals(1, projects.size());
-		assertEquals(2, projects.get(0).getProjectId().intValue());
-		assertEquals("2014/06", projects.get(0).getName());
-		assertEquals("2014-06-30 23:44:50.66", projects.get(0).getCreatedDate().toString());
+		assertEquals(1, projects.get(0).getProjectId().intValue());
+		assertEquals("2014/05", projects.get(0).getName());
+		assertEquals("2014-05-30 23:44:50.66", projects.get(0).getCreatedDate().toString());
 	}
 
 	@Test
@@ -35,7 +68,7 @@ public class ProjectDAOTest extends CustomAbstractTransactionalJUnit4SpringConte
 		this.projectDAO.insertProject(project);
 		List<Project> projects = this.projectDAO.listProjects();
 
-		assertEquals(2, projects.size());
+		assertEquals(8, projects.size());
 		assertEquals("2014/07", projects.get(0).getName());
 	}
 
@@ -64,7 +97,7 @@ public class ProjectDAOTest extends CustomAbstractTransactionalJUnit4SpringConte
 		this.projectDAO.deleteProject(project);
 
 		List<Project> projects = this.projectDAO.listProjects();
-		assertEquals(0, projects.size());
+		assertEquals(6, projects.size());
 	}
 
 	@SuppressWarnings("rawtypes")
@@ -102,5 +135,10 @@ public class ProjectDAOTest extends CustomAbstractTransactionalJUnit4SpringConte
 		assertEquals(43.25, resultMap.get(Constant.Tag.SUM_TOTALESTIMATEDDURATION));
 		assertEquals(36.25, resultMap.get(Constant.Tag.SUM_TOTALACTUALDURATION));
 		assertEquals(80.57692307692308, ((Double) resultMap.get(Constant.Tag.SUM_AVERAGEPROGRESS)).doubleValue(), Constant.DELTA);
+	}
+
+	@Test
+	public void testGetProjectCount() {
+		assertEquals(Long.valueOf(7), this.projectDAO.getProjectCount());
 	}
 }

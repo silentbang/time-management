@@ -15,6 +15,11 @@ public class Constant {
 
 	public static final String MESSAGE_LIST = "messages";
 
+	public class PAGING {
+		public static final int DISPLAYED_PAGES_COUNT = 5;
+		public static final int MAX_RESULTS_PER_PAGE = 3;
+	}
+
 	public class Tag {
 		public static final String SUM = "sum";
 		public static final String SUM_ESTIMATEDDURATION = "SUM(\"estimatedDuration\")";

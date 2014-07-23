@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -32,10 +33,19 @@ public class ProjectController extends GenericController {
 	private ProjectService projectService;
 
 	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView listProjects() {
+	public ModelAndView listProjects(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page) {
+		Long totalPageCount = this.toUpperBound((double) this.projectService.getProjectCount() / Constant.PAGING.MAX_RESULTS_PER_PAGE);
+		List<Project> projects = this.projectService.listProject(page, Constant.PAGING.MAX_RESULTS_PER_PAGE);
+
+		int currentPage = page;
+		int startPage = Math.max(1, currentPage - Constant.PAGING.DISPLAYED_PAGES_COUNT / 2);
+		int endPage = Math.min(startPage + Constant.PAGING.DISPLAYED_PAGES_COUNT, totalPageCount.intValue());
+
 		ModelAndView mav = new ModelAndView();
-		List<Project> projects = this.projectService.listProjects();
 		mav.addObject("projects", this.prepareListOfBeans(projects));
+		mav.addObject("currentPage", currentPage);
+		mav.addObject("beginPage", startPage);
+		mav.addObject("endPage", endPage);
 		mav.setViewName("projectList");
 
 		return mav;
@@ -138,4 +148,10 @@ public class ProjectController extends GenericController {
 		return project;
 	}
 
+	private Long toUpperBound(double number) {
+		if (number % 1 != 0) {
+			return (long) number + 1;
+		}
+		return (long) number;
+	}
 }
