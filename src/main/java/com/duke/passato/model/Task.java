@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -23,7 +24,8 @@ public class Task implements Serializable {
 	private static final long serialVersionUID = -4400842752968299857L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@SequenceGenerator(name = "taskSequence", sequenceName = "\"task_taskId_seq\"", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "taskSequence")
 	@Column(name = "\"taskId\"")
 	private Integer taskId;
 
