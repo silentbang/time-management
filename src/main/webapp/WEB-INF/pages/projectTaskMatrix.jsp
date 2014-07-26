@@ -139,13 +139,18 @@
 							</div>
 							<br>
 							<div class="slider primary col-md-12">
-								<form:label path="estimatedDuration" cssClass="form-label"><spring:message code="label.task.estimatedDuration"/>&nbsp;<span class="requiredSymbol">*</span></form:label>
+								<form:label path="estimatedDuration" cssClass="form-label"><spring:message code="label.task.estimatedDuration"/>
+									&nbsp;<span class="requiredSymbol">*</span>
+									<span id="estimatedDurationText" class="badge badge-info"></span><spring:message code="symbol.hour"/>
+								</form:label>
 								<form:input path="estimatedDuration" value="${task.estimatedDuration}" cssClass="slider-element form-control" 
 									data-slider-min="0" data-slider-max="8" data-slider-step="0.25" data-slider-value="${task.estimatedDuration}" data-slider-orientation="horizontal" data-slider-selection="after" data-slider-tooltip="show"/>
 							</div>
 							<br>
 							<div class="slider primary col-md-12">
-								<form:label path="actualDuration" cssClass="form-label"><spring:message code="label.task.actualDuration"/></form:label>
+								<form:label path="actualDuration" cssClass="form-label"><spring:message code="label.task.actualDuration"/>
+									<span id="actualDurationText" class="badge badge-info"></span><spring:message code="symbol.hour"/>
+								</form:label>
 								<form:input path="actualDuration" value="${task.actualDuration}" cssClass="slider-element form-control" 
 									data-slider-min="0" data-slider-max="8" data-slider-step="0.25" data-slider-value="${task.actualDuration}" data-slider-orientation="horizontal" data-slider-selection="after" data-slider-tooltip="show"/>
 							</div>
@@ -172,7 +177,9 @@
 							</div>
 							<br>
 							<div class="slider primary col-md-12">
-								<form:label path="completedPercentage" cssClass="form-label"><spring:message code="label.task.completedPercentage"/></form:label>
+								<form:label path="completedPercentage" cssClass="form-label"><spring:message code="label.task.completedPercentage"/>
+									<span id="completedPercentageText" class="badge badge-info"></span><spring:message code="symbol.percentage"/>
+								</form:label>
 								<form:input path="completedPercentage" value="${task.completedPercentage}" cssClass="slider-element form-control" placeholder="${labelTaskCompletedPercentage}" 
 									data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="${task.completedPercentage}" data-slider-orientation="horizontal" data-slider-selection="after" data-slider-tooltip="show"/>
 							</div>

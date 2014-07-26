@@ -53,7 +53,24 @@ $(document).ready(function() {
 		
 		$(".taskInfoDone").css("display", "block");
 	});
+	
+	// Slider text automatically changes on slide
+	var estimatedDurationSlider = $("#estimatedDuration");
+	estimatedDurationSlider.on('slide', function(){
+		$("#estimatedDurationText").text(estimatedDurationSlider.val());
+	});
+	var actualDurationSlider = $("#actualDuration");
+	actualDurationSlider.on('slide', function(){
+		$("#actualDurationText").text(actualDurationSlider.val());
+	});
+	var completedPercentageSlider = $("#completedPercentage");
+	completedPercentageSlider.on('slide', function(){
+		$("#completedPercentageText").text(completedPercentageSlider.val());
+	});
 });
+
+
+
 
 //Block form
 function triggerFormReloadBlock(el) {
@@ -86,27 +103,33 @@ function resetTaskForm(){
 	$("#taskTypeId").val(null);
 	$("#name").val(null);
 	$("#estimatedDuration").slider("setValue", 0);
+	$("#estimatedDurationText").text(0);
 	$("#actualDuration").slider("setValue", 0);
+	$("#actualDurationText").text(0);
 	$("#deadlineDate").val(null);
 	$("#deadlineTime").val("00:00:00");
 	$("#note").val(null);
 	$("#completedPercentage").slider("setValue", 0);
+	$("#completedPercentageText").text(0);
 }
 
-function onFetchTaskSuccess(data, statuss) {
+function onFetchTaskSuccess(data, status) {
 	// Update task form
 	$("#projectId").val(data["projectId"]);
 	$("#taskId").val(data["taskId"]);
 	$("#taskTypeId").val(data["taskTypeId"]);
 	$("#name").val(data["name"]);
 	$("#estimatedDuration").val(data["estimatedDuration"]);
-	$("#actualDuration").val(data["actualDuration"]);
+	$("#estimatedDurationText").text(data["estimatedDuration"]);
 	$("#estimatedDuration").slider("setValue", data["estimatedDuration"]);
+	$("#actualDuration").val(data["actualDuration"]);
+	$("#actualDurationText").text( (data["actualDuration"] == null)?0:data["actualDuration"] );
 	$("#actualDuration").slider("setValue", data["actualDuration"]);
 	$("#deadlineDate").val(data["deadlineDateText"]);
 	$("#deadlineTime").val(data["deadlineTimeText"]);
 	$("#note").val(data["note"]);
 	$("#completedPercentage").val(data["completedPercentage"]);
+	$("#completedPercentageText").text( (data["completedPercentage"] == null)?0:data["completedPercentage"] );
 	$("#completedPercentage").slider("setValue", data["completedPercentage"]);
 	// Release block
 	triggerFormReloadRelease($("#formDialog"));
