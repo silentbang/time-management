@@ -6,6 +6,9 @@ public class Message {
 	private final String key;
 	private String param;
 
+	/**
+	 * One-param message
+	 */
 	public Message(MessageType type, String key, String param) {
 		this.type = type;
 		this.key = key;

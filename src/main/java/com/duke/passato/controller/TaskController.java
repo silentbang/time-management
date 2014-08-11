@@ -54,19 +54,6 @@ public class TaskController extends GenericController {
 		return mav;
 	}
 
-	private ModelAndView prepareTaskListView(ModelAndView mav, Integer projectId) {
-		Project project = this.projectService.findProjectById(projectId);
-		// Sort list of tasks
-		List<Task> tasks = this.sortTasksByDeadline(project);
-
-		mav.addObject("project", project);
-		mav.addObject("taskTypes", TaskType.values());
-		mav.addObject("tasks", this.prepareBeans(tasks));
-		mav.addObject("hoursByType", this.projectService.calculateProjectDurationByTaskType(project));
-		mav.setViewName("projectTaskMatrix");
-		return mav;
-	}
-
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public ModelAndView saveTask(@Valid @ModelAttribute("task") TaskBean taskBean, BindingResult result, RedirectAttributes redirectAttributes) {
 		if (result.hasErrors()) {
@@ -195,5 +182,18 @@ public class TaskController extends GenericController {
 		tasks.addAll(project.getTasks());
 		Collections.sort(tasks, new TaskComparator());
 		return tasks;
+	}
+
+	private ModelAndView prepareTaskListView(ModelAndView mav, Integer projectId) {
+		Project project = this.projectService.findProjectById(projectId);
+		// Sort list of tasks
+		List<Task> tasks = this.sortTasksByDeadline(project);
+
+		mav.addObject("project", project);
+		mav.addObject("taskTypes", TaskType.values());
+		mav.addObject("tasks", this.prepareBeans(tasks));
+		mav.addObject("hoursByType", this.projectService.calculateProjectDurationByTaskType(project));
+		mav.setViewName("projectTaskMatrix");
+		return mav;
 	}
 }

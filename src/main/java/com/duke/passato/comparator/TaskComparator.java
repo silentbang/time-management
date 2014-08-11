@@ -8,7 +8,13 @@ public class TaskComparator implements Comparator<Task> {
 
 	@Override
 	public int compare(Task task1, Task task2) {
-		return task1.getDeadline().compareTo(task2.getDeadline());
+		// Compare by deadline ASC and duration DESC
+		int result = task1.getDeadline().compareTo(task2.getDeadline());
+		if (result == 0) {
+			task2.getEstimatedDuration().compareTo(task1.getEstimatedDuration());
+		}
+
+		return result;
 	}
 
 }

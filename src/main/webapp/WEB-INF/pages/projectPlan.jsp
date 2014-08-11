@@ -35,8 +35,11 @@
 							<th style="width:4%">
 								<spring:message code="label.task.actualDuration"/>
 							</th>
-							<th style="width:10%">
+							<th style="width:5%">
 								<spring:message code="label.task.deadline"/>
+							</th>
+							<th style="width:5%">
+								<spring:message code="label.task.note"/>
 							</th>
 							<th style="width:10%">
 								<spring:message code="label.task.completedPercentage"/>
@@ -65,7 +68,8 @@
 								<th style="width:4%">
 									${entry.value.totalActualDuration}
 								</th>
-								<th style="width:10%"><span class="label label-inverse">${dateText}</span></th>
+								<th style="width:5%"><span class="label label-inverse">${dateText}</span></th>
+								<th style="width:5%">&nbsp;</th>
 								<th style="width:10%">
 									<fmt:formatNumber value="${entry.value.averageProgress}" maxFractionDigits="2"/>%
 								</th>
@@ -102,6 +106,9 @@
 									</td>
 									<td>
 										<fmt:formatDate value="${task.deadline}" pattern="<%=Constant.FORMAT_DATE_TIME %>" />
+									</td>
+									<td>
+										<i>${task.note}</i>
 									</td>
 									<td class="v-align-middle">
 										<div class="progress">
