@@ -117,7 +117,7 @@ public class TaskServiceImpl implements TaskService {
 		Boolean needsActionAfterChecking = this.needsAction(task);
 
 		// If different between statuses before and after checking then update
-		if (needsActionBeforeChecking != needsActionAfterChecking) {
+		if (!needsActionBeforeChecking.equals(needsActionAfterChecking)) {
 			this.taskDAO.updateTask(task);
 		}
 		return task;

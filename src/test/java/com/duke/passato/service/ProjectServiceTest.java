@@ -29,11 +29,21 @@ public class ProjectServiceTest extends CustomAbstractTransactionalJUnit4SpringC
 	}
 
 	@Test
-	public void testCalculateProjectDuration() {
+	public void testCalculateProjectDuration_CaseSuccess() {
 		Project project = this.projectService.findProjectById(2);
 		Map<String, BigDecimal> projectDurations = this.projectService.calculateProjectDuration(project);
-		assertEquals(43.25, projectDurations.get(Constant.Tag.SUM_TOTALESTIMATEDDURATION));
-		assertEquals(36.25, projectDurations.get(Constant.Tag.SUM_TOTALACTUALDURATION));
-		assertEquals(80.57692307692308, projectDurations.get(Constant.Tag.SUM_AVERAGEPROGRESS));
+		assertEquals(BigDecimal.valueOf(43.25), projectDurations.get(Constant.Tag.SUM_TOTALESTIMATEDDURATION));
+		assertEquals(BigDecimal.valueOf(36.25), projectDurations.get(Constant.Tag.SUM_TOTALACTUALDURATION));
+		assertEquals(BigDecimal.valueOf(80.57692307692308), projectDurations.get(Constant.Tag.SUM_AVERAGEPROGRESS));
+	}
+
+	@Test
+	public void testCalculateProjectDuration_CaseNull() {
+		Project project = new Project();
+		project.setProjectId(99999);
+		Map<String, BigDecimal> projectDurations = this.projectService.calculateProjectDuration(project);
+		assertEquals(BigDecimal.valueOf(0), projectDurations.get(Constant.Tag.SUM_TOTALESTIMATEDDURATION));
+		assertEquals(BigDecimal.valueOf(0), projectDurations.get(Constant.Tag.SUM_TOTALACTUALDURATION));
+		assertEquals(BigDecimal.valueOf(0), projectDurations.get(Constant.Tag.SUM_AVERAGEPROGRESS));
 	}
 }

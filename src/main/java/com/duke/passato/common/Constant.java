@@ -15,12 +15,12 @@ public class Constant {
 
 	public static final String MESSAGE_LIST = "messages";
 
-	public class PAGING {
+	public static class PAGING {
 		public static final int DISPLAYED_PAGES_COUNT = 5;
 		public static final int MAX_RESULTS_PER_PAGE = 3;
 	}
 
-	public class Tag {
+	public static class Tag {
 		public static final String SUM = "sum";
 		public static final String SUM_ESTIMATEDDURATION = "SUM(\"estimatedDuration\")";
 		public static final String SUM_TOTALESTIMATEDDURATION = "totalEstimatedDuration";
@@ -30,7 +30,7 @@ public class Constant {
 		public static final String TASK_TASKTYPEID = "taskTypeId";
 	}
 
-	public class UI_CSS_CLASS {
+	public static class UI_CSS_CLASS {
 		public static final String PROGRESS_BAR_DANGER = "progress-bar-danger";
 		public static final String PROGRESS_BAR_WARNING = "progress-bar-warning";
 		public static final String PROGRESS_BAR_SUCCESS = "progress-bar-success";

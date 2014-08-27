@@ -22,54 +22,54 @@ public class ProjectDAOTest extends CustomAbstractTransactionalJUnit4SpringConte
 	public void testListProjects() {
 		List<Project> projects = this.projectDAO.listProjects();
 		assertEquals(7, projects.size());
-		assertEquals(7, projects.get(0).getProjectId().intValue());
-		assertEquals("2014/11", projects.get(0).getName());
-		assertEquals("2014-11-30 23:44:50.66", projects.get(0).getCreatedDate().toString());
+		assertEquals(8, projects.get(0).getProjectId().intValue());
+		assertEquals("2014/12", projects.get(0).getName());
+		assertEquals("2014-12-30 23:44:50.66", projects.get(0).getCreatedDate().toString());
 	}
 
 	@Test
 	public void testListProjects_firstPage() {
 		List<Project> projects = this.projectDAO.listProject(1, 2);
 		assertEquals(2, projects.size());
-		assertEquals(7, projects.get(0).getProjectId().intValue());
-		assertEquals(6, projects.get(1).getProjectId().intValue());
-		assertEquals("2014/11", projects.get(0).getName());
-		assertEquals("2014-11-30 23:44:50.66", projects.get(0).getCreatedDate().toString());
-		assertEquals("2014/10", projects.get(1).getName());
-		assertEquals("2014-10-30 23:44:50.66", projects.get(1).getCreatedDate().toString());
+		assertEquals(8, projects.get(0).getProjectId().intValue());
+		assertEquals(7, projects.get(1).getProjectId().intValue());
+		assertEquals("2014/12", projects.get(0).getName());
+		assertEquals("2014-12-30 23:44:50.66", projects.get(0).getCreatedDate().toString());
+		assertEquals("2014/11", projects.get(1).getName());
+		assertEquals("2014-11-30 23:44:50.66", projects.get(1).getCreatedDate().toString());
 	}
 
 	@Test
 	public void testListProjects_secondPage() {
 		List<Project> projects = this.projectDAO.listProject(2, 2);
 		assertEquals(2, projects.size());
-		assertEquals(5, projects.get(0).getProjectId().intValue());
-		assertEquals(4, projects.get(1).getProjectId().intValue());
-		assertEquals("2014/09", projects.get(0).getName());
-		assertEquals("2014-09-30 23:44:50.66", projects.get(0).getCreatedDate().toString());
-		assertEquals("2014/08", projects.get(1).getName());
-		assertEquals("2014-08-30 23:44:50.66", projects.get(1).getCreatedDate().toString());
+		assertEquals(6, projects.get(0).getProjectId().intValue());
+		assertEquals(5, projects.get(1).getProjectId().intValue());
+		assertEquals("2014/10", projects.get(0).getName());
+		assertEquals("2014-10-30 23:44:50.66", projects.get(0).getCreatedDate().toString());
+		assertEquals("2014/09", projects.get(1).getName());
+		assertEquals("2014-09-30 23:44:50.66", projects.get(1).getCreatedDate().toString());
 	}
 
 	@Test
 	public void testListProjectsWithPaging_lastPage() {
 		List<Project> projects = this.projectDAO.listProject(4, 2);
 		assertEquals(1, projects.size());
-		assertEquals(1, projects.get(0).getProjectId().intValue());
-		assertEquals("2014/05", projects.get(0).getName());
-		assertEquals("2014-05-30 23:44:50.66", projects.get(0).getCreatedDate().toString());
+		assertEquals(2, projects.get(0).getProjectId().intValue());
+		assertEquals("2014/06", projects.get(0).getName());
+		assertEquals("2014-06-30 23:44:50.66", projects.get(0).getCreatedDate().toString());
 	}
 
 	@Test
 	public void testInsertProject() {
 		Project project = new Project();
-		project.setName("2014/07");
+		project.setName("2014/01");
 
 		this.projectDAO.insertProject(project);
 		List<Project> projects = this.projectDAO.listProjects();
 
 		assertEquals(8, projects.size());
-		assertEquals("2014/07", projects.get(0).getName());
+		assertEquals("2014/12", projects.get(0).getName());
 	}
 
 	@Test
@@ -92,12 +92,20 @@ public class ProjectDAOTest extends CustomAbstractTransactionalJUnit4SpringConte
 	}
 
 	@Test
-	public void testDeleteProject() {
+	public void testDeleteProject_CaseNotNull() {
 		Project project = this.projectDAO.findProjectById(2);
 		this.projectDAO.deleteProject(project);
 
 		List<Project> projects = this.projectDAO.listProjects();
 		assertEquals(6, projects.size());
+	}
+
+	@Test
+	public void testDeleteProject_CaseNull() {
+		this.projectDAO.deleteProject(null);
+
+		List<Project> projects = this.projectDAO.listProjects();
+		assertEquals(7, projects.size());
 	}
 
 	@SuppressWarnings("rawtypes")
@@ -135,6 +143,24 @@ public class ProjectDAOTest extends CustomAbstractTransactionalJUnit4SpringConte
 		assertEquals(43.25, resultMap.get(Constant.Tag.SUM_TOTALESTIMATEDDURATION));
 		assertEquals(36.25, resultMap.get(Constant.Tag.SUM_TOTALACTUALDURATION));
 		assertEquals(80.57692307692308, ((Double) resultMap.get(Constant.Tag.SUM_AVERAGEPROGRESS)).doubleValue(), Constant.DELTA);
+	}
+
+	@SuppressWarnings("rawtypes")
+	@Test
+	public void testCalculateProjectDuration_CaseNullProject() {
+		// Project project = this.projectDAO.findProjectById(2);
+		//
+		Project unknownProject = new Project();
+		// BeanUtils.copyProperties(project, unknownProject);
+		unknownProject.setProjectId(99999);
+
+		Object result = this.projectDAO.calculateProjectDuration(unknownProject);
+		Assert.assertNotNull(result);
+
+		Map resultMap = (Map) result;
+		assertEquals(null, resultMap.get(Constant.Tag.SUM_TOTALESTIMATEDDURATION));
+		assertEquals(null, resultMap.get(Constant.Tag.SUM_TOTALACTUALDURATION));
+		assertEquals(null, resultMap.get(Constant.Tag.SUM_AVERAGEPROGRESS));
 	}
 
 	@Test

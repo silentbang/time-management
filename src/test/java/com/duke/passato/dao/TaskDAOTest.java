@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.duke.passato.common.Constant;
 import com.duke.passato.dao.TaskDAO;
+import com.duke.passato.model.Project;
 import com.duke.passato.model.Task;
 import com.duke.passato.util.CustomAbstractTransactionalJUnit4SpringContextTest;
 
@@ -48,7 +49,7 @@ public class TaskDAOTest extends CustomAbstractTransactionalJUnit4SpringContextT
 
 		List<Task> tasks = this.taskDAO.listTasks();
 		assertEquals(27, tasks.size());
-		assertEquals(taskName, tasks.get(26).getName());
+		assertEquals(taskName, tasks.get(0).getName());
 	}
 
 	@Test
@@ -93,7 +94,7 @@ public class TaskDAOTest extends CustomAbstractTransactionalJUnit4SpringContextT
 
 		List<Task> tasks = this.taskDAO.listTasks();
 		assertEquals(27, tasks.size());
-		assertEquals(taskName, tasks.get(26).getName());
+		assertEquals(taskName, tasks.get(0).getName());
 	}
 
 	@Test

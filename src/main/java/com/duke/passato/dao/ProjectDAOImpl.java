@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.duke.passato.common.Constant;
 import com.duke.passato.model.Project;
 
 @Repository("projectDAO")
@@ -20,10 +19,10 @@ public class ProjectDAOImpl implements ProjectDAO {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	private final String SQL_PROJECT_COUNT = "SELECT COUNT(*) FROM Project";
-	private final String SQL_DURATION_BY_TASK_TYPE = "SELECT \"taskTypeId\", SUM(\"estimatedDuration\") " + "FROM \"task\" "
+	private static final String SQL_PROJECT_COUNT = "SELECT COUNT(*) FROM Project";
+	private static final String SQL_DURATION_BY_TASK_TYPE = "SELECT \"taskTypeId\", SUM(\"estimatedDuration\") " + "FROM \"task\" "
 			+ "WHERE \"projectId\" = :projectId GROUP BY \"taskTypeId\" ORDER BY \"taskTypeId\" ASC";
-	private final String SQL_DURATION_BY_PROJECT = "SELECT SUM(\"estimatedDuration\") as \"totalEstimatedDuration\", " + " SUM(\"actualDuration\") as \"totalActualDuration\", "
+	private static final String SQL_DURATION_BY_PROJECT = "SELECT SUM(\"estimatedDuration\") as \"totalEstimatedDuration\", " + " SUM(\"actualDuration\") as \"totalActualDuration\", "
 			+ " SUM(\"completedPercentage\") / count(\"taskId\") as \"averageProgress\" " + " FROM \"task\" " + " WHERE \"projectId\" = :projectId";
 
 	@SuppressWarnings("unchecked")
@@ -69,7 +68,7 @@ public class ProjectDAOImpl implements ProjectDAO {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Object> calculateProjectDurationByTaskType(Project project) {
-		Query query = this.sessionFactory.getCurrentSession().createSQLQuery(this.SQL_DURATION_BY_TASK_TYPE).setParameter("projectId", project.getProjectId())
+		Query query = this.sessionFactory.getCurrentSession().createSQLQuery(SQL_DURATION_BY_TASK_TYPE).setParameter("projectId", project.getProjectId())
 				.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
 		List<Object> result = query.list();
 
@@ -79,16 +78,16 @@ public class ProjectDAOImpl implements ProjectDAO {
 	@SuppressWarnings("unchecked")
 	@Override
 	public Object calculateProjectDuration(Project project) {
-		Query query = this.sessionFactory.getCurrentSession().createSQLQuery(this.SQL_DURATION_BY_PROJECT).setParameter("projectId", project.getProjectId())
+		Query query = this.sessionFactory.getCurrentSession().createSQLQuery(SQL_DURATION_BY_PROJECT).setParameter("projectId", project.getProjectId())
 				.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
 		List<Object> result = query.list();
 
-		return (result.isEmpty() ? null : result.get(0));
+		return result.get(0);
 	}
 
 	@Override
 	public Long getProjectCount() {
-		return (Long) this.sessionFactory.getCurrentSession().createQuery(this.SQL_PROJECT_COUNT).uniqueResult();
+		return (Long) this.sessionFactory.getCurrentSession().createQuery(SQL_PROJECT_COUNT).uniqueResult();
 	}
 
 }

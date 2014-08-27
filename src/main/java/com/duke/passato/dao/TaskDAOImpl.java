@@ -29,7 +29,7 @@ public class TaskDAOImpl implements TaskDAO {
 	@Override
 	public List<Task> listTasksByProject(Integer projectId) {
 		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Task.class);
-		criteria.add(Restrictions.eq("project.projectId", projectId.intValue()));
+		criteria.add(Restrictions.eq("project.projectId", projectId));
 
 		return criteria.list();
 	}
