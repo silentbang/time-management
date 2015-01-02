@@ -12,7 +12,7 @@
 				</div>
 			</div>
 			<div class="grid-body no-border">
-				<form:form method="POST" commandName="project" action="/Passato/projects/save">
+				<form:form method="POST" commandName="project" action="${pageContext.request.contextPath}/projects/save">
 					<spring:bind path = "*">
 					    <c:if test="${status.error}"> 
 					    	<div class="alert alert-error">

@@ -12,7 +12,7 @@
 				</div>
 			</div>
 			<div class="grid-body no-border">
-				<form:form method="POST" commandName="project" action="/Passato/projects/update/${project.projectId}">
+				<form:form method="POST" commandName="project" action="${pageContext.request.contextPath}/projects/update/${project.projectId}">
 					<spring:bind path = "*">
 					    <c:if test="${status.error}"> 
 					    	<div class="alert alert-error">
@@ -38,7 +38,7 @@
 								<i class="icon-ok">
 								</i> <spring:message code="crud.command.save"/>
 							</button>
-							<a href="javascript:deleteEntity('/Passato/projects/delete/${project.projectId}');" class="btn btn-small btn-danger btn-cons">
+							<a href="javascript:deleteEntity('${pageContext.request.contextPath}/projects/delete/${project.projectId}');" class="btn btn-small btn-danger btn-cons">
 								<i class="fa fa-file-text-o"></i> Delete
 							</a>
 						</div>

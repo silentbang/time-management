@@ -5,7 +5,7 @@
 	<div class="span12">
 		<div class="grid simple ">
 			<div class="grid-title">
-				<a class="btn btn-small btn-info btn-cons" href="/Passato/projects/add">
+				<a class="btn btn-small btn-info btn-cons" href="${pageContext.request.contextPath}/projects/add">
 					<i class="fa fa-paste"></i> <spring:message code="crud.add" />
 				</a>
 				<div class="tools">
@@ -55,12 +55,12 @@
 										</div>
 									</td>
 									<td>
-										<a href="/Passato/projects/update/${project.projectId}" class="btn btn-small btn-primary btn-xs btn-mini" ><i class="fa fa-paste"></i> Update</a>
-										<a href="javascript:deleteEntity('/Passato/projects/delete/${project.projectId}');" class="btn btn-small btn-danger btn-xs btn-mini">
+										<a href="${pageContext.request.contextPath}/projects/update/${project.projectId}" class="btn btn-small btn-primary btn-xs btn-mini" ><i class="fa fa-paste"></i> Update</a>
+										<a href="javascript:deleteEntity('${pageContext.request.contextPath}/projects/delete/${project.projectId}');" class="btn btn-small btn-danger btn-xs btn-mini">
 											<i class="fa fa-file-text-o"></i> Delete
 										</a>
-										<a href="/Passato/tasks/${project.projectId}" class="btn btn-small btn-warning btn-xs btn-mini" ><i class="fa fa-paste"></i> Manage tasks</a>
-										<a href="/Passato/tasks/plan/${project.projectId}" class="btn btn-small btn-warning btn-xs btn-mini" ><i class="fa fa-paste"></i> Planning</a>
+										<a href="${pageContext.request.contextPath}/tasks/${project.projectId}" class="btn btn-small btn-warning btn-xs btn-mini" ><i class="fa fa-paste"></i> Manage tasks</a>
+										<a href="${pageContext.request.contextPath}/tasks/plan/${project.projectId}" class="btn btn-small btn-warning btn-xs btn-mini" ><i class="fa fa-paste"></i> Planning</a>
 									</td>
 								</tr>
 							</c:forEach>
@@ -72,16 +72,16 @@
 								<!-- TODO Add CSS styles to fade button away -->
 							</c:when>
 							<c:otherwise>
-			                    <a href="/Passato/projects?page=${currentPage - 1}" class="btn btn-white"><i class="fa fa-chevron-left"></i></a>
+			                    <a href="${pageContext.request.contextPath}/projects?page=${currentPage - 1}" class="btn btn-white"><i class="fa fa-chevron-left"></i></a>
 							</c:otherwise>
 						</c:choose>
 						<c:forEach var="i" begin="${beginPage}" end="${endPage}">
 							<c:choose>
 								<c:when test="${i == currentPage}">
-				                    <a class="btn btn-white active" href="/Passato/projects?page=${i}">${i}</a>
+				                    <a class="btn btn-white active" href="${pageContext.request.contextPath}/projects?page=${i}">${i}</a>
 								</c:when>
 								<c:otherwise>
-				                    <a class="btn btn-white" href="/Passato/projects?page=${i}">${i}</a>
+				                    <a class="btn btn-white" href="${pageContext.request.contextPath}/projects?page=${i}">${i}</a>
 								</c:otherwise>
 							</c:choose>
 						</c:forEach>
@@ -90,7 +90,7 @@
 								<!-- TODO Add CSS styles to fade button away -->
 							</c:when>
 							<c:otherwise>
-			                    <a href="/Passato/projects?page=${currentPage + 1}" class="btn btn-white"><i class="fa fa-chevron-right"></i> </a>
+			                    <a href="${pageContext.request.contextPath}/projects?page=${currentPage + 1}" class="btn btn-white"><i class="fa fa-chevron-right"></i> </a>
 							</c:otherwise>
 						</c:choose>
 	                  </div>
