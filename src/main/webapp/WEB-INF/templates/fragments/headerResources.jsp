@@ -38,3 +38,6 @@
 <!-- END CSS TEMPLATE -->
 
 <link href="<c:url value="/assets/css/app.css" />" rel="stylesheet" type="text/css"/>
+
+<!-- Declare global context path to access root path in JS files -->
+<script>var contextPath = "${pageContext.request.contextPath}"</script>

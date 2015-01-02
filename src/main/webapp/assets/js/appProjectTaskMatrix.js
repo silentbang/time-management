@@ -15,7 +15,7 @@ $(document).ready(function() {
 		// Call web service
 		$.ajax({
 			type : "POST",
-			url : "/Passato/tasks/update/" + taskId,
+			url : contextPath + "/tasks/update/" + taskId,
 			taskIdValue : taskId,
 			success : onFetchTaskSuccess,
 			error : onFetchTaskError
