@@ -29,6 +29,7 @@ $(document).ready(function() {
 
 		resetTaskForm();
 		showTaskFormAndUpdateTaskTypeId(taskTypeId);
+		updateTitleBackgroundColor(parseInt(taskTypeId));
 		focusOnForm();
 	});
 	
@@ -94,6 +95,28 @@ function showTaskFormAndUpdateTaskTypeId(order) {
 	$("#taskTypeId").val(order);
 }
 
+function updateTitleBackgroundColor(taskTypeId) {
+	var color = "dark";
+	switch (taskTypeId) {
+	case 1:
+		color = "red";
+		break;
+	case 2:
+		color = "green";
+		break;
+	case 3:
+		color = "blue";
+		break;
+	case 4:
+		color = "purple";
+		break;
+	default:
+		break;
+	}
+	
+	$("#formTitle").removeClass().addClass("widget-title").addClass(color);
+}
+
 function showTaskForm() {
 	$("#taskForm").visible();
 }
@@ -133,6 +156,9 @@ function onFetchTaskSuccess(data, status) {
 	$("#completedPercentage").slider("setValue", data["completedPercentage"]);
 	// Release block
 	triggerFormReloadRelease($("#formDialog"));
+	
+	// Update title's background color
+	updateTitleBackgroundColor(data["taskTypeId"]);
 	
 	focusOnForm();
 }

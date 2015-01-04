@@ -110,8 +110,8 @@
 		<div class="row">
 			<div class="col-md-12 col-sm-6 spacing-bottom">
 				<div id="formDialog" class="widget">
-					<div class="widget-title dark">
-						 <spring:message code="page.taskMatrix.form.title" />
+					<div id="formTitle" class="widget-title dark">
+						<spring:message code="page.taskMatrix.form.title" />
 						<div class="controller">
 							<a id="formReload" href="javascript:;" class="reload"></a>
 							<a href="javascript:;" class="remove"></a>
