@@ -73,6 +73,17 @@ $(document).ready(function() {
 	});
 	
 	hideOrShowExpiredAtStart();
+	// Count down deadlines
+	$('[data-countdown]').each(function() {
+		var $this = $(this), finalDate = $(this).data('countdown');
+		var currentDate = new Date();
+		var finalDateStandard = new Date(finalDate);
+		if (currentDate < finalDateStandard){
+			$this.countdown(finalDate, function(event) {
+				$this.html(event.strftime('%Dd %H:%M:%S'));
+			});
+		}
+	});
 });
 
 //Hide or show expired according to cookie

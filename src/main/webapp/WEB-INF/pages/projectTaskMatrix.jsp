@@ -68,10 +68,16 @@
 									
 									<div id="taskInfo_${task.taskId}" class="notification-messages info task-info task ${taskInfoStyle} ${taskStyleByTime}">
 										<div class="date pull-right"><span class="badge" onClick="deleteEntity('${pageContext.request.contextPath}/tasks/delete/${task.taskId}');"><i class="fa fa-trash-o"></i></span></div>
-										<div class="date pull-right">${task.estimatedDuration}h &nbsp;</div>
+										<div class="date pull-right">${task.estimatedDuration}h &nbsp;</div>									
 										<div class="message-wrapper">
 											<div class="heading tip ${taskStyleByTime}" title="${task.name}" data-toggle="tooltip">${task.name}</div>
-											<div class="description"><fmt:formatDate value="${task.deadline}" pattern="<%=Constant.FORMAT_DATE_TIME %>" /></div>
+											<div class="description">
+												<fmt:formatDate value="${task.deadline}" pattern="<%=Constant.FORMAT_DATE_TIME %>" />
+												
+												<!-- Count-down deadline -->
+												<fmt:formatDate value="${task.deadline}" pattern="yyyy/MM/dd HH:mm:ss" var="formattedDeadline" />
+												| <span style="opacity:1" data-countdown="${formattedDeadline}" class="date text-error semi-bold">&#8709;</span>
+											</div>
 										</div>
 									</div>
 								</c:if>
