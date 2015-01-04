@@ -47,12 +47,15 @@ $(document).ready(function() {
 		
 		// Hide task infos which are done
 		$(".taskInfoDone").css("display", "none");
+		// Set cookie
+		setCookieHideExpired();
 	});
 	$("#showExpired").click(function(){
 		$(this).addClass("active");
 		$("#addLineThrough").removeClass("active");
 		
 		$(".taskInfoDone").css("display", "block");
+		setCookieShowExpired();
 	});
 	
 	// Slider text automatically changes on slide
@@ -68,10 +71,27 @@ $(document).ready(function() {
 	completedPercentageSlider.on('slide', function(){
 		$("#completedPercentageText").text(completedPercentageSlider.val());
 	});
+	
+	hideOrShowExpiredAtStart();
 });
 
-
-
+//Hide or show expired according to cookie
+function hideOrShowExpiredAtStart() {
+	var hideExpired = getCookie("hideExpired");
+	if (hideExpired != ""){
+		if (hideExpired == "true"){
+			$("#hideExpired").trigger("click");
+		}
+		else{
+			$("#showExpired").trigger("click");
+		}
+	}
+	else{
+		// Set hide expired as default
+		$("#hideExpired").trigger("click");
+		setCookieHideExpired();
+	}
+}
 
 //Block form
 function triggerFormReloadBlock(el) {
@@ -179,4 +199,12 @@ function triggerFormReloadRelease(el) {
 	window.setTimeout(function() {
 		$(el).unblock();
 	}, 200);
+}
+
+function setCookieHideExpired() {
+	setCookie("hideExpired", "true", 14);
+}
+
+function setCookieShowExpired() {
+	setCookie("hideExpired", "false", 14);
 }
