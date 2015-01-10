@@ -8,7 +8,7 @@
 	<div class="col-md-12">
 		<div class="grid simple ">
 			<div class="grid-title no-border">
-				<h4>${project.name} - <span class="semi-bold">50%</span></h4>
+				<h4>${project.name} - <span class="semi-bold">${project.averageProgress}%</span></h4>
 				<div class="tools">
 					<a href="javascript:;" class="collapse"></a>
 					<a href="#grid-config" data-toggle="modal" class="config"></a>
