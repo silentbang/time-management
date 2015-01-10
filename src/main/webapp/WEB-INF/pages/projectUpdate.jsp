@@ -39,7 +39,7 @@
 								</i> <spring:message code="crud.command.save"/>
 							</button>
 							<a href="javascript:deleteEntity('${pageContext.request.contextPath}/projects/delete/${project.projectId}');" class="btn btn-small btn-danger btn-cons">
-								<i class="fa fa-file-text-o"></i> Delete
+								<i class="fa fa-file-text-o"></i> <spring:message code="crud.delete"/>
 							</a>
 						</div>
 					</div>

@@ -21,6 +21,7 @@
 			<span class="label label-past"><spring:message code="page.taskMatrix.label.past"/></span>
 		</div>
 		<div class="pull-right">
+	 		<a target="_blank" href="${pageContext.request.contextPath}/tasks/plan/${projectId}" class="btn btn-white"><i class="fa fa-bar-chart-o"></i>&nbsp;<spring:message code="page.taskMatrix.link.planning"/></a>
 		 	<div class="btn-group" data-toggle="buttons-radio">
 		    	<button id="hideExpired" class="btn btn-primary active tip" title='<spring:message code="page.taskMatrix.tooltip.hideExpiredTasks" />' data-toggle="tooltip" type="button"><i class="fa fa-th-list"></i></button>
 		    	<button id="showExpired" class="btn btn-primary tip" title='<spring:message code="page.taskMatrix.tooltip.showExpiredTasks" />' data-toggle="tooltip" type="button"><i class="fa fa-th-large"></i></button>
@@ -75,7 +76,7 @@
 												<fmt:formatDate value="${task.deadline}" pattern="<%=Constant.FORMAT_DATE_TIME %>" />
 												
 												<!-- Count-down deadline -->
-												<fmt:formatDate value="${task.deadline}" pattern="yyyy/MM/dd HH:mm:ss" var="formattedDeadline" />
+												<fmt:formatDate value="${task.deadline}" pattern="<%=Constant.FORMAT_DATE_TIME_COUNTDOWN %>" var="formattedDeadline" />
 												| <span style="opacity:1" data-countdown="${formattedDeadline}" class="date text-error semi-bold">&#8709;</span>
 											</div>
 										</div>

@@ -55,12 +55,12 @@
 										</div>
 									</td>
 									<td>
-										<a href="${pageContext.request.contextPath}/projects/update/${project.projectId}" class="btn btn-small btn-primary btn-xs btn-mini" ><i class="fa fa-paste"></i> Update</a>
+										<a href="${pageContext.request.contextPath}/projects/update/${project.projectId}" class="btn btn-small btn-primary btn-xs btn-mini" ><i class="fa fa-paste"></i> <spring:message code="crud.update"/></a>
 										<a href="javascript:deleteEntity('${pageContext.request.contextPath}/projects/delete/${project.projectId}');" class="btn btn-small btn-danger btn-xs btn-mini">
-											<i class="fa fa-file-text-o"></i> Delete
+											<i class="fa fa-file-text-o"></i> <spring:message code="crud.delete"/>
 										</a>
-										<a href="${pageContext.request.contextPath}/tasks/${project.projectId}" class="btn btn-small btn-warning btn-xs btn-mini" ><i class="fa fa-paste"></i> Manage tasks</a>
-										<a href="${pageContext.request.contextPath}/tasks/plan/${project.projectId}" class="btn btn-small btn-warning btn-xs btn-mini" ><i class="fa fa-paste"></i> Planning</a>
+										<a href="${pageContext.request.contextPath}/tasks/${project.projectId}" class="btn btn-small btn-white btn-xs btn-mini" ><i class="fa fa-paste"></i> <spring:message code="crud.prioritize"/></a>
+										<a href="${pageContext.request.contextPath}/tasks/plan/${project.projectId}" class="btn btn-small btn-white btn-xs btn-mini" ><i class="fa fa-paste"></i> <spring:message code="crud.plan"/></a>
 									</td>
 								</tr>
 							</c:forEach>
