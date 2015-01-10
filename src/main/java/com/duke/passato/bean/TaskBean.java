@@ -12,7 +12,7 @@ import com.duke.passato.common.Constant;
 import com.duke.passato.common.DateUtils;
 import com.duke.passato.model.Task;
 
-public class TaskBean implements TransferableBean<TaskBean, Task> {
+public class TaskBean implements TransferableBean<Task> {
 	private final DateUtils dateUtils = new DateUtils();
 
 	private Integer taskId;

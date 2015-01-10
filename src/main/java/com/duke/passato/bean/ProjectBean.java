@@ -10,7 +10,7 @@ import org.springframework.beans.BeanUtils;
 import com.duke.passato.common.Constant;
 import com.duke.passato.model.Project;
 
-public class ProjectBean implements TransferableBean<ProjectBean, Project> {
+public class ProjectBean implements TransferableBean<Project> {
 	private Integer projectId;
 	@NotBlank
 	private String name;
