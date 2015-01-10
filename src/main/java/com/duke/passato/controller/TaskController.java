@@ -1,9 +1,11 @@
 package com.duke.passato.controller;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -19,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.duke.passato.bean.PlanningBean;
+import com.duke.passato.bean.ProjectBean;
 import com.duke.passato.bean.TaskBean;
 import com.duke.passato.common.DateUtils;
 import com.duke.passato.common.Message;
@@ -63,7 +66,10 @@ public class TaskController extends GenericController {
 			return mav;
 		}
 		else {
-			Task task = this.prepareModel(taskBean);
+			Task task = taskBean.transformIntoModel();
+			// Set project from here (as Bean should not access service)
+			task.setProject(this.projectService.findProjectById(taskBean.getProjectId()));
+
 			this.taskService.saveTask(task);
 
 			this.postSingleMessage(redirectAttributes, new Message(MessageType.SUCCESS, "success.task.save", task.getName()));
@@ -76,7 +82,7 @@ public class TaskController extends GenericController {
 	@ResponseBody
 	public TaskBean updateTask(@PathVariable Integer taskId, RedirectAttributes redirectAttributes) {
 		Task task = this.taskService.findTaskById(taskId);
-		TaskBean taskBean = this.prepareBean(task);
+		TaskBean taskBean = new TaskBean(task);
 
 		this.postSingleMessage(redirectAttributes, new Message(MessageType.SUCCESS, "success.task.update", task.getName()));
 
@@ -97,11 +103,14 @@ public class TaskController extends GenericController {
 	@RequestMapping(value = "/plan/{projectId}", method = RequestMethod.GET)
 	public ModelAndView showPlan(@PathVariable Integer projectId) {
 		Project project = this.projectService.findProjectById(projectId);
+		// Transform to ProjectBean
+		Map<String, BigDecimal> projectDurations = this.projectService.calculateProjectDuration(project);
+		ProjectBean projectBean = new ProjectBean(project, projectDurations);
 
 		List<Task> tasks = this.taskService.listTasksByProject(projectId);
 
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("project", project);
+		mav.addObject("project", projectBean);
 		mav.addObject("plan", new PlanningBean(tasks));
 		mav.addObject("uiUtils", UIUtils.getInstance());
 		mav.setViewName("projectPlan");
@@ -109,72 +118,13 @@ public class TaskController extends GenericController {
 		return mav;
 	}
 
-	private Task prepareModel(TaskBean taskBean) {
-		// Transform deadline
-		Date deadline = this.transformDeadline(taskBean);
-
-		Task task = new Task();
-		task.setTaskId(taskBean.getTaskId());
-		task.setProject(this.projectService.findProjectById(taskBean.getProjectId()));
-		task.setTaskTypeId(taskBean.getTaskTypeId());
-		task.setName(taskBean.getName());
-		task.setEstimatedDuration(taskBean.getEstimatedDuration());
-		task.setActualDuration(taskBean.getActualDuration());
-		task.setDeadline(deadline);
-		task.setNote(taskBean.getNote());
-		task.setCompletedPercentage(taskBean.getCompletedPercentage());
-		task.setIsFinished(taskBean.getIsFinished());
-
-		return task;
-	}
-
 	private List<TaskBean> prepareBeans(List<Task> tasks) {
 		List<TaskBean> taskBeans = new ArrayList<TaskBean>();
 		for (Task task : tasks) {
-			taskBeans.add(this.prepareBean(task));
+			taskBeans.add(new TaskBean(task));
 		}
 
 		return taskBeans;
-	}
-
-	private TaskBean prepareBean(Task task) {
-		TaskBean taskBean = new TaskBean();
-		taskBean.setTaskId(task.getTaskId());
-		taskBean.setProjectId(task.getProject().getProjectId());
-		taskBean.setTaskTypeId(task.getTaskTypeId());
-		taskBean.setName(task.getName());
-		taskBean.setEstimatedDuration(task.getEstimatedDuration());
-		taskBean.setActualDuration(task.getActualDuration());
-
-		Date deadline = task.getDeadline();
-		taskBean.setDeadline(deadline);
-		taskBean.setDeadlineDate(deadline);
-		taskBean.setDeadlineTime(deadline);
-		taskBean.setDeadlineDateText(this.dateUtils.convertToDateText(deadline));
-		taskBean.setDeadlineTimeText(this.dateUtils.convertToTimeText(deadline));
-		taskBean.setIsToday(this.dateUtils.isToday(deadline));
-		taskBean.setIsWithin3Days(this.dateUtils.isWithin3Days(deadline));
-
-		taskBean.setNote(task.getNote());
-		taskBean.setCompletedPercentage(task.getCompletedPercentage());
-		taskBean.setIsFinished(task.getIsFinished());
-
-		return taskBean;
-	}
-
-	@SuppressWarnings("deprecation")
-	private Date transformDeadline(TaskBean taskBean) {
-		Date deadlineDate = taskBean.getDeadlineDate();
-		Date deadlineTime = taskBean.getDeadlineTime();
-
-		Date deadline = new Date();
-		deadline.setYear(deadlineDate.getYear());
-		deadline.setMonth(deadlineDate.getMonth());
-		deadline.setDate(deadlineDate.getDate());
-		deadline.setHours(deadlineTime.getHours());
-		deadline.setMinutes(deadlineTime.getMinutes());
-		deadline.setSeconds(deadlineTime.getSeconds());
-		return deadline;
 	}
 
 	private List<Task> sortTasksByDeadline(Project project) {

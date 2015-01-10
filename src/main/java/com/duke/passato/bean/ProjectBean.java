@@ -1,10 +1,16 @@
 package com.duke.passato.bean;
 
+import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Map;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.beans.BeanUtils;
 
-public class ProjectBean {
+import com.duke.passato.common.Constant;
+import com.duke.passato.model.Project;
+
+public class ProjectBean implements TransferableBean<ProjectBean, Project> {
 	private Integer projectId;
 	@NotBlank
 	private String name;
@@ -12,6 +18,18 @@ public class ProjectBean {
 	private Double totalEstimatedDuration;
 	private Double totalActualDuration;
 	private Double averageProgress;
+
+	public ProjectBean() {
+	}
+
+	public ProjectBean(Project project, Map<String, BigDecimal> projectDurations) {
+		this.setProjectId(project.getProjectId());
+		this.setName(project.getName());
+		this.setCreatedDate(project.getCreatedDate());
+		this.setTotalEstimatedDuration(projectDurations.get(Constant.Tag.SUM_TOTALESTIMATEDDURATION).doubleValue());
+		this.setTotalActualDuration(projectDurations.get(Constant.Tag.SUM_TOTALACTUALDURATION).doubleValue());
+		this.setAverageProgress(projectDurations.get(Constant.Tag.SUM_AVERAGEPROGRESS).doubleValue());
+	}
 
 	public Integer getProjectId() {
 		return this.projectId;
@@ -59,6 +77,14 @@ public class ProjectBean {
 
 	public void setAverageProgress(Double averageProgress) {
 		this.averageProgress = averageProgress;
+	}
+
+	@Override
+	public Project transformIntoModel() {
+		Project project = new Project();
+		BeanUtils.copyProperties(this, project);
+
+		return project;
 	}
 
 }

@@ -66,7 +66,7 @@ public class ProjectController extends GenericController {
 			return new ModelAndView("projectAdd");
 		}
 		else {
-			Project project = this.prepareModel(projectBean);
+			Project project = projectBean.transformIntoModel();
 			this.projectService.insertProject(project);
 
 			this.postSingleMessage(redirectAttributes, new Message(MessageType.SUCCESS, "success.project.create", project.getName()));
@@ -78,8 +78,10 @@ public class ProjectController extends GenericController {
 	@RequestMapping(value = "/update/{projectId}", method = RequestMethod.GET)
 	public ModelAndView updateProject(@PathVariable Integer projectId) {
 		Project project = this.projectService.findProjectById(projectId);
+		Map<String, BigDecimal> projectDurations = this.projectService.calculateProjectDuration(project);
+
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("project", this.prepareBean(project));
+		mav.addObject("project", new ProjectBean(project, projectDurations));
 		mav.setViewName("projectUpdate");
 
 		return mav;
@@ -91,7 +93,7 @@ public class ProjectController extends GenericController {
 			return new ModelAndView("projectUpdate");
 		}
 		else {
-			Project project = this.prepareModel(projectBean);
+			Project project = projectBean.transformIntoModel();
 			this.projectService.updateProject(project);
 
 			this.postSingleMessage(redirectAttributes, new Message(MessageType.SUCCESS, "success.project.update", project.getName()));
@@ -114,38 +116,16 @@ public class ProjectController extends GenericController {
 		List<ProjectBean> beans = null;
 		if (projects != null && !projects.isEmpty()) {
 			beans = new ArrayList<ProjectBean>();
-			ProjectBean bean = null;
 
 			for (Project project : projects) {
-				bean = this.prepareBean(project);
+				// Query for estimated & actual durations
+				Map<String, BigDecimal> projectDurations = this.projectService.calculateProjectDuration(project);
+				ProjectBean bean = new ProjectBean(project, projectDurations);
 				beans.add(bean);
 			}
 		}
 
 		return beans;
-	}
-
-	private ProjectBean prepareBean(Project project) {
-		// Query for estimated & actual durations
-		Map<String, BigDecimal> projectDurations = this.projectService.calculateProjectDuration(project);
-
-		ProjectBean bean = new ProjectBean();
-		bean.setProjectId(project.getProjectId());
-		bean.setName(project.getName());
-		bean.setCreatedDate(project.getCreatedDate());
-		bean.setTotalEstimatedDuration(projectDurations.get(Constant.Tag.SUM_TOTALESTIMATEDDURATION).doubleValue());
-		bean.setTotalActualDuration(projectDurations.get(Constant.Tag.SUM_TOTALACTUALDURATION).doubleValue());
-		bean.setAverageProgress(projectDurations.get(Constant.Tag.SUM_AVERAGEPROGRESS).doubleValue());
-
-		return bean;
-	}
-
-	private Project prepareModel(ProjectBean projectBean) {
-		Project project = new Project();
-		project.setProjectId(projectBean.getProjectId());
-		project.setName(projectBean.getName());
-
-		return project;
 	}
 
 	private Long toUpperBound(double number) {

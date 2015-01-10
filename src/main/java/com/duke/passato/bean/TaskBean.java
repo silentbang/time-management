@@ -5,11 +5,16 @@ import java.util.Date;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.beans.BeanUtils;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.duke.passato.common.Constant;
+import com.duke.passato.common.DateUtils;
+import com.duke.passato.model.Task;
 
-public class TaskBean {
+public class TaskBean implements TransferableBean<TaskBean, Task> {
+	private final DateUtils dateUtils = new DateUtils();
+
 	private Integer taskId;
 	private Integer projectId;
 	private Integer taskTypeId;
@@ -33,6 +38,32 @@ public class TaskBean {
 	private String deadlineTimeText;
 	private boolean isToday;
 	private boolean isWithin3Days;
+
+	public TaskBean() {
+
+	}
+
+	public TaskBean(Task task) {
+		this.setTaskId(task.getTaskId());
+		this.setProjectId(task.getProject().getProjectId());
+		this.setTaskTypeId(task.getTaskTypeId());
+		this.setName(task.getName());
+		this.setEstimatedDuration(task.getEstimatedDuration());
+		this.setActualDuration(task.getActualDuration());
+
+		Date deadline = task.getDeadline();
+		this.setDeadline(deadline);
+		this.setDeadlineDate(deadline);
+		this.setDeadlineTime(deadline);
+		this.setDeadlineDateText(this.dateUtils.convertToDateText(deadline));
+		this.setDeadlineTimeText(this.dateUtils.convertToTimeText(deadline));
+		this.setIsToday(this.dateUtils.isToday(deadline));
+		this.setIsWithin3Days(this.dateUtils.isWithin3Days(deadline));
+
+		this.setNote(task.getNote());
+		this.setCompletedPercentage(task.getCompletedPercentage());
+		this.setIsFinished(task.getIsFinished());
+	}
 
 	public Integer getTaskId() {
 		return this.taskId;
@@ -160,6 +191,33 @@ public class TaskBean {
 
 	public void setIsWithin3Days(boolean isWithin3Days) {
 		this.isWithin3Days = isWithin3Days;
+	}
+
+	@Override
+	public Task transformIntoModel() {
+		Task task = new Task();
+		BeanUtils.copyProperties(this, task);
+
+		// Transform deadline
+		Date deadline = this.transformDeadline();
+		task.setDeadline(deadline);
+
+		return task;
+	}
+
+	@SuppressWarnings("deprecation")
+	private Date transformDeadline() {
+		Date deadlineDate = this.getDeadlineDate();
+		Date deadlineTime = this.getDeadlineTime();
+
+		Date deadline = new Date();
+		deadline.setYear(deadlineDate.getYear());
+		deadline.setMonth(deadlineDate.getMonth());
+		deadline.setDate(deadlineDate.getDate());
+		deadline.setHours(deadlineTime.getHours());
+		deadline.setMinutes(deadlineTime.getMinutes());
+		deadline.setSeconds(deadlineTime.getSeconds());
+		return deadline;
 	}
 
 }
