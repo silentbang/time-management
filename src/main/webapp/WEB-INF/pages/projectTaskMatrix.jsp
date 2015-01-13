@@ -23,7 +23,7 @@
 		<div class="pull-right">
 	 		<a target="_blank" href="${pageContext.request.contextPath}/tasks/plan/${projectId}" class="btn btn-white"><i class="fa fa-bar-chart-o"></i>&nbsp;<spring:message code="page.taskMatrix.link.planning"/></a>
 		 	<div class="btn-group" data-toggle="buttons-radio">
-		    	<button id="hideExpired" class="btn btn-primary active tip" title='<spring:message code="page.taskMatrix.tooltip.hideExpiredTasks" />' data-toggle="tooltip" type="button"><i class="fa fa-th-list"></i></button>
+		    	<button id="hideExpired" class="btn btn-primary tip" title='<spring:message code="page.taskMatrix.tooltip.hideExpiredTasks" />' data-toggle="tooltip" type="button"><i class="fa fa-th-list"></i></button>
 		    	<button id="showExpired" class="btn btn-primary tip" title='<spring:message code="page.taskMatrix.tooltip.showExpiredTasks" />' data-toggle="tooltip" type="button"><i class="fa fa-th-large"></i></button>
 			</div>
 		</div>

@@ -41,8 +41,9 @@ $(document).ready(function() {
 	
 	// Toggle display for expired tasks
 	$("#hideExpired").click(function(){
-		// Set active button
-		$(this).addClass("active");
+		// Not need to set 'active' for #hideExpired and remove it for #showExpired
+		// as bootstrap.min.js already handle it (onClick)
+		
 		$("#removeLineThrough").removeClass("active");
 		
 		// Hide task infos which are done
@@ -51,12 +52,12 @@ $(document).ready(function() {
 		setCookieHideExpired();
 	});
 	$("#showExpired").click(function(){
-		$(this).addClass("active");
 		$("#addLineThrough").removeClass("active");
 		
 		$(".taskInfoDone").css("display", "block");
 		setCookieShowExpired();
 	});
+	hideOrShowExpiredAtStart();
 	
 	// Slider text automatically changes on slide
 	var estimatedDurationSlider = $("#estimatedDuration");
@@ -72,7 +73,6 @@ $(document).ready(function() {
 		$("#completedPercentageText").text(completedPercentageSlider.val());
 	});
 	
-	hideOrShowExpiredAtStart();
 	// Count down deadlines
 	$('[data-countdown]').each(function() {
 		var $this = $(this), finalDate = $(this).data('countdown');
@@ -86,7 +86,7 @@ $(document).ready(function() {
 	});
 });
 
-//Hide or show expired according to cookie
+// Hide or show expired according to cookie
 function hideOrShowExpiredAtStart() {
 	var hideExpired = getCookie("hideExpired");
 	if (hideExpired != ""){
