@@ -46,15 +46,12 @@
 							</th>
 						</tr>
 					</thead>
-				</table>
-				
-				<c:forEach items="${plan.tasksByDays}" var="entry">
-					<c:set var="dateText" value="${entry.key}"/>
-					<c:set var="tasksByDate" value="${entry.value.tasks}"/>
-					
-					<table class="table no-more-tables">
-						<thead>
-							<tr class="tableHead">
+					<tbody>
+						<c:forEach items="${plan.tasksByDays}" var="entry">
+							<c:set var="dateText" value="${entry.key}"/>
+							<c:set var="tasksByDate" value="${entry.value.tasks}"/>
+							
+							<tr class="tableHead" style="border-color: blue;">
 								<th style="width:1%">
 									<div class="checkbox check-default">
 										<input id="checkbox10" type="checkbox" value="1" class="checkall">
@@ -74,10 +71,8 @@
 									<fmt:formatNumber value="${entry.value.averageProgress}" maxFractionDigits="2"/>%
 								</th>
 							</tr>
-						</thead>
-						<tbody>
 							<c:forEach items="${tasksByDate}" var="task">
-								<tr>
+								<tr style="border-color: red;">
 									<td class="v-align-middle">
 										<div class="checkbox check-default">
 											<input id="checkbox11" type="checkbox" value="1">
@@ -114,15 +109,15 @@
 										<div class="progress">
 											<c:set var="progressCSSClass" value='${uiUtils.computeProgressBarCSSClass(task.completedPercentage)}'/>
 											<div data-percentage="${task.completedPercentage}%" class="progress-bar ${progressCSSClass}  animate-progress-bar">
+												<fmt:formatNumber maxFractionDigits="2" value="${task.completedPercentage}" />%
 											</div>
 										</div>
 									</td>
 								</tr>
 							</c:forEach>
-						</tbody>
-					</table>
-					<br />
-				</c:forEach>
+						</c:forEach>
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>

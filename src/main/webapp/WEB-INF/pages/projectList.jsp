@@ -1,3 +1,4 @@
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
@@ -51,6 +52,7 @@
 									<td>
 										<div class="progress">
 											<div data-percentage="${project.averageProgress}%" class="progress-bar progress-bar-primary animate-progress-bar">
+												<fmt:formatNumber maxFractionDigits="2" value="${project.averageProgress}" />%
 											</div>
 										</div>
 									</td>

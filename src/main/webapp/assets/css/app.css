@@ -21,3 +21,9 @@
 .requiredSymbol {
 	color: red;
 }
+
+/* Progress Bar */
+.progress-bar {
+	line-height: 14px;
+	font-size: 10px;
+}
