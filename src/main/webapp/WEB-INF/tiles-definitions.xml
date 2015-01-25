@@ -23,10 +23,10 @@
 	</definition>
 	
 	
-	<definition name="error" template="/WEB-INF/pages/genericError.jsp">
-<!-- 		<put-attribute name="headTitle" value="headTitle.dashboard" /> -->
-<!-- 		<put-attribute name="body" value="/WEB-INF/pages/dashboard.jsp" /> -->
+	<definition name="login" template="/WEB-INF/pages/login.jsp">
+		<put-attribute name="title" value="global.title" />
 	</definition>
+	<definition name="error" template="/WEB-INF/pages/genericError.jsp"></definition>
 
 	<definition name="dashboard" extends="mainLayout">
 		<put-attribute name="headTitle" value="headTitle.dashboard" />

@@ -27,3 +27,8 @@
 	line-height: 14px;
 	font-size: 10px;
 }
+
+/* Login */
+.error-body {
+	background-color:#FFFFFF !important;
+}
