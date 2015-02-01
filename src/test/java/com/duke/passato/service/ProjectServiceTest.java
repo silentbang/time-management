@@ -32,9 +32,10 @@ public class ProjectServiceTest extends CustomAbstractTransactionalJUnit4SpringC
 	public void testCalculateProjectDuration_CaseSuccess() {
 		Project project = this.projectService.findProjectById(2);
 		Map<String, BigDecimal> projectDurations = this.projectService.calculateProjectDuration(project);
-		assertEquals(BigDecimal.valueOf(43.25), projectDurations.get(Constant.Tag.SUM_TOTALESTIMATEDDURATION));
-		assertEquals(BigDecimal.valueOf(36.25), projectDurations.get(Constant.Tag.SUM_TOTALACTUALDURATION));
-		assertEquals(BigDecimal.valueOf(80.57692307692308), projectDurations.get(Constant.Tag.SUM_AVERAGEPROGRESS));
+		// In test mode, value is of type Double, not BigDecimal
+		assertEquals(Double.valueOf(43.25), projectDurations.get(Constant.Tag.SUM_TOTALESTIMATEDDURATION));
+		assertEquals(Double.valueOf(36.25), projectDurations.get(Constant.Tag.SUM_TOTALACTUALDURATION));
+		assertEquals(Double.valueOf(80.57692307692308), projectDurations.get(Constant.Tag.SUM_AVERAGEPROGRESS));
 	}
 
 	@Test
