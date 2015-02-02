@@ -2,6 +2,7 @@ package com.duke.passato.controller;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -66,6 +67,7 @@ public class ProjectController extends GenericController {
 			return new ModelAndView("projectAdd");
 		}
 		else {
+			projectBean.setCreatedDate(new Date());
 			Project project = projectBean.transformIntoModel();
 			this.projectService.insertProject(project);
 
