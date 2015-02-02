@@ -6,6 +6,9 @@
 <meta content="" name="description" />
 <meta content="" name="author" />
 
+<link rel="shortcut icon" href="<c:url value="/assets/img/favicon.ico" />" type="image/x-icon">
+<link rel="icon" href="<c:url value="/assets/img/favicon.ico" />" type="image/x-icon">
+
 <!-- BEGIN PLUGIN CSS -->
 <link href="<c:url value="/assets/plugins/jquery-slider/css/jquery.sidr.light.css" />" rel="stylesheet" type="text/css" media="screen"/>
 <link href="<c:url value="/assets/plugins/boostrap-slider/css/slider.css" />" rel="stylesheet" type="text/css"/>
