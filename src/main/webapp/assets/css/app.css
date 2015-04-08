@@ -10,11 +10,18 @@
 .tableHead th {
 	font-weight: 900;
 	font-size: small;
+/* 	background-color: #93D035; */
+	background-color: #87BBD0;
+	color: #FFFFFF !important;
 }
 
 .table-hover tbody tr:hover>td, .table-hover tbody tr:hover>th {
     background-color: #9EBCFB;
     color: white;
+}
+
+.table td {
+	font-size: 12px;	
 }
 
 /* Validation */
@@ -32,3 +39,16 @@
 .error-body {
 	background-color:#FFFFFF !important;
 }
+
+/* Background */
+.page-content {
+	background-color: #f7fbfe;
+}
+
+/* */
+.header .chat-toggler {
+	min-width: auto;
+}
+
+.header .quick-section {
+	margin-left: 6px;

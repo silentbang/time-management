@@ -9,6 +9,9 @@
 			<spring:message code="${title}"/>
 		</title>
 		
+		<link rel="shortcut icon" href="<c:url value="/assets/img/favicon.ico" />" type="image/x-icon">
+		<link rel="icon" href="<c:url value="/assets/img/favicon.ico" />" type="image/x-icon">
+		
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 		<meta content="" name="description"/>
 		<meta content="" name="author"/>
@@ -35,7 +38,6 @@
 					<div class="col-md-8 col-md-offset-4 col-sm-6 col-sm-offset-4 col-xs-offset-2">
 						<div class="profile-wrapper">
 							<img width="69" height="69" 
-							data-src-retina="<c:url value="/assets/img/profiles/avatar2x.jpg" />" 
 							data-src="<c:url value="/assets/img/profiles/avatar.jpg" />" 
 							src="<c:url value="/assets/img/profiles/avatar.jpg" />" alt="">
 						</div>
@@ -71,9 +73,10 @@
 		<script src="<c:url value="/assets/plugins/jquery-unveil/jquery.unveil.min.js" />" type="text/javascript"></script>
 		<script src="<c:url value="/assets/plugins/pace/pace.min.js" />" type="text/javascript"></script>
 		<script type="text/javascript">
-		$(document).ready(function() {	
-			$("img").unveil();
-		});	
+			$(document).ready(function() {	
+				$("img").unveil();
+				$("input[name='password']").focus();
+			});	
 		</script>
 		<!-- BEGIN CORE TEMPLATE JS -->
 		<!-- END CORE TEMPLATE JS -->

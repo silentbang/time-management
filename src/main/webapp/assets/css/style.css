@@ -5418,7 +5418,7 @@ ul.progress-list li  .progress{
 }
 .table th{
 	/*border-bottom: 1px solid #c9d1d8;*/
-	border-top: 1px solid #e8edf1;
+/* 	border-top: 1px solid #e8edf1; */
 	padding: 10px 12px;
 	font-size:12px;
 	text-transform:uppercase;
@@ -5498,7 +5498,7 @@ ul.progress-list li  .progress{
 }
 
 .table td{
-	border-top: 1px solid #e8edf1;
+/* 	border-top: 1px solid #e8edf1; */
 	vertical-align: top;
 	 padding: 10px 12px !important;
 	color:#576475;
@@ -5558,7 +5558,7 @@ ul.progress-list li  .progress{
 	margin-left: 4px;
 }
 .table > tbody > tr > td, .table > tfoot > tr > td{
-	 border-top: 1px solid #E8EDF1;
+/* 	 border-top: 1px solid #E8EDF1; */
 }
 .table-striped tbody > tr:nth-child(2n+1) > td, .table-striped tbody > tr:nth-child(2n+1) > th {
 	background-color:#ecf0f2;
@@ -5595,14 +5595,14 @@ ul.progress-list li  .progress{
 }
 
 .table-bordered{
-	border-color:#E8EDF1 !important;
+/* 	border-color:#E8EDF1 !important; */
 }
 .table-bordered th{
 	background-color:#ecf0f2;
    border:0 !important;
 }
 .table-bordered td{
-	 border: 1px solid #E8EDF1 !important;
+/* 	 border: 1px solid #E8EDF1 !important; */
 
 }
 .table-bordered td:first-child{
