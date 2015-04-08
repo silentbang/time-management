@@ -1,5 +1,6 @@
 package com.duke.passato.dao;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import com.duke.passato.model.Project;
@@ -20,7 +21,7 @@ public interface ProjectDAO {
 
 	public void deleteProject(Project project);
 
-	public Double calculateAverageProgress();
+	public BigDecimal calculateAverageProgress();
 
 	public List<Object> calculateProjectDurationByTaskType(Project project);
 

@@ -62,7 +62,7 @@ public class ProjectServiceImpl implements ProjectService {
 
 	@Override
 	public Double calculateAverageProgress() {
-		return this.projectDAO.calculateAverageProgress();
+		return this.projectDAO.calculateAverageProgress().doubleValue();
 	}
 
 	@SuppressWarnings("rawtypes")

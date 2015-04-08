@@ -2,6 +2,7 @@ package com.duke.passato.dao;
 
 import static org.junit.Assert.assertEquals;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +26,14 @@ public class ProjectDAOTest extends CustomAbstractTransactionalJUnit4SpringConte
 		assertEquals(8, projects.get(0).getProjectId().intValue());
 		assertEquals("2014/12", projects.get(0).getName());
 		assertEquals("2014-12-30 23:44:50.66", projects.get(0).getCreatedDate().toString());
+	}
+
+	@Test
+	public void testListRecentProjects() {
+		List<Project> recentProjects = this.projectDAO.listRecentProjects(2);
+		assertEquals(2, recentProjects.size());
+		assertEquals("2014/12", recentProjects.get(0).getName());
+		assertEquals("2014/11", recentProjects.get(1).getName());
 	}
 
 	@Test
@@ -106,6 +115,12 @@ public class ProjectDAOTest extends CustomAbstractTransactionalJUnit4SpringConte
 
 		List<Project> projects = this.projectDAO.listProjects();
 		assertEquals(7, projects.size());
+	}
+
+	@Test
+	public void testCalculateAverageProgress() {
+		BigDecimal averageProgress = this.projectDAO.calculateAverageProgress();
+		assertEquals(BigDecimal.valueOf(80.57692307692308), averageProgress);
 	}
 
 	@SuppressWarnings("rawtypes")

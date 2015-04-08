@@ -16,6 +16,8 @@ public class Constant {
 
 	public static final String MESSAGE_LIST = "messages";
 
+	public static final int RECENT_PROJECT_COUNT = 2;
+
 	public static class PAGING {
 		public static final int DISPLAYED_PAGES_COUNT = 5;
 		public static final int MAX_RESULTS_PER_PAGE = 3;
@@ -29,6 +31,9 @@ public class Constant {
 		public static final String SUM_AVERAGEPROGRESS = "averageProgress";
 
 		public static final String TASK_TASKTYPEID = "taskTypeId";
+
+		public static final String MENU_RECENTPROJECTS = "recentProjects";
+		public static final String MENU_AVERAGEPROGRESS = "averageProgress";
 	}
 
 	public static class UI_CSS_CLASS {

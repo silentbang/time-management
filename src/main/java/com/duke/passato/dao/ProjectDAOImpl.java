@@ -1,5 +1,6 @@
 package com.duke.passato.dao;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -19,7 +20,7 @@ public class ProjectDAOImpl implements ProjectDAO {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	private static final String SQL_AVERAGE_PROGRESS = "SELECT AVG(completedPercentage) FROM Task ";
+	private static final String SQL_AVERAGE_PROGRESS = "SELECT SUM(\"completedPercentage\") / COUNT(*) FROM \"task\" ";
 	private static final String SQL_PROJECT_COUNT = "SELECT COUNT(*) FROM Project";
 	private static final String SQL_DURATION_BY_TASK_TYPE = "SELECT \"taskTypeId\", SUM(\"estimatedDuration\") " + "FROM \"task\" "
 			+ "WHERE \"projectId\" = :projectId GROUP BY \"taskTypeId\" ORDER BY \"taskTypeId\" ASC";
@@ -73,8 +74,15 @@ public class ProjectDAOImpl implements ProjectDAO {
 	}
 
 	@Override
-	public Double calculateAverageProgress() {
-		return (Double) this.sessionFactory.getCurrentSession().createQuery(SQL_AVERAGE_PROGRESS).uniqueResult();
+	public BigDecimal calculateAverageProgress() {
+		try {
+			BigDecimal averageProgress = (BigDecimal) this.sessionFactory.getCurrentSession().createSQLQuery(SQL_AVERAGE_PROGRESS).uniqueResult();
+			return averageProgress;
+		}
+		catch (ClassCastException cce) {
+			Double averageProgress = (Double) this.sessionFactory.getCurrentSession().createSQLQuery(SQL_AVERAGE_PROGRESS).uniqueResult();
+			return BigDecimal.valueOf(averageProgress);
+		}
 	}
 
 	@SuppressWarnings("unchecked")
