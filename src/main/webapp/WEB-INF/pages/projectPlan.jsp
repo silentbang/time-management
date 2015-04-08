@@ -8,7 +8,9 @@
 	<div class="col-md-12">
 		<div class="grid simple ">
 			<div class="grid-title no-border">
-				<h4>${project.name} - <span class="semi-bold">${project.averageProgress}%</span></h4>
+				<h4>${project.name} - 
+					<span class="semi-bold"><fmt:formatNumber value="${project.averageProgress}" maxFractionDigits="2"/>%</span>
+				</h4>
 				<div class="tools">
 					<a href="javascript:;" class="collapse"></a>
 					<a href="#grid-config" data-toggle="modal" class="config"></a>
@@ -29,16 +31,16 @@
 							<th style="width:19%">
 								<spring:message code="label.task.name"/>
 							</th>
-							<th style="width:4%">
+							<th style="width:2%">
 								<spring:message code="label.task.estimatedDuration"/>
 							</th>
-							<th style="width:4%">
+							<th style="width:2%">
 								<spring:message code="label.task.actualDuration"/>
 							</th>
 							<th style="width:5%">
 								<spring:message code="label.task.deadline"/>
 							</th>
-							<th style="width:5%">
+							<th style="width:9%">
 								<spring:message code="label.task.note"/>
 							</th>
 							<th style="width:10%">
@@ -51,7 +53,7 @@
 							<c:set var="dateText" value="${entry.key}"/>
 							<c:set var="tasksByDate" value="${entry.value.tasks}"/>
 							
-							<tr class="tableHead" style="border-color: blue;">
+							<tr class="tableHead">
 								<th style="width:1%">
 									<div class="checkbox check-default">
 										<input id="checkbox10" type="checkbox" value="1" class="checkall">
@@ -59,14 +61,14 @@
 									</div>
 								</th>
 								<th style="width:19%"></th>
-								<th style="width:4%">
+								<th style="width:2%">
 									${entry.value.totalEstimatedDuration}
 								</th>
-								<th style="width:4%">
+								<th style="width:2%">
 									${entry.value.totalActualDuration}
 								</th>
 								<th style="width:5%"><span class="label label-inverse">${dateText}</span></th>
-								<th style="width:5%">&nbsp;</th>
+								<th style="width:9%">&nbsp;</th>
 								<th style="width:10%">
 									<fmt:formatNumber value="${entry.value.averageProgress}" maxFractionDigits="2"/>%
 								</th>
