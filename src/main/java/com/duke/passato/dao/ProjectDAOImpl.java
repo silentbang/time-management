@@ -19,6 +19,7 @@ public class ProjectDAOImpl implements ProjectDAO {
 	@Autowired
 	private SessionFactory sessionFactory;
 
+	private static final String SQL_AVERAGE_PROGRESS = "SELECT AVG(completedPercentage) FROM Task ";
 	private static final String SQL_PROJECT_COUNT = "SELECT COUNT(*) FROM Project";
 	private static final String SQL_DURATION_BY_TASK_TYPE = "SELECT \"taskTypeId\", SUM(\"estimatedDuration\") " + "FROM \"task\" "
 			+ "WHERE \"projectId\" = :projectId GROUP BY \"taskTypeId\" ORDER BY \"taskTypeId\" ASC";
@@ -29,6 +30,12 @@ public class ProjectDAOImpl implements ProjectDAO {
 	@Override
 	public List<Project> listProjects() {
 		return this.sessionFactory.getCurrentSession().createCriteria(Project.class).addOrder(Order.desc("projectId")).list();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Project> listRecentProjects(int number) {
+		return this.sessionFactory.getCurrentSession().createCriteria(Project.class).addOrder(Order.desc("projectId")).setMaxResults(number).list();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -63,6 +70,11 @@ public class ProjectDAOImpl implements ProjectDAO {
 		if (project != null) {
 			this.sessionFactory.getCurrentSession().delete(project);
 		}
+	}
+
+	@Override
+	public Double calculateAverageProgress() {
+		return (Double) this.sessionFactory.getCurrentSession().createQuery(SQL_AVERAGE_PROGRESS).uniqueResult();
 	}
 
 	@SuppressWarnings("unchecked")

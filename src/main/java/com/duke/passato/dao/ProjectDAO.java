@@ -8,6 +8,8 @@ public interface ProjectDAO {
 
 	public List<Project> listProjects();
 
+	public List<Project> listRecentProjects(int number);
+
 	public List<Project> listProject(Integer pageNumber, Integer maxResultsPerPage);
 
 	public void insertProject(Project project);
@@ -18,9 +20,12 @@ public interface ProjectDAO {
 
 	public void deleteProject(Project project);
 
+	public Double calculateAverageProgress();
+
 	public List<Object> calculateProjectDurationByTaskType(Project project);
 
 	public Object calculateProjectDuration(Project project);
 
 	public Long getProjectCount();
+
 }

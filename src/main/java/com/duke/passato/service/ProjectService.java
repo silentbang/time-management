@@ -9,6 +9,8 @@ import com.duke.passato.model.Project;
 public interface ProjectService {
 	public List<Project> listProjects();
 
+	public List<Project> listRecentProjects(int number);
+
 	public List<Project> listProject(Integer pageNumber, Integer maxResultsPerPage);
 
 	public void insertProject(Project project);
@@ -18,6 +20,8 @@ public interface ProjectService {
 	public void updateProject(Project project);
 
 	public void deleteProject(Project project);
+
+	public Double calculateAverageProgress();
 
 	public Map<String, Double> calculateProjectDurationByTaskType(Project project);
 

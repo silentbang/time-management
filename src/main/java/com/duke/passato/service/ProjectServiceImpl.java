@@ -29,6 +29,11 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	@Override
+	public List<Project> listRecentProjects(int number) {
+		return this.projectDAO.listRecentProjects(number);
+	}
+
+	@Override
 	public List<Project> listProject(Integer pageNumber, Integer maxResultsPerPage) {
 		return this.projectDAO.listProject(pageNumber, maxResultsPerPage);
 	}
@@ -53,6 +58,11 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override
 	public void deleteProject(Project project) {
 		this.projectDAO.deleteProject(project);
+	}
+
+	@Override
+	public Double calculateAverageProgress() {
+		return this.projectDAO.calculateAverageProgress();
 	}
 
 	@SuppressWarnings("rawtypes")
