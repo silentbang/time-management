@@ -26,7 +26,16 @@
 <!-- END MINI-PROFILE -->
 <!-- BEGIN SIDEBAR MENU -->
 <ul>
-	<li class="start active "><a href="${pageContext.request.contextPath}/"><i class="icon-custom-home"></i><span class="title">Dashboard</span><span class="selected"></span></a></li>
+	<li class="start active ">
+		<a href="${pageContext.request.contextPath}/">
+			<i class="icon-custom-home"></i><span class="title"><spring:message code="menu.item.dashboard"/></span><span class="selected"></span>
+		</a>
+	</li>
+	<li class="start">
+		<a href="${pageContext.request.contextPath}/statistics">
+			<i class="icon-custom-chart"></i><span class="title"><spring:message code="menu.item.statistics"/></span><span class="selected"></span>
+		</a>
+	</li>
 	<li class="hidden-lg hidden-md hidden-xs" id="more-widgets"><a href="javascript:;"><i class="fa fa-plus"></i></a>
 	<ul class="sub-menu">
 		<li class="side-bar-widgets">
@@ -53,7 +62,7 @@
 	</li>
 </ul>
 <div class="side-bar-widgets">
-	<p class="menu-title">RECENT PROJECTS</p>
+	<p class="menu-title"><spring:message code="menu.item.recentProjects"/></p>
 	<ul class="folders">
 		<c:forEach items="${requestScope.recentProjects}" var="recentProject">
 			<li>
