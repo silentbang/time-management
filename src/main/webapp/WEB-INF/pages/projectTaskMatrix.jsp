@@ -188,7 +188,7 @@
 									<span id="completedPercentageText" class="badge badge-info"></span><spring:message code="symbol.percentage"/>
 								</form:label>
 								<form:input path="completedPercentage" value="${task.completedPercentage}" cssClass="slider-element form-control" placeholder="${labelTaskCompletedPercentage}" 
-									data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="${task.completedPercentage}" data-slider-orientation="horizontal" data-slider-selection="after" data-slider-tooltip="show"/>
+									data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="${task.completedPercentage}" data-slider-orientation="horizontal" data-slider-selection="after" data-slider-tooltip="show"/>
 							</div>
 							<br>
 							<div class="form-actions">
