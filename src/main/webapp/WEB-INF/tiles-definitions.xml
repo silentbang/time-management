@@ -39,10 +39,16 @@
 	<definition name="projectAdd" extends="mainLayout">
 		<put-attribute name="headTitle" value="headTitle.projectAdd" />
 		<put-attribute name="body" value="/WEB-INF/pages/projectAdd.jsp" />
+		<put-list-attribute name="jsScripts">
+			<add-attribute value="/assets/js/appProjectCRUD.js"></add-attribute>
+	  	</put-list-attribute>
 	</definition>
 	<definition name="projectUpdate" extends="mainLayout">
 		<put-attribute name="headTitle" value="headTitle.projectUpdate" />
 		<put-attribute name="body" value="/WEB-INF/pages/projectUpdate.jsp" />
+		<put-list-attribute name="jsScripts">
+			<add-attribute value="/assets/js/appProjectCRUD.js"></add-attribute>
+	  	</put-list-attribute>
 	</definition>
 	<definition name="projectTaskMatrix" extends="mainLayout">
 		<put-attribute name="headTitle" value="headTitle.projectTaskMatrix" />
@@ -59,5 +65,12 @@
 	<definition name="projectPlan" extends="mainLayout">
 		<put-attribute name="headTitle" value="headTitle.projectPlan" />
 		<put-attribute name="body" value="/WEB-INF/pages/projectPlan.jsp" />
+	</definition>
+	<definition name="charts" extends="mainLayout">
+		<put-attribute name="headTitle" value="headTitle.charts" />
+		<put-attribute name="body" value="/WEB-INF/pages/charts.jsp" />
+		<put-list-attribute name="jsScripts">
+			<add-attribute value="/assets/js/appCharts.js"></add-attribute>
+	  	</put-list-attribute>
 	</definition>
 </tiles-definitions>
